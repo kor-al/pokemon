@@ -35,10 +35,6 @@ class Heatmap extends Component {
   rowTiles = (d, xScale, yScale, colorScale) => {
     return this.props.vars.map((variable, i) => (
       <rect
-        x={xScale(variable)}
-        y={yScale(d.name)}
-        height={yScale.bandwidth()}
-        width={xScale.bandwidth()}
         style={{
           stroke: "black",
           strokeOpacity: 0.5,

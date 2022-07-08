@@ -13,6 +13,7 @@ import Button from "./Components/Button";
 import ScatterPlot from "./Components/ScatterPlot/ScatterPlot";
 import Heatmap from "./Components/Heatmap/Heatmap";
 import Card from "./Components/Card/Card"
+import CustomBarChart from "./Components/BarChart/CustomBarChart";
 
 const types = [
   "grass",
@@ -186,6 +187,15 @@ class App extends Component {
           size={[800, 300]}
           vars={columnsAgainst}
           items={this.state.team}/>
+
+        <CustomBarChart
+          data={dataTeam}
+          size={[500, 300]}
+          xvariable={"weight_kg"}
+          yvariable={"height_m"}
+          colorvariable={"experience_growth"}
+          items={this.state.team}
+        />
       </div>
     );
   }
