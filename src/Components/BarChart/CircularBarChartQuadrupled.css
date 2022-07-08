@@ -1,0 +1,51 @@
+.arcStat{
+    stroke: "black";
+    opacity: 0.5;
+}
+
+.arcStat--inner{
+    fill:orange;
+}
+
+.arcStat--innerdouble{
+    fill:rgb(255, 204, 109);
+    stroke: orange;
+}
+
+
+.arcStat--outer{
+    fill: green;
+}
+
+
+.arcStat--outerdouble{
+    fill:rgb(113, 202, 113);
+    stroke: green;
+}
+
+
+.circle{
+    opacity: 0.5;
+}
+
+
+.circle.speed{
+    fill:rgb(103, 103, 248);
+    stroke: blue;
+}
+
+.circle.hp{
+    fill:red;
+}
+
+.axis{
+    opacity: 0.5;
+}
+
+.highlighted{
+    filter: brightness(100%) saturate(1) !important;
+}
+
+g.dimmed > path, g.dimmed > circle{
+    filter: brightness(50%);
+}
