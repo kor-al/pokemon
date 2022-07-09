@@ -34,8 +34,8 @@ class CustomBarChart extends Component {
 
   render() {
     const maxData = {
-      y: max(this.props.data.map((d) => d[this.props.yvariable])),
-      x: max(this.props.data.map((d) => d[this.props.xvariable])),
+      y: max(this.props.data.map((d) => isNaN(d[this.props.yvariable])? 0: (d[this.props.yvariable]))),
+      x: max(this.props.data.map((d) => isNaN(d[this.props.xvariable])? 0: (d[this.props.xvariable]))),
     };
 
     let nameScale = scaleBand()
@@ -49,21 +49,22 @@ class CustomBarChart extends Component {
 
     //individual scales per item but max is common
     let xScale = scaleLinear()
-      .domain([0, maxData.x])
+      .domain([0.1, maxData.x])
       .range([0, nameScale.bandwidth()]);
 
-    let yScale = scaleLinear().domain([0, maxData.y]).range([0, this.height]);
+    console.log("max Data y height", maxData.y)
+    let yScale = scaleLinear().domain([0, maxData.y]).range([0.1, this.height]);
 
     let colorScale = scaleOrdinal()
       .domain(
         this.props.data.map(function (d) {
           return d.experience_growth;
-        })
+        }).sort()
       )
       .range(["#f7fbff","#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"]);
 
     const boxes = this.props.data.map((d, i) => {
-      console.log(d.name, xScale(d[this.props.xvariable]));
+      if (!isNaN(d[this.props.yvariable]) && !isNaN(d[this.props.xvariable])){
       return (
         <rect
           key={"rect" + i}
@@ -85,7 +86,27 @@ class CustomBarChart extends Component {
             ry: 4,
           }}
         />
-      );
+      );}
+      else{
+          return(
+            <circle
+          key={"circle" + i}
+          data-name={`${d.name}`}
+          className={`circle ${d.name}`}
+          style={{
+            stroke: "black",
+            strokeOpacity: 0.5,
+            fill: colorScale(d.experience_growth),
+            // fill: colorScale(d[this.props.colorvariable]),
+            cx:
+              nameScale(d.name) +
+              nameScale.bandwidth() / 2,
+            cy: this.height - 20,
+            r:10,
+          }}
+        />  
+          )
+      }
     });
 
     return (

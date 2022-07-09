@@ -36,7 +36,7 @@ const types = [
   "flying",
 ];
 
-const baseStats = ["defense", "attack", "hp"];
+const baseStats = ["defense", "attack", "hp", "height_m", "weight_kg"];
 
 const columnsAgainst = ["against_bug","against_dark","against_dragon", "against_electric","against_fairy","against_fighting",
 "against_fire","against_flying","against_ghost","against_grass","against_ground","against_ice" ,"against_normal",
