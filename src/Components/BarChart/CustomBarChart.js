@@ -51,8 +51,6 @@ class CustomBarChart extends Component {
     let xScale = scaleLinear()
       .domain([0.1, maxData.x])
       .range([0, nameScale.bandwidth()]);
-
-    console.log("max Data y height", maxData.y)
     let yScale = scaleLinear().domain([0, maxData.y]).range([0.1, this.height]);
 
     let colorScale = scaleOrdinal()

@@ -1,10 +1,12 @@
 import "./App.css";
 import React, { Component } from "react";
 import data from "./pokemons";
+import dataFlow from "./pokemonTypesCounts";
 import { scaleThreshold, scaleOrdinal } from "d3-scale";
 import { schemeSet3 } from "d3-scale-chromatic";
 import { groups } from "d3-array";
-import getDataByOneType from "./preprocess"
+import { min, max, median } from "d3-array";
+import { getDataByOneType, summarizeGroupedData} from "./preprocess"
 import BarChart from "./Components/BarChart/BarChart";
 import CircularBarChartQuadrupled from "./Components/BarChart/CircularBarChartDoubleQuadrupled";
 import ViolinChart from "./Components/ViolinChart/ViolinChart";
@@ -14,6 +16,7 @@ import ScatterPlot from "./Components/ScatterPlot/ScatterPlot";
 import Heatmap from "./Components/Heatmap/Heatmap";
 import Card from "./Components/Card/Card"
 import CustomBarChart from "./Components/BarChart/CustomBarChart";
+import ChordDiagram from "./Components/Circle/ChordDiagram";
 
 const types = [
   "grass",
@@ -79,10 +82,8 @@ class App extends Component {
   }
 
   handleButtonClick(e){
-    console.log(this.state.team)
     const new_team  = [...this.state.team].concat(this.state.selectedName)
     this.setState({ team: new_team });
-    console.log("NEW", new_team)
   }
 
   getFilteredDataByType(data, filter) {
@@ -109,24 +110,38 @@ class App extends Component {
       value: this.state.selectedType,
     });
 
-    console.log(this.state.selectedName)
-
     const dataFilteredByName = data.filter(d=> d.name == this.state.selectedName)
     const dataTeam= data.filter(d=> this.state.team.includes(d.name))
-    console.log(dataFilteredByName)
 
 
     const dataOneType = getDataByOneType(data)
+    const dataByTypes = groups(dataOneType, (d) => d.type1);
+    const dataByTwoTypes = groups(dataOneType, (d) => d.type1, (d) => d.type2);
+    console.log("dataByTwoTypes", dataByTwoTypes)
+    const summarizedDataByType = summarizeGroupedData(dataByTypes, columnsAgainst, max)
 
     return (
       <div className="App">
-        <header className="App-header"></header>
-        <BarChart
+        {/* <header className="App-header"></header> */}
+        {/* <BarChart
           colorScale={this.colorScale}
           data={data}
           size={[500, 400]}
           yvariable="weight_kg"
-        />
+        /> */}
+
+        <Heatmap 
+          data={summarizedDataByType}
+          size={[500, 500]}
+          vars={columnsAgainst}
+          items={summarizedDataByType.map(d=> d.name)}/>
+
+        <ChordDiagram
+          data={dataFlow}
+          size={[500, 500]}
+          items={types}
+          fillScale={this.colorScale_type} />
+
         <Dropdown
           label="Stat"
           options={baseStats.map((t) => ({ label: t, value: t }))}
@@ -137,7 +152,8 @@ class App extends Component {
         />
         <ViolinChart
           fillScale={this.colorScale_type}
-          data={dataOneType}
+          data={dataOneType} //TODO: remove it as it's needed only to calc max ranges
+          dataGrouped={dataByTypes}
           size={[800, 200]}
           yvariable={this.state.valueDropdownTypeStat}
           onClick={this.handleViolinClick}

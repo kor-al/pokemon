@@ -2,7 +2,7 @@ import React, { Component, useRef, useEffect } from "react";
 import { scaleLinear, scaleBand, scaleSequential } from "d3-scale";
 import { min, max, bin, groups, range } from "d3-array";
 import { area, curveCatmullRom } from "d3-shape";
-import { interpolateInferno } from "d3-scale-chromatic";
+import { interpolateInferno, interpolateGreens } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 
@@ -27,7 +27,7 @@ class Heatmap extends Component {
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     this.tyleSize = {height: 50, width:50}
-    this.maxValue = 5;
+    this.maxValue = 4;
 
     this.rowTiles = this.rowTiles.bind(this);
   }
@@ -51,7 +51,6 @@ class Heatmap extends Component {
   };
 
   render() {
-    const maxData = max(this.props.data.map((d) => d[this.props.variable]));
     let xScale = scaleBand()
       .domain(this.props.vars)
       .range([0, this.width])
@@ -63,7 +62,7 @@ class Heatmap extends Component {
       .padding(0.1);
 
     var colorScale = scaleSequential()
-      .interpolator(interpolateInferno)
+      .interpolator(interpolateGreens)
       .domain([0, this.maxValue]);
 
     const tiles = this.props.data.map((d, i) => {

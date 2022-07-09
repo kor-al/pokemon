@@ -33,7 +33,7 @@ class ViolinChart extends Component {
     //var xScale = scaleLinear().domain([0, 30]).range([0, 20]);
     const types = this.props.fillScale.domain()
     var xScale = scaleBand().domain( types).range([0, width]).padding(0.2); // This is important: it is the space between 2 groups. 0 means no padding. 1 is the maximum.
-    const dataByTypes = groups(this.props.data, (d) => d.type1);
+    const dataByTypes = this.props.dataGrouped
     const step = this.props.size[0] / dataByTypes.length;
 
     // Build and Show the Y scale
