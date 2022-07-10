@@ -2,6 +2,15 @@
     fill:green;
     opacity: 0.5;
 }
+.sp_defense{
+    fill:green;
+    opacity: 0.5;
+}
+
+.sp_defense line{
+    stroke:green;
+    opacity: 0.5;
+}
 
 .hp{
     fill: red;
@@ -12,5 +21,14 @@
 .attack{
     fill:orange;
     opacity: 0.5;
+}
 
+.sp_attack{
+    fill:orange;
+    opacity: 0.5;
+}
+
+.sp_attack line{
+    stroke:orange;
+    opacity: 0.5;
 }

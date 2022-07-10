@@ -4,7 +4,7 @@ import data from "./pokemons";
 import dataFlow from "./pokemonTypesCounts";
 import { scaleThreshold, scaleOrdinal } from "d3-scale";
 import { schemeSet3 } from "d3-scale-chromatic";
-import { groups } from "d3-array";
+import { groups, range } from "d3-array";
 import { min, max, median } from "d3-array";
 import { getDataByOneType, summarizeGroupedData} from "./preprocess"
 import BarChart from "./Components/BarChart/BarChart";
@@ -55,6 +55,7 @@ class App extends Component {
     this.colorScale_type = scaleOrdinal().domain(types).range(schemeSet3);
     this.state = {
       selectedType: "water",
+      selectedGeneration: 0, //"all"
       valueDropdownTypeStat: "attack",
       valueDropdownType: "water",
       valueDropdownStatX: "attack",
@@ -111,6 +112,10 @@ class App extends Component {
       value: this.state.selectedType,
     });
 
+    let dataFilteredByTypeAndGeneration = dataFilteredByType
+    if (this.state.selectedGeneration!=0){
+      dataFilteredByTypeAndGeneration = dataFilteredByType.filter(d=>d.generation == this.state.selectedGeneration)
+    }
     const dataFilteredByName = data.filter(d=> d.name == this.state.selectedName)
     const dataTeam= data.filter(d=> this.state.team.includes(d.name))
 
@@ -164,6 +169,12 @@ class App extends Component {
           onChange={(e) => this.handleDropdownChange(e, "selectedType")}
         />
         <Dropdown
+          label="Generation"
+          options={range(0,8).map((t) => ({ label: t==0? "All" : t, value: t }))}
+          value={this.state.selectedGeneration}
+          onChange={(e) => this.handleDropdownChange(e, "selectedGeneration")}
+        />
+        <Dropdown
           label="Stat X"
           options={baseStats.map((t) => ({ label: t, value: t }))}
           value={this.state.valueDropdownStatX}
@@ -177,9 +188,9 @@ class App extends Component {
         />
         <ScatterPlot
           fillScale={this.colorScale_type}
-          data={dataFilteredByType}
+          data={dataFilteredByTypeAndGeneration}
           selectedType={this.state.selectedType}
-          size={[800, 800]}
+          size={[600, 600]}
           yvariable={this.state.valueDropdownStatY}
           xvariable={this.state.valueDropdownStatX}
           onClick={this.handlScatterPlotClick}
@@ -188,18 +199,18 @@ class App extends Component {
           data={dataFilteredByName[0]}
         />
         <Button text="Add to the team" onClick={this.handleButtonClick}/>
-        <CircularBarChartQuadrupled
+        {/* <CircularBarChartQuadrupled
           data={dataTeam}
           size={[600, 600]}
           y1variable={"defense"}
           y1innervariable={"attack"}
           y2variable={"sp_defense"}
           y2innervariable={"sp_attack"}
-        />
+        /> */}
 
         <DoubleStackedBarChart
         data={dataTeam}
-        size={[400, 300]}
+        size={[600, 300]}
         items={this.state.team}
         variables={["hp","defense"]}
         circlevariables={["hp","sp_defense"]}
@@ -215,7 +226,7 @@ class App extends Component {
 
         <CustomBarChart
           data={dataTeam}
-          size={[500, 300]}
+          size={[600, 300]}
           xvariable={"weight_kg"}
           yvariable={"height_m"}
           colorvariable={"experience_growth"}
