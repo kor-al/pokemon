@@ -17,7 +17,7 @@ import Heatmap from "./Components/Heatmap/Heatmap";
 import Card from "./Components/Card/Card"
 import CustomBarChart from "./Components/BarChart/CustomBarChart";
 import ChordDiagram from "./Components/Circle/ChordDiagram";
-import StackedBarChart from "./Components/BarChart/StackedBarChart";
+import DoubleStackedBarChart from "./Components/BarChart/DoubleStackedBarChart";
 
 const types = [
   "grass",
@@ -197,10 +197,14 @@ class App extends Component {
           y2innervariable={"sp_attack"}
         />
 
-        <StackedBarChart
+        <DoubleStackedBarChart
         data={dataTeam}
-        size={[600, 600]}
+        size={[400, 300]}
+        items={this.state.team}
         variables={["hp","defense"]}
+        circlevariables={["hp","sp_defense"]}
+        leftvariable={"attack"}
+        circleleftvariable={"sp_attack"}
         />
 
         <Heatmap 

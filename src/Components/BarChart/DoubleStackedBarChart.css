@@ -1,0 +1,16 @@
+.defense{
+    fill:green;
+    opacity: 0.5;
+}
+
+.hp{
+    fill: red;
+    opacity: 0.5;
+
+}
+
+.attack{
+    fill:orange;
+    opacity: 0.5;
+
+}
