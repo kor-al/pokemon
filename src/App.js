@@ -17,6 +17,7 @@ import Heatmap from "./Components/Heatmap/Heatmap";
 import Card from "./Components/Card/Card"
 import CustomBarChart from "./Components/BarChart/CustomBarChart";
 import ChordDiagram from "./Components/Circle/ChordDiagram";
+import StackedBarChart from "./Components/BarChart/StackedBarChart";
 
 const types = [
   "grass",
@@ -115,9 +116,7 @@ class App extends Component {
 
 
     const dataOneType = getDataByOneType(data)
-    const dataByTypes = groups(dataOneType, (d) => d.type1);
-    const dataByTwoTypes = groups(dataOneType, (d) => d.type1, (d) => d.type2);
-    console.log("dataByTwoTypes", dataByTwoTypes)
+    const dataByTypes = groups(data, (d) => d.type1);
     const summarizedDataByType = summarizeGroupedData(dataByTypes, columnsAgainst, max)
 
     return (
@@ -196,6 +195,12 @@ class App extends Component {
           y1innervariable={"attack"}
           y2variable={"sp_defense"}
           y2innervariable={"sp_attack"}
+        />
+
+        <StackedBarChart
+        data={dataTeam}
+        size={[600, 600]}
+        variables={["hp","defense"]}
         />
 
         <Heatmap 

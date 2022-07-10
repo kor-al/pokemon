@@ -15,6 +15,7 @@ class ChordDiagram extends Component {
     this.outerRadius = this.innerRadius * 1.1;
     this.mapping = {};
     this.matrix = [];
+    this.chord = {}
     this.init = this.init.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this)
     this.onMouseOut = this.onMouseOut.bind(this)
@@ -22,24 +23,34 @@ class ChordDiagram extends Component {
 
   onMouseOver(e){
     // const nodes = select(e.target.parentElement).selectAll(`.${e.target.dataset.name}`)
-    // select(e.target.parentElement).classed("dimmed", true)
-    // nodes.classed("highlighted", true)
-    
+    const index = e.target.dataset.name
+    const chord = document.querySelector(".chord")
+    const ribbons = chord.querySelectorAll("path.ribbon")
+    const arcs = chord.querySelectorAll("path.arc")
+    // paths.forEach(p=>{
+    //     if(p.dataset.name !=index) p.style.opacity = "0.3";
+    // })
+    // const connections = this.chord.filter(d=> d.source.index == index)
+    // const targetIndices = connections.map(d=> d.target.index)
+    let connectedIndices = []
+    ribbons.forEach(p=>{
+        if((p.dataset.target !=index )&& (p.dataset.source!=index) ) {
+            p.style.opacity = "0.2";
+            p.style.stroke = "2";}
+        if(p.dataset.target == index) connectedIndices.push(p.dataset.source)
+        if(p.dataset.source == index) connectedIndices.push(p.dataset.target)
+    })
+    arcs.forEach(p=>{
+        if(!connectedIndices.includes(p.dataset.name) ){
+            p.style.opacity = "0.2";
+            p.style.stroke = "2";}
+    })
   }
 
-  fade(opacity) {
-    return function (g, i) {
-        svg.selectAll(".chord path")
-            .filter(function (d) { return d.source.index != i && d.target.index != i; })
-            // .transition()
-            .style("opacity", opacity);
-            console.log("name: "+config.gnames[i].buurt);
-    };}
-
   onMouseOut(e){
-    // select(e.target.parentElement).style("stroke", "black");
-    // console.log(e.target.classList[0])
-    // select("."+e.target.classList[0]).style("stroke", "black");
+    const paths = Array.from(document.querySelector(".chord").querySelectorAll("path"))
+    paths.forEach(p=>{ p.style.opacity = "1";
+    })
   }
 
   mapItemsToIndex = (items) => {
@@ -52,7 +63,6 @@ class ChordDiagram extends Component {
 
   init() {
     this.mapping = this.mapItemsToIndex(this.props.items);
-
     this.props.data.forEach((flow) => {
       if (!this.matrix[this.mapping[flow.type2]]) {
         this.matrix[this.mapping[flow.type2]] = new Array(
@@ -61,6 +71,7 @@ class ChordDiagram extends Component {
       }
       this.matrix[this.mapping[flow.type2]][this.mapping[flow.type1]] = flow.n;
     });
+
   }
 
   render() {
@@ -68,8 +79,8 @@ class ChordDiagram extends Component {
     var res = chord()
       .padAngle(0.05) // padding between entities (black arc)
       .sortSubgroups(descending)(this.matrix);
+    this.chord = res;
 
-    console.log("res", res);
     var arcGen = arc()
       .innerRadius(this.innerRadius)
       .outerRadius(this.outerRadius)
@@ -78,15 +89,18 @@ class ChordDiagram extends Component {
     var itemArcs = res.groups.map((d, i) => (
       <path
         key={"path" + i}
+        className={"arc"}
         data-name={`${d.index}`}
         d={arcGen(d)}
         style={{ fill: this.props.fillScale(this.props.items[d.index]) }}
+        onMouseOver={(e) => this.onMouseOver(e)}
+        onMouseOut={(e) => this.onMouseOut(e)}
       />
     ));
     var labels = res.groups.map((d, i) => {
       let angle = (d.startAngle + d.endAngle) / 2;
       let rotate = (angle * 180 / Math.PI - 90)
-      let translateX = (this.outerRadius)
+      let translateX = (this.outerRadius +10)
       let translateY = (0)
       let transform = `rotate(${rotate}) translate(${translateX}, ${translateY})`
       let anchor = null
@@ -118,15 +132,16 @@ class ChordDiagram extends Component {
     var ribbons = res.map((d, i) => (
       <path
         key={"ribbon" + i}
+        className={"ribbon"}
         d={ribbonGen(d)}
+        data-source={`${d.source.index}`}
+        data-target={`${d.target.index}`}
         style={{ fill: this.props.fillScale(this.props.items[d.source.index]) }}
-        onMouseOver={(e) => this.onMouseOver(e)}
-        onMouseOut={(e) => this.onMouseOut(e)}
       />
     ));
 
     return (
-      <svg width={this.props.size[0]} height={this.props.size[1]}>
+      <svg width={this.props.size[0]} height={this.props.size[1]} className="chord">
         <g transform={`translate(${this.width / 2}, ${this.height / 2})`}>
           {itemArcs}
           {ribbons}

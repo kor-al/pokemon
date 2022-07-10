@@ -79,6 +79,7 @@ class ScatterPlot extends Component {
         onClick={this.props.onClick}
       />
     ));
+    console.log("points.legth",points.length)
     return (
       <svg width={this.props.size[0]} height={this.props.size[1]}>
         <g transform={`translate(${this.margin.left}, ${this.margin.top})`}>
