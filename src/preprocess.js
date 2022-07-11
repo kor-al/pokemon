@@ -18,4 +18,17 @@ const summarizeGroupedData = (gData, summarizeColumns, d3sumFunc) => {
         return result
     })
 }
-export { getDataByOneType, summarizeGroupedData }
+
+function varToInt(d){
+    if (typeof d === 'string'){
+      return +d.split(" ")[0]
+    }
+    if (isNaN(d)){
+        return 0
+    }
+    else{
+      return +d
+    }
+  }
+
+export { getDataByOneType, summarizeGroupedData, varToInt }

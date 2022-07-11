@@ -142,7 +142,7 @@ class ChordDiagram extends Component {
 
     return (
       <svg width={this.props.size[0]} height={this.props.size[1]} className="chord">
-        <g transform={`translate(${this.width / 2}, ${this.height / 2})`}>
+        <g transform={`translate(${this.props.size[0] / 2}, ${this.props.size[1] / 2})`}>
           {itemArcs}
           {ribbons}
           {labels}

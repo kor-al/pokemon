@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import data from "./pokemons";
 import dataFlow from "./pokemonTypesCounts";
 import { scaleThreshold, scaleOrdinal } from "d3-scale";
-import { schemeSet3 } from "d3-scale-chromatic";
+import { schemeSet3, schemeCategory10 } from "d3-scale-chromatic";
 import { groups, range } from "d3-array";
-import { min, max, median } from "d3-array"
+import { min, max, median } from "d3-array";
 import { format } from "d3-format";
-import { getDataByOneType, summarizeGroupedData} from "./preprocess"
+import { getDataByOneType, summarizeGroupedData } from "./preprocess";
 import BarChart from "./Components/BarChart/BarChart";
 import CircularBarChartQuadrupled from "./Components/BarChart/CircularBarChartDoubleQuadrupled";
 import ViolinChart from "./Components/ViolinChart/ViolinChart";
@@ -15,10 +15,11 @@ import Dropdown from "./Components/Dropdown";
 import Button from "./Components/Button";
 import ScatterPlot from "./Components/ScatterPlot/ScatterPlot";
 import Heatmap from "./Components/Heatmap/Heatmap";
-import Card from "./Components/Card/Card"
+import Card from "./Components/Card/Card";
 import CustomBarChart from "./Components/BarChart/CustomBarChart";
 import ChordDiagram from "./Components/Circle/ChordDiagram";
 import DoubleStackedBarChart from "./Components/BarChart/DoubleStackedBarChart";
+import CurvesBarChart from "./Components/BarChart/CurvesBarChart copy";
 
 const types = [
   "grass",
@@ -43,9 +44,26 @@ const types = [
 
 const baseStats = ["defense", "attack", "hp", "height_m", "weight_kg"];
 
-const columnsAgainst = ["against_bug","against_dark","against_dragon", "against_electric","against_fairy","against_fighting",
-"against_fire","against_flying","against_ghost","against_grass","against_ground","against_ice" ,"against_normal",
-"against_poison","against_psychic", "against_rock","against_steel","against_water"]
+const columnsAgainst = [
+  "against_bug",
+  "against_dark",
+  "against_dragon",
+  "against_electric",
+  "against_fairy",
+  "against_fighting",
+  "against_fire",
+  "against_flying",
+  "against_ghost",
+  "against_grass",
+  "against_ground",
+  "against_ice",
+  "against_normal",
+  "against_poison",
+  "against_psychic",
+  "against_rock",
+  "against_steel",
+  "against_water",
+];
 
 class App extends Component {
   constructor(props) {
@@ -61,7 +79,7 @@ class App extends Component {
       valueDropdownType: "water",
       valueDropdownStatX: "attack",
       valueDropdownStatY: "defense",
-      team: []
+      team: [],
     };
 
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -84,8 +102,8 @@ class App extends Component {
     // this.setState({ selectedType: e.target.__data__[0] });
   }
 
-  handleButtonClick(e){
-    const new_team  = [...this.state.team].concat(this.state.selectedName)
+  handleButtonClick(e) {
+    const new_team = [...this.state.team].concat(this.state.selectedName);
     this.setState({ team: new_team });
   }
 
@@ -113,17 +131,24 @@ class App extends Component {
       value: this.state.selectedType,
     });
 
-    let dataFilteredByTypeAndGeneration = dataFilteredByType
-    if (this.state.selectedGeneration!=0){
-      dataFilteredByTypeAndGeneration = dataFilteredByType.filter(d=>d.generation == this.state.selectedGeneration)
+    let dataFilteredByTypeAndGeneration = dataFilteredByType;
+    if (this.state.selectedGeneration != 0) {
+      dataFilteredByTypeAndGeneration = dataFilteredByType.filter(
+        (d) => d.generation == this.state.selectedGeneration
+      );
     }
-    const dataFilteredByName = data.filter(d=> d.name == this.state.selectedName)
-    const dataTeam= data.filter(d=> this.state.team.includes(d.name))
+    const dataFilteredByName = data.filter(
+      (d) => d.name == this.state.selectedName
+    );
+    const dataTeam = data.filter((d) => this.state.team.includes(d.name));
 
-
-    const dataOneType = getDataByOneType(data)
+    const dataOneType = getDataByOneType(data);
     const dataByTypes = groups(data, (d) => d.type1);
-    const summarizedDataByType = summarizeGroupedData(dataByTypes, columnsAgainst, max)
+    const summarizedDataByType = summarizeGroupedData(
+      dataByTypes,
+      columnsAgainst,
+      max
+    );
 
     return (
       <div className="App">
@@ -135,17 +160,19 @@ class App extends Component {
           yvariable="weight_kg"
         /> */}
 
-        <Heatmap 
+        <Heatmap
           data={summarizedDataByType}
           size={[500, 500]}
           vars={columnsAgainst}
-          items={summarizedDataByType.map(d=> d.name)}/>
+          items={summarizedDataByType.map((d) => d.name)}
+        />
 
         <ChordDiagram
           data={dataFlow}
           size={[500, 500]}
           items={types}
-          fillScale={this.colorScale_type} />
+          fillScale={this.colorScale_type}
+        />
 
         <Dropdown
           label="Stat"
@@ -171,7 +198,10 @@ class App extends Component {
         />
         <Dropdown
           label="Generation"
-          options={range(0,8).map((t) => ({ label: t==0? "All" : t, value: t }))}
+          options={range(0, 8).map((t) => ({
+            label: t == 0 ? "All" : t,
+            value: t,
+          }))}
           value={this.state.selectedGeneration}
           onChange={(e) => this.handleDropdownChange(e, "selectedGeneration")}
         />
@@ -196,10 +226,8 @@ class App extends Component {
           xvariable={this.state.valueDropdownStatX}
           onClick={this.handlScatterPlotClick}
         />
-        <Card
-          data={dataFilteredByName[0]}
-        />
-        <Button text="Add to the team" onClick={this.handleButtonClick}/>
+        <Card data={dataFilteredByName[0]} />
+        <Button text="Add to the team" onClick={this.handleButtonClick} />
         {/* <CircularBarChartQuadrupled
           data={dataTeam}
           size={[600, 600]}
@@ -210,20 +238,33 @@ class App extends Component {
         /> */}
 
         <DoubleStackedBarChart
-        data={dataTeam}
-        size={[600, 300]}
-        items={this.state.team}
-        variables={["hp","defense"]}
-        circlevariables={["hp","sp_defense"]}
-        leftvariable={"attack"}
-        circleleftvariable={"sp_attack"}
+          data={dataTeam}
+          size={[600, 300]}
+          items={this.state.team}
+          variables={["hp", "defense"]}
+          circlevariables={["hp", "sp_defense"]}
+          leftvariable={"attack"}
+          circleleftvariable={"sp_attack"}
         />
 
-        <Heatmap 
+        <Heatmap
           data={dataTeam}
           size={[800, 300]}
           vars={columnsAgainst}
-          items={this.state.team}/>
+          items={this.state.team}
+        />
+
+<BarChart
+          data={dataTeam}
+          size={[600, 300]}
+          xvariable={"speed"}
+          items={this.state.team}
+          text={dataTeam.map((d) => ({
+            name: d.name,
+            x: d.speed,
+            text: `faster than ${format(".0%")(d.speed_rank / data.length)}`,
+          }))}
+        />
 
         <CustomBarChart
           data={dataTeam}
@@ -234,12 +275,13 @@ class App extends Component {
           items={this.state.team}
         />
 
-<BarChart
+        <CurvesBarChart
           data={dataTeam}
           size={[600, 300]}
-          xvariable={"speed"}
           items={this.state.team}
-          text={dataTeam.map(d=> ({name: d.name, x: d.speed, text: `faster than ${format(".0%")(d.speed_rank / data.length)}`}))}
+          leftvariable={"capture_rate"}
+          rightvariable={"base_egg_steps"}
+          rvariable={"base_happiness"}
         />
       </div>
     );
