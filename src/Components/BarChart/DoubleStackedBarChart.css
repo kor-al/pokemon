@@ -32,3 +32,16 @@
     stroke:orange;
     opacity: 0.5;
 }
+
+.speed{
+    opacity: 0.5;
+    fill:blue;
+}
+
+.speed > line{
+    stroke: blue;
+}
+
+/* .speed > line{
+    stroke: blue
+} */

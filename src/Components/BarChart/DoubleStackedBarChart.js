@@ -75,6 +75,8 @@ class DoubleStackedBarChart extends Component {
           y={yScale(d.data.name)}
           width={xScale(d[1]) - xScale(d[0])}
           height={yScale.bandwidth()}
+          rx={4}
+          ry={4}
         />
       ));
       return (
@@ -86,7 +88,6 @@ class DoubleStackedBarChart extends Component {
     });
 
     var group = stackedDataCircle[1]; //sp_defense
-    console.log("stackedDataCircle[1]", group.key);
     var gcircles = group.map((d, i) => {
       var circles = (
         <g transform={`translate(0,${yScale.bandwidth() / 2})`}>
@@ -120,6 +121,8 @@ class DoubleStackedBarChart extends Component {
           y={yScale(d.name)}
           width={this.width / 2 - xLeftScale(d[this.props.leftvariable])}
           height={yScale.bandwidth()}
+          rx={4}
+          ry={4}
         />
       );
       return rects;

@@ -5,7 +5,8 @@ import dataFlow from "./pokemonTypesCounts";
 import { scaleThreshold, scaleOrdinal } from "d3-scale";
 import { schemeSet3 } from "d3-scale-chromatic";
 import { groups, range } from "d3-array";
-import { min, max, median } from "d3-array";
+import { min, max, median } from "d3-array"
+import { format } from "d3-format";
 import { getDataByOneType, summarizeGroupedData} from "./preprocess"
 import BarChart from "./Components/BarChart/BarChart";
 import CircularBarChartQuadrupled from "./Components/BarChart/CircularBarChartDoubleQuadrupled";
@@ -231,6 +232,14 @@ class App extends Component {
           yvariable={"height_m"}
           colorvariable={"experience_growth"}
           items={this.state.team}
+        />
+
+<BarChart
+          data={dataTeam}
+          size={[600, 300]}
+          xvariable={"speed"}
+          items={this.state.team}
+          text={dataTeam.map(d=> ({name: d.name, x: d.speed, text: `faster than ${format(".0%")(d.speed_rank / data.length)}`}))}
         />
       </div>
     );
