@@ -11,6 +11,7 @@ import { getDataByOneType, summarizeGroupedData } from "./preprocess";
 import BarChart from "./Components/BarChart/BarChart";
 import CircularBarChartQuadrupled from "./Components/BarChart/CircularBarChartDoubleQuadrupled";
 import ViolinChart from "./Components/ViolinChart/ViolinChart";
+import ViolinChartKDE from "./Components/ViolinChart/ViolinChart_kde";
 import Dropdown from "./Components/Dropdown";
 import Button from "./Components/Button";
 import ScatterPlot from "./Components/ScatterPlot/ScatterPlot";
@@ -143,11 +144,11 @@ class App extends Component {
     const dataTeam = data.filter((d) => this.state.team.includes(d.name));
 
     const dataOneType = getDataByOneType(data);
-    const dataByTypes = groups(data, (d) => d.type1);
+    const dataByTypes = groups(dataOneType, (d) => d.type);
     const summarizedDataByType = summarizeGroupedData(
       dataByTypes,
       columnsAgainst,
-      max
+      median
     );
 
     return (
@@ -254,7 +255,7 @@ class App extends Component {
           items={this.state.team}
         />
 
-<BarChart
+        <BarChart
           data={dataTeam}
           size={[600, 300]}
           xvariable={"speed"}

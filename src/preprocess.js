@@ -4,7 +4,7 @@ const getDataByOneType = (data) =>
 {
     const dataType1 = data.map(obj => ({ ...obj, type: obj.type1 }))
     const dataType2 = data.map(obj => ({ ...obj, type: obj.type2 }))
-    return dataType1.concat(dataType2)
+    return dataType1.concat(dataType2).filter(d => d.type !="")
 }
 
 const summarizeGroupedData = (gData, summarizeColumns, d3sumFunc) => {

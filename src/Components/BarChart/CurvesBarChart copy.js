@@ -87,7 +87,7 @@ class CurvesBarChart extends Component {
         .curve(curveBasis);
 
       var curves = (
-        <g>
+        <g key={`g${i}`}>
           <path
             key={`lpath${i}`}
             d={curveGen(leftpoints)}

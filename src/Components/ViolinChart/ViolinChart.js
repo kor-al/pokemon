@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
-import { min, max, bin, groups, range } from "d3-array";
+import { min, max, bin, groups, range, log} from "d3-array";
 import { area, curveCatmullRom } from "d3-shape";
 import { select } from "d3-selection";
 import {axisLeft, axisBottom} from "d3-axis"
@@ -30,6 +30,9 @@ class ViolinChart extends Component {
     const yMax = max(this.props.data.map((d) => d[this.props.yvariable]));
     const yMin = min(this.props.data.map((d) => d[this.props.yvariable]));
     var yScale = scaleLinear().domain([0, yMax]).range([height, 0]);
+    // if (this.props.yvariable == "height_m"){
+    //   yScale = scaleLinear().domain([0, 2]).range([height, 0]);
+    // }
     //var xScale = scaleLinear().domain([0, 30]).range([0, 20]);
     const types = this.props.fillScale.domain()
     var xScale = scaleBand().domain( types).range([0, width]).padding(0.2); // This is important: it is the space between 2 groups. 0 means no padding. 1 is the maximum.
@@ -45,9 +48,14 @@ class ViolinChart extends Component {
     var histFunc = (group) => {
       const maxval = max(group);
       const minval = min(group);
+      let step = (maxval - minval)/7
+      if (step>20) step = 20
+      if (step<0.1) step = 0.5
+      let valuesRange = range(minval, maxval, step)
+      if (!valuesRange.includes(maxval)) valuesRange.push(maxval)
       return bin()
         .domain([minval, maxval])
-        .thresholds(range(minval, maxval, 20))
+        .thresholds(valuesRange)
         .value((d) => d);
     };
 
@@ -76,7 +84,7 @@ class ViolinChart extends Component {
       .style("stroke", "black")
       .style("fill", (d, i) => this.props.fillScale(d[0]))
       .attr("d", (d) => {
-        const yData = d[1].map((d) => d[this.props.yvariable]);
+        const yData = d[1].map((d) => isNaN(d[this.props.yvariable])? 0 : d[this.props.yvariable]);
         const hist = histFunc(yData);
         const histData = hist(yData);
         const maxBinData = max(histData.map(d => d.length))

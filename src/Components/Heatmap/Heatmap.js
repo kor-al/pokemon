@@ -6,19 +6,6 @@ import { interpolateInferno, interpolateGreens } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 
-const Axis = ({ d3Axis, scale, translateX, translateY }) => {
-  const anchor = useRef();
-
-  const axis = d3Axis(scale);
-
-  useEffect(() => {
-    select(anchor.current).call(axis);
-  }, [scale]);
-
-  return (
-    <g transform={`translate(${translateX}, ${translateY})`} ref={anchor} />
-  );
-};
 
 class Heatmap extends Component {
   constructor(props) {
@@ -35,6 +22,7 @@ class Heatmap extends Component {
   rowTiles = (d, xScale, yScale, colorScale) => {
     return this.props.vars.map((variable, i) => (
       <rect
+        key={`tile-${i}`}
         style={{
           stroke: "black",
           strokeOpacity: 0.5,

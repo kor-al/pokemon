@@ -92,6 +92,7 @@ class DoubleStackedBarChart extends Component {
       var circles = (
         <g transform={`translate(0,${yScale.bandwidth() / 2})`}>
           <line
+            key={`line${i}`}
             strokeWidth={3}
             x1={xScale(d[0])}
             y1={yScale(d.data.name)}
@@ -129,9 +130,10 @@ class DoubleStackedBarChart extends Component {
     });
 
     var leftCircles = this.props.data.map((d, i) => {
-      var rects = (
-        <g transform={`translate(0,${yScale.bandwidth() / 2})`}>
+      var circles = (
+        <g key={`gcircle${i}`} transform={`translate(0,${yScale.bandwidth() / 2})`}>
           <line
+            key={`line${i}`}
             strokeWidth={3}
             x1={-this.width / 2 + xLeftScale(0)}
             y1={yScale(d.name)}
@@ -146,7 +148,7 @@ class DoubleStackedBarChart extends Component {
           />
         </g>
       );
-      return rects;
+      return circles;
     });
 
     var labels = this.props.data.map((d, i) => {
@@ -171,7 +173,7 @@ class DoubleStackedBarChart extends Component {
         </text>
       );
       return (
-        <g transform={`translate(0,${yScale.bandwidth() / 2})`}>{labels}</g>
+        <g key={"g" + i} transform={`translate(0,${yScale.bandwidth() / 2})`}>{labels}</g>
       );
     });
 
@@ -179,6 +181,7 @@ class DoubleStackedBarChart extends Component {
 
     xLabels.push(
       <text
+        key={"xlabelDef"}
         y={this.height}
         x={this.width / 2}
         className={"defense"}
@@ -191,6 +194,7 @@ class DoubleStackedBarChart extends Component {
 
     xLabels.push(
       <text
+        key={"xlabelHP"}
         y={this.height}
         x={xScale(0)}
         className={"hp"}
@@ -203,6 +207,7 @@ class DoubleStackedBarChart extends Component {
 
     xLabels.push(
       <text
+        key={"xlabelAtk"}
         y={this.height}
         x={-this.width / 2}
         className={"attack"}
