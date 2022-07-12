@@ -49,12 +49,17 @@ class CurvesBarChart extends Component {
   mousemove = function (e, d) {
     const el = e.target;
     const variable = el.dataset.var
-    const val = isNaN(el.dataset.val) ? d[variable] : el.dataset.val
-    if (varibale === "base_happiness")
+    let  val = isNaN(el.dataset.val) ? d[variable] : el.dataset.val
+    if (variable === "base_happiness" && isNaN(el.dataset.val)){
+      val+="(caught)"
+    }
+    if (variable === "base_happiness" && !isNaN(el.dataset.val)){
+      val+="(hatched)"
+    }
     this.tooltip.innerHTML = `
     ${d.name}, ${d.classfication}
     </br>Types: ${d.type1}${d.type2 == "" ? "" : ", " + d.type2}
-    </br>${formatNameString(variable)}: ${isNaN(val)? d[variable]+"(caught)": val + "(hatched)"}
+    </br>${formatNameString(variable)}: ${val}
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";
     this.tooltip.style.left = e.pageX + 10 + "px";
