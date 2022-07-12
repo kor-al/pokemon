@@ -4,7 +4,7 @@ import { min, max, bin, groups, range } from "d3-array";
 import { stack } from "d3-shape";
 import { select, selectAll } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
-import { schemeSet1 } from "d3-scale-chromatic";
+import { capitalizeFirstLetter } from "../../preprocess";
 import "./DoubleStackedBarChart.css";
 
 const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
@@ -28,7 +28,54 @@ class DoubleStackedBarChart extends Component {
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     this.yScalePadding = 0.3;
+
+    this.mouseover = this.mouseover.bind(this);
+    this.mousemove = this.mousemove.bind(this);
+    this.mouseleave = this.mouseleave.bind(this);
   }
+
+  mouseover = function (e) {
+    let el = e.target;
+    if (el.tagName == "line" || el.tagName === "circle") {
+      el = el.parentElement;
+      el.style.strokeWidth = 3;
+    } else {
+      el.style.strokeWidth = 2;
+    }
+    this.tooltip.style.opacity = 1;
+    el.style.strokeOpacity = 1;
+    el.style.strokeWidth = 2;
+  };
+
+  mousemove = function (e, d) {
+    let el = e.target;
+    if (el.tagName == "line" || el.tagName === "circle") {
+      el = el.parentElement;
+      el.style.strokeWidth = 3;
+    } else {
+      el.style.strokeWidth = 2;
+    }
+    this.tooltip.innerHTML = `
+    ${el.dataset.name}
+    </br>${capitalizeFirstLetter(el.dataset.var)}: ${el.dataset.val}
+    `;
+    this.tooltip.style.top = e.pageY + 10 + "px";
+    this.tooltip.style.left = e.pageX + 10 + "px";
+  };
+
+  mouseleave = function (e) {
+    let el = e.target;
+    if (el.tagName == "line" || el.tagName === "circle") {
+      el = el.parentElement;
+      el.style.strokeWidth = 3;
+    } else {
+      el.style.strokeWidth = 2;
+    }
+    this.tooltip.style.opacity = 0;
+    el.style.strokeOpacity = 0.5;
+    this.tooltip.style.top = 0 + "px";
+    this.tooltip.style.left = 0 + "px";
+  };
 
   render() {
     const stackedVariablesSumMax = (vars) =>
@@ -71,12 +118,18 @@ class DoubleStackedBarChart extends Component {
       var rects = group.map((d, i) => (
         <rect
           key={`rect${i}`}
+          data-var={group.key}
+          data-val={d[1] - d[0]}
+          data-name={d.data.name}
           x={xScale(d[0])}
           y={yScale(d.data.name)}
           width={xScale(d[1]) - xScale(d[0])}
           height={yScale.bandwidth()}
           rx={4}
           ry={4}
+          onMouseOver={(e) => this.mouseover(e)}
+          onMouseMove={(e) => this.mousemove(e, d)}
+          onMouseOut={(e) => this.mouseleave(e)}
         />
       ));
       return (
@@ -90,7 +143,12 @@ class DoubleStackedBarChart extends Component {
     var group = stackedDataCircle[1]; //sp_defense
     var gcircles = group.map((d, i) => {
       var circles = (
-        <g transform={`translate(0,${yScale.bandwidth() / 2})`}>
+        <g
+          transform={`translate(0,${yScale.bandwidth() / 2})`}
+          data-var={group.key}
+          data-val={d[1] - d[0]}
+          data-name={d.data.name}
+        >
           <line
             key={`line${i}`}
             strokeWidth={3}
@@ -98,12 +156,18 @@ class DoubleStackedBarChart extends Component {
             y1={yScale(d.data.name)}
             x2={xScale(d[1])}
             y2={yScale(d.data.name)}
+            onMouseOver={(e) => this.mouseover(e)}
+            onMouseMove={(e) => this.mousemove(e, d)}
+            onMouseOut={(e) => this.mouseleave(e)}
           />
           <circle
             key={`circle${i}`}
             cx={xScale(d[1])}
             cy={yScale(d.data.name)}
-            r={yScale.bandwidth() / 10}
+            r={yScale.bandwidth() / 7}
+            onMouseOver={(e) => this.mouseover(e)}
+            onMouseMove={(e) => this.mousemove(e, d)}
+            onMouseOut={(e) => this.mouseleave(e)}
           />
         </g>
       );
@@ -118,12 +182,18 @@ class DoubleStackedBarChart extends Component {
       var rects = (
         <rect
           key={`rect${i}`}
+          data-var={this.props.leftvariable}
+          data-val={d[this.props.leftvariable]}
+          data-name={d.name}
           x={-this.width / 2 + xLeftScale(d[this.props.leftvariable])}
           y={yScale(d.name)}
           width={this.width / 2 - xLeftScale(d[this.props.leftvariable])}
           height={yScale.bandwidth()}
           rx={4}
           ry={4}
+          onMouseOver={(e) => this.mouseover(e)}
+          onMouseMove={(e) => this.mousemove(e, d)}
+          onMouseOut={(e) => this.mouseleave(e)}
         />
       );
       return rects;
@@ -131,7 +201,22 @@ class DoubleStackedBarChart extends Component {
 
     var leftCircles = this.props.data.map((d, i) => {
       var circles = (
-        <g key={`gcircle${i}`} transform={`translate(0,${yScale.bandwidth() / 2})`}>
+        <g
+          key={`gcircle${i}`}
+          data-var={this.props.circleleftvariable}
+          data-val={d[this.props.circleleftvariable]}
+          data-name={d.name}
+          transform={`translate(0,${yScale.bandwidth() / 2})`}
+        >
+          <circle
+            key={`circle${i}`}
+            cx={-this.width / 2 + xLeftScale(d[this.props.circleleftvariable])}
+            cy={yScale(d.name)}
+            r={yScale.bandwidth() / 7}
+            onMouseOver={(e) => this.mouseover(e)}
+            onMouseMove={(e) => this.mousemove(e, d)}
+            onMouseOut={(e) => this.mouseleave(e)}
+          />
           <line
             key={`line${i}`}
             strokeWidth={3}
@@ -139,12 +224,9 @@ class DoubleStackedBarChart extends Component {
             y1={yScale(d.name)}
             x2={-this.width / 2 + xLeftScale(d[this.props.circleleftvariable])}
             y2={yScale(d.name)}
-          />
-          <circle
-            key={`circle${i}`}
-            cx={-this.width / 2 + xLeftScale(d[this.props.circleleftvariable])}
-            cy={yScale(d.name)}
-            r={yScale.bandwidth() / 10}
+            onMouseOver={(e) => this.mouseover(e)}
+            onMouseMove={(e) => this.mousemove(e, d)}
+            onMouseOut={(e) => this.mouseleave(e)}
           />
         </g>
       );
@@ -173,7 +255,9 @@ class DoubleStackedBarChart extends Component {
         </text>
       );
       return (
-        <g key={"g" + i} transform={`translate(0,${yScale.bandwidth() / 2})`}>{labels}</g>
+        <g key={"g" + i} transform={`translate(0,${yScale.bandwidth() / 2})`}>
+          {labels}
+        </g>
       );
     });
 
@@ -219,32 +303,37 @@ class DoubleStackedBarChart extends Component {
     );
 
     return (
-      <svg width={this.props.size[0]} height={this.props.size[1]}>
-        <g
-          transform={`translate(${this.props.size[0] / 2}, ${this.margin.top})`}
-        >
-          {grects}
-          {gcircles}
-          <g className={`${this.props.leftvariable}`}>{leftRects}</g>
-          <g className={`${this.props.circleleftvariable}`}>{leftCircles}</g>
-          {labels}
-          <g>{xLabels}</g>
-          <Axis
-            d3Axis={axisBottom}
-            scale={xScale}
-            translateX={0}
-            translateY={this.height+10}
-            ticks={6}
-          />
-          <Axis
-            d3Axis={axisBottom}
-            scale={xLeftScale}
-            translateX={-this.width / 2}
-            translateY={this.height+10}
-            ticks={6}
-          />
-        </g>
-      </svg>
+      <div className="stackedbar">
+        <svg width={this.props.size[0]} height={this.props.size[1]}>
+          <g
+            transform={`translate(${this.props.size[0] / 2}, ${
+              this.margin.top
+            })`}
+          >
+            {grects}
+            {gcircles}
+            <g className={`${this.props.leftvariable}`}>{leftRects}</g>
+            <g className={`${this.props.circleleftvariable}`}>{leftCircles}</g>
+            {labels}
+            <g>{xLabels}</g>
+            <Axis
+              d3Axis={axisBottom}
+              scale={xScale}
+              translateX={0}
+              translateY={this.height + 10}
+              ticks={6}
+            />
+            <Axis
+              d3Axis={axisBottom}
+              scale={xLeftScale}
+              translateX={-this.width / 2}
+              translateY={this.height + 10}
+              ticks={6}
+            />
+          </g>
+        </svg>
+        <div ref={(node) => (this.tooltip = node)} className="tooltip" />
+      </div>
     );
   }
 }
