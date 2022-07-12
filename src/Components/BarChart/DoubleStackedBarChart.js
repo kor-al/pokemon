@@ -4,7 +4,7 @@ import { min, max, bin, groups, range } from "d3-array";
 import { stack } from "d3-shape";
 import { select, selectAll } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
-import { capitalizeFirstLetter } from "../../preprocess";
+import { formatNameString } from "../../preprocess";
 import "./DoubleStackedBarChart.css";
 
 const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
@@ -57,7 +57,7 @@ class DoubleStackedBarChart extends Component {
     }
     this.tooltip.innerHTML = `
     ${el.dataset.name}
-    </br>${capitalizeFirstLetter(el.dataset.var)}: ${el.dataset.val}
+    </br>${formatNameString(el.dataset.var)}: ${el.dataset.val}
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";
     this.tooltip.style.left = e.pageX + 10 + "px";

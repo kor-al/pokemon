@@ -6,6 +6,7 @@ import { select } from "d3-selection";
 import { useRef, useEffect } from "react";
 import { symbol, symbolTriangle } from "d3-shape";
 import "./DoubleStackedBarChart.css";
+import { formatNameString } from "../../preprocess";
 
 const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
   const anchor = useRef();
@@ -31,8 +32,41 @@ class BarChart extends Component {
 
     this.yScalePadding = 0.3;
 
+    this.mouseover = this.mouseover.bind(this);
+    this.mousemove = this.mousemove.bind(this);
+    this.mouseleave = this.mouseleave.bind(this);
+
     // this.createBarChart = this.createBarChart.bind(this)
   }
+
+  mouseover = function (e) {
+    let point = e.target;
+    this.tooltip.style.opacity = 1;
+    point.style.strokeOpacity = 1;
+    point.style.strokeWidth = 2;
+  };
+
+  mousemove = function (e, d) {
+    const point = e.target;
+    this.tooltip.innerHTML = `
+    ${d.name}, ${d.classfication}
+    </br>Types: ${d.type1}${d.type2 == "" ? "" : ", " + d.type2}
+    </br>${formatNameString(this.props.xvariable)}: ${
+      d[this.props.xvariable]
+    }
+    `;
+    this.tooltip.style.top = e.pageY + 10 + "px";
+    this.tooltip.style.left = e.pageX + 10 + "px";
+  };
+
+  mouseleave = function (e) {
+    let point = e.target;
+    this.tooltip.style.opacity = 0;
+    point.style.strokeOpacity = 0.5;
+    point.style.strokeWidth = 1;
+    this.tooltip.style.top = 0 + "px";
+    this.tooltip.style.left = 0 + "px";
+  };
 
   render() {
     const sortedData = this.props.data
@@ -61,6 +95,9 @@ class BarChart extends Component {
         height={yScale.bandwidth()}
         rx={4}
         ry={4}
+        onMouseOver={(e) => this.mouseover(e)}
+        onMouseMove={(e) => this.mousemove(e, d)}
+        onMouseOut={(e) => this.mouseleave(e)}
       />
     ));
 
@@ -99,11 +136,11 @@ class BarChart extends Component {
       </text>
     ));
 
-    var text= this.props.text.map((d, i) => (
+    var text = this.props.text.map((d, i) => (
       <text
         className={d.name}
         key={`text${i}`}
-        x={xScale(d.x)+10}
+        x={xScale(d.x) + 10}
         y={yScale(d.name) + yScale.bandwidth() / 2}
         textAnchor="start"
         alignmentBaseline="middle"
@@ -113,19 +150,25 @@ class BarChart extends Component {
     ));
 
     return (
-      <svg width={this.props.size[0]} height={this.props.size[1]}>
-        <g transform={`translate(${this.margin.left}, ${this.margin.top})`}>
-          <g className={this.props.xvariable}>{rects}{text}</g>
-          <Axis
-            d3Axis={axisBottom}
-            scale={xScale}
-            translateX={0}
-            translateY={this.height + 10}
-            ticks={6}
-          />
-          {labels}
-        </g>
-      </svg>
+      <div className="barplot">
+        <svg width={this.props.size[0]} height={this.props.size[1]}>
+          <g transform={`translate(${this.margin.left}, ${this.margin.top})`}>
+            <g className={this.props.xvariable}>
+              {rects}
+              {text}
+            </g>
+            <Axis
+              d3Axis={axisBottom}
+              scale={xScale}
+              translateX={0}
+              translateY={this.height + 10}
+              ticks={6}
+            />
+            {labels}
+          </g>
+        </svg>
+        <div ref={(node) => (this.tooltip = node)} className="tooltip" />
+      </div>
     );
   }
 }

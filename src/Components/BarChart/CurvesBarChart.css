@@ -1,0 +1,23 @@
+.capture_rate{
+    stroke: #6fde6f;
+}
+
+.base_egg_steps{
+    stroke: #ff913c;
+}
+
+.base_happiness{
+    fill:#ff9ac6fa;
+    stroke:#f162a0fa;
+}
+
+.base_happiness-caught:before{
+    content: "";
+    position: absolute;
+    left:0;
+    right:0;
+    width:10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+}

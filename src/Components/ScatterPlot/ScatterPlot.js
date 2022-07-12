@@ -5,7 +5,7 @@ import { rgb } from "d3-color";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { symbol, symbolStar } from "d3-shape";
-import { capitalizeFirstLetter } from "../../preprocess";
+import { formatNameString } from "../../preprocess";
 
 
 const Axis = ({ d3Axis, scale, translateX, translateY }) => {
@@ -48,8 +48,8 @@ class ScatterPlot extends Component {
     this.tooltip.innerHTML = `
     ${d.name}, ${d.classfication}
     </br>Types: ${d.type1}${d.type2 == ""? "": ", " + d.type2}
-    </br>${capitalizeFirstLetter(this.props.xvariable)}: ${d[this.props.xvariable]}
-    </br>${capitalizeFirstLetter(this.props.yvariable)}: ${d[this.props.yvariable]}
+    </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
+    </br>${formatNameString(this.props.yvariable)}: ${d[this.props.yvariable]}
     `
     this.tooltip.style.top = (e.pageY+10)+"px"
     this.tooltip.style.left = (e.pageX+10) + "px"
@@ -113,7 +113,6 @@ class ScatterPlot extends Component {
         />
       );
     });
-    console.log("points.legth", points.length);
     return (
       <div className="scatter">
         <svg width={this.props.size[0]} height={this.props.size[1]}>

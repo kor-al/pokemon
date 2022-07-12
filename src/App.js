@@ -12,7 +12,6 @@ import { getDataByOneType, summarizeGroupedData } from "./preprocess";
 import BarChart from "./Components/BarChart/BarChart";
 import CircularBarChartQuadrupled from "./Components/BarChart/CircularBarChartDoubleQuadrupled";
 import ViolinChart from "./Components/ViolinChart/ViolinChart";
-import ViolinChartKDE from "./Components/ViolinChart/ViolinChart_kde";
 import Dropdown from "./Components/Dropdown";
 import Button from "./Components/Button";
 import ScatterPlot from "./Components/ScatterPlot/ScatterPlot";
@@ -21,7 +20,7 @@ import Card from "./Components/Card/Card";
 import CustomBarChart from "./Components/BarChart/CustomBarChart";
 import ChordDiagram from "./Components/Circle/ChordDiagram";
 import DoubleStackedBarChart from "./Components/BarChart/DoubleStackedBarChart";
-import CurvesBarChart from "./Components/BarChart/CurvesBarChart copy";
+import CurvesBarChart from "./Components/BarChart/CurvesBarChart";
 
 const types = [
   "grass",
