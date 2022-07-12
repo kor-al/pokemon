@@ -1,4 +1,7 @@
-
+//https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
 const getDataByOneType = (data) =>
 {
@@ -31,4 +34,4 @@ function varToInt(d){
     }
   }
 
-export { getDataByOneType, summarizeGroupedData, varToInt }
+export { getDataByOneType, summarizeGroupedData, varToInt, capitalizeFirstLetter }

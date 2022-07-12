@@ -15,21 +15,29 @@
 .hp{
     fill: red;
     opacity: 0.5;
-
 }
 
 .attack{
     fill:orange;
     opacity: 0.5;
+    stroke-width: 0;
 }
+
+.attack rect{
+    stroke:rgb(255, 140, 0);
+    stroke-width: 0;
+}
+
 
 .sp_attack{
-    fill:orange;
+    fill:rgb(179, 75, 15);
     opacity: 0.5;
+    stroke-width: 0;
 }
 
+
 .sp_attack line{
-    stroke:orange;
+    stroke:rgb(179, 75, 15);
     opacity: 0.5;
 }
 

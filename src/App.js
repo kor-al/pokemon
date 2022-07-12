@@ -1,4 +1,5 @@
 import "./App.css";
+import "./tooltip.css";
 import React, { Component } from "react";
 import data from "./pokemons";
 import dataFlow from "./pokemonTypesCounts";
