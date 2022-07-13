@@ -8,3 +8,22 @@
     transition: opacity ease-in-out 300ms;
     text-align: left;
 }
+
+
+.tooltip-transparent{
+    position:absolute;
+    opacity: 0;
+    padding: 0rem;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: opacity ease-in-out 300ms;
+    text-align: left;
+}
+
+.tooltip__img {
+    clip-path: circle(30%);
+    width: 100px;
+    height: 100px;
+    margin-left:-10px;
+    margin-top:-10px;
+  }

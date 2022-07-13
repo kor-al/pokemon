@@ -45,14 +45,18 @@ class ScatterPlot extends Component {
   
   mousemove = function(e,d) {
     const point=e.target
+    // this.tooltip.innerHTML = `
+    // ${d.name}, ${d.classfication}
+    // </br>Types: ${d.type1}${d.type2 == ""? "": ", " + d.type2}
+    // </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
+    // </br>${formatNameString(this.props.yvariable)}: ${d[this.props.yvariable]}
+    // `
     this.tooltip.innerHTML = `
-    ${d.name}, ${d.classfication}
-    </br>Types: ${d.type1}${d.type2 == ""? "": ", " + d.type2}
-    </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
-    </br>${formatNameString(this.props.yvariable)}: ${d[this.props.yvariable]}
+    <img class="tooltip__img" src=${process.env.PUBLIC_URL + "/pokemons/" + d.name + ".png"}>
     `
-    this.tooltip.style.top = (e.pageY+10)+"px"
-    this.tooltip.style.left = (e.pageX+10) + "px"
+
+    this.tooltip.style.top = (e.pageY)+"px"
+    this.tooltip.style.left = (e.pageX) + "px"
   }
   
   mouseleave = function(e) {
@@ -132,7 +136,7 @@ class ScatterPlot extends Component {
             />
           </g>
         </svg>
-        <div ref={(node) => (this.tooltip = node)} className="tooltip"/>
+        <div ref={(node) => (this.tooltip = node)} className="tooltip-transparent"/>
       </div>
     );
   }
