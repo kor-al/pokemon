@@ -1,0 +1,13 @@
+.card{
+    width: 22rem;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.typeIcon{
+    width: 40px;
+}
+
+.card__portrait{
+    /* width: 20rem; */
+}

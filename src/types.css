@@ -1,0 +1,171 @@
+:root {
+    /* --grass: #38BF4B;
+    --fire:#FF9741;
+    --water: #3692DC;
+    --bug: #83C300;
+    --normal: #919AA2;
+    --poison:#B567CE;
+    --electric:#FBD100;
+    --ground: #E87236;
+    --fairy:#FB89EB;
+    --fighting:#E0306A;
+    --psychic:#FF6675;
+    --rock: #C8B686;
+    --ghost:#4C6AB2;
+    --ice: #4CD1C0;
+    --dragon: #006FC9;
+    --dark: #5B5466;
+    --steel: #5A8EA2;
+    --flying: #89AAE3; */
+    --grass:   56, 191, 75 ;
+    --fire:  255, 151, 65 ;
+    --water:   54, 146, 220 ;
+    --bug:   131, 195, 0 ;
+    --normal:   145, 154, 162 ;
+    --poison:  181, 103, 206 ;
+    --electric:  251, 209, 0 ;
+    --ground:   232, 114, 54 ;
+    --fairy:  251, 137, 235 ;
+    --fighting:  224, 48, 106 ;
+    --psychic:  255, 102, 117 ;
+    --rock:   200, 182, 134 ;
+    --ghost:  76, 106, 178 ;
+    --ice:   76, 209, 192 ;
+    --dragon:   0, 111, 201 ;
+    --dark:   91, 84, 102 ;
+    --steel:   90, 142, 162 ;
+    --flying:   137, 170, 227 ;
+
+    --type_opacity:0.4;
+    --violin--opacity: 0.5;
+    --violin--stroke-opacity:0.8
+  }
+
+
+.grass--transparent{
+    background-color: rgba(var(--grass), var(--type_opacity));
+}
+.fire--transparent{
+    background-color: rgba(var(--fire), var(--type_opacity));
+}
+.water--transparent{
+    background-color: rgba(var(--water), var(--type_opacity));
+}
+.bug--transparent{
+    background-color: rgba(var(--bug), var(--type_opacity));
+}
+.normal--transparent{
+    background-color: rgba(var(--normal), var(--type_opacity));
+}
+.poison--transparent{
+    background-color: rgba(var(--poison), var(--type_opacity));
+}
+.electric--transparent{
+    background-color: rgba(var(--electric), var(--type_opacity));
+}
+.ground--transparent{
+    background-color: rgba(var(--ground), var(--type_opacity));
+}
+.fairy--transparent{
+    background-color: rgba(var(--fairy), var(--type_opacity));
+}
+.fighting--transparent{
+    background-color: rgba(var(--fighting), var(--type_opacity));
+}
+.psychic--transparent{
+    background-color: rgba(var(--psychic), var(--type_opacity));
+}
+.rock--transparent{
+    background-color: rgba(var(--rock), var(--type_opacity));
+}
+.ghost--transparent{
+    background-color: rgba(var(--ghost), var(--type_opacity));
+}
+.ice--transparent{
+    background-color: rgba(var(--ice), var(--type_opacity));
+}
+.dragon--transparent{
+    background-color: rgba(var(--dragon), var(--type_opacity));
+}
+.dark--transparent{
+    background-color: rgba(var(--dark), var(--type_opacity));
+}
+.steel--transparent{
+    background-color: rgba(var(--steel), var(--type_opacity));
+}
+.flying--transparent{
+    background-color: rgba(var(--flying), var(--type_opacity));
+}
+
+.violin g.grass{
+    fill: rgba(var(--grass), var(--violin--opacity));
+    stroke: rgba(var(--grass), var(--violin--stroke-opacity));
+}
+ .violin g.fire{
+    fill: rgba(var(--fire), var(--violin--opacity));
+    stroke: rgba(var(--fire), var(--violin--opacity));
+}
+ .violin g.water{
+    fill: rgba(var(--water), var(--violin--opacity));
+    stroke: rgba(var(--water), var(--violin--stroke-opacity));
+}
+ .violin g.bug{
+    fill: rgba(var(--bug), var(--violin--opacity));
+    stroke: rgba(var(--bug), var(--violin--stroke-opacity));
+}
+ .violin g.normal{
+    fill: rgba(var(--normal), var(--violin--opacity));
+    stroke: rgba(var(--normal), var(--violin--stroke-opacity));
+}
+ .violin g.poison{
+    fill: rgba(var(--poison), var(--violin--opacity));
+    stroke: rgba(var(--poison), var(--violin--stroke-opacity));
+}
+ .violin g.electric{
+    fill: rgba(var(--electric), var(--violin--opacity));
+    stroke: rgba(var(--electric), var(--violin--stroke-opacity));
+}
+ .violin g.ground{
+    fill: rgba(var(--ground), var(--violin--opacity));
+    stroke: rgba(var(--ground), var(--violin--stroke-opacity));
+}
+ .violin g.fairy{
+    fill: rgba(var(--fairy), var(--violin--opacity));
+    stroke: rgba(var(--fairy), var(--violin--stroke-opacity));
+}
+ .violin g.fighting{
+    fill: rgba(var(--fighting), var(--violin--opacity));
+    stroke: rgba(var(--fighting), var(--violin--stroke-opacity));
+}
+ .violin g.psychic{
+    fill: rgba(var(--psychic), var(--violin--opacity));
+    stroke: rgba(var(--psychic), var(--violin--stroke-opacity));
+}
+ .violin g.rock{
+    fill: rgba(var(--rock), var(--violin--opacity));
+    stroke: rgba(var(--rock), var(--violin--stroke-opacity));
+}
+ .violin g.ghost{
+    fill: rgba(var(--ghost), var(--violin--opacity));
+    stroke: rgba(var(--ghost), var(--violin--stroke-opacity));
+}
+ .violin g.ice{
+    fill: rgba(var(--ice), var(--violin--opacity));
+    stroke: rgba(var(--ice), var(--violin--stroke-opacity));
+}
+ .violin g.dragon{
+    fill: rgba(var(--dragon), var(--violin--opacity));
+    stroke: rgba(var(--dragon), var(--violin--stroke-opacity));
+}
+ .violin g.dark{
+    fill: rgba(var(--dark), var(--violin--opacity));
+    stroke: rgba(var(--dark), var(--violin--stroke-opacity));
+}
+ .violin g.steel{
+    fill: rgba(var(--steel), var(--violin--opacity));
+    stroke: rgba(var(--steel), var(--violin--stroke-opacity));
+}
+ .violin g.flying{
+    fill: rgba(var(--flying), var(--violin--opacity));
+    stroke: rgba(var(--flying), var(--violin--stroke-opacity));
+}

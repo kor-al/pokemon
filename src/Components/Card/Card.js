@@ -1,9 +1,5 @@
 import React, { Component, useRef, useEffect } from "react";
-import { scaleLinear, scaleBand } from "d3-scale";
-import { min, max, bin, groups, range } from "d3-array";
-import { area, curveCatmullRom } from "d3-shape";
-import { select } from "d3-selection";
-import { axisLeft, axisBottom } from "d3-axis";
+import "./Card.css"
 
 class Card extends Component {
     constructor(props) {
@@ -12,15 +8,16 @@ class Card extends Component {
 
   
     render() {
-        if (this.props.data){
-        return <div className="Card">
+        return <div className={"card "+ this.props.data.type1+"--transparent"}>
             <h3>{this.props.data.name}</h3>
-            <div>Types:{this.props.data.type1}, {this.props.data.type2}</div>
-            <div>Hp:{this.props.data.hp}</div>
+            <p>{this.props.data.japanese_name}</p>
+            <img className="card__portrait" src={process.env.PUBLIC_URL + "/pokemons/" + this.props.data.pokedex_number + ".png"}/>
+            <img className="typeIcon" src={process.env.PUBLIC_URL + "/types/" + this.props.data.type1 + ".svg"}/>
+            {this.props.data.type2 != "" && <img className="typeIcon" src={process.env.PUBLIC_URL + "/types/" + this.props.data.type2 + ".svg"}/>}
+            <div>HP:{this.props.data.hp}</div>
             <div>Attack:{this.props.data.attack}</div>
             <div>Defense:{this.props.data.defense}</div>
         </div>
-        }
     }
       
   }

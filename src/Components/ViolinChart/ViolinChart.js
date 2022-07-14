@@ -113,8 +113,8 @@ class ViolinChart extends Component {
         return `translate(${xScale(d[0])},0)`;
       }) //#`translate(${30 + i * step},0)`)
       .append("path")
-      .style("stroke", "black")
-      .style("fill", (d, i) => this.props.fillScale(d[0]))
+      // .style("stroke", "black")
+      // .style("fill", (d, i) => this.props.fillScale(d[0]))
       // .datum(d=>d[this.props.yvariable])
       .attr("d", (d) => {
         const yData = d[1].map((d) =>

@@ -1,3 +1,32 @@
+:root {
+  --pokemon-blueish: #b1e1ff68;
+  --pokemon-blue: #0075BE;
+  --pokemon-darkblue: #0A285F;
+  --pokemon-yellow: #FFCC00;
+  --pokemon-darkyellow: #D5A100;
+
+  --grass: green;
+  --fire:orange;
+  /* "fire",
+  "water",
+  "bug",
+  "normal",
+  "poison",
+  "electric",
+  "ground",
+  "fairy",
+  "fighting",
+  "psychic",
+  "rock",
+  "ghost",
+  "ice",
+  "dragon",
+  "dark",
+  "steel",
+  "flying", */
+}
+
+
 html {
   box-sizing: border-box;
   font-size: 100%;
@@ -10,6 +39,8 @@ html {
 body{
   margin: 0;
   padding: 0;
+  font-family: 'Red Hat Mono', monospace;;
+  background-color: var(--pokemon-blue);
   /* font-family: typography.$body-font-family;
   font-size: typography.$base-font-size; */
   line-height: 1.5;
@@ -21,12 +52,76 @@ img{
 
 
 .App {
-  text-align: center;
+  background-color: white;
+  width: 80%;
+  max-width: 1256px;;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@media screen and (max-width:1256px) {
+  .App {
+    width: 100%;
+    text-align: center;
+  }
 }
+
+.pad{
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+@media screen and (max-width:900px) {
+  .pad{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+section{
+  margin-bottom: 5rem;;
+}
+
+
+h1{
+  /* font-family: "Pokemon Fire Red"; */
+  font-size: 3rem;
+  color:var(--pokemon-blue);
+  text-transform: capitalize;
+}
+
+h2{
+  color:var(--pokemon-blue);
+  margin-bottom: 4rem;
+}
+
+@media screen and (max-width:1256px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2{
+    font-size: 1.5rem;
+  }
+}
+
+span.step{
+  display: inline-block;
+  font-family: 'Pokemon', monospace;
+  background-color: var(--pokemon-blue);
+  color: var(--pokemon-yellow);
+  text-align: center;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.25em 0; /* ('line-height' - 'font-size') / 2 */
+  margin-right: 2rem;
+  border-bottom: 3px solid var(--pokemon-darkblue);
+  border-left: 3px solid var(--pokemon-darkblue);
+  text-shadow: 1px -1px 0 var(--pokemon-darkyellow);
+}
+
+/* axis */
+/* .domain{stroke:none;} */
+.tick line{stroke:none;}
 
 

@@ -1,26 +1,18 @@
 import "./App.css";
+import "./types.css";
 import "./tooltip.css";
 import React, { Component } from "react";
 import data from "./pokemons";
-import dataFlow from "./pokemonTypesCounts";
+// import dataFlow from "./pokemonTypesCounts";
 import { scaleThreshold, scaleOrdinal } from "d3-scale";
 import { schemeSet3, schemeCategory10 } from "d3-scale-chromatic";
-import { groups, range } from "d3-array";
-import { min, max, median } from "d3-array";
-import { format } from "d3-format";
-import { getDataByOneType, summarizeGroupedData } from "./preprocess";
-import BarChart from "./Components/BarChart/BarChart";
-import CircularBarChartQuadrupled from "./Components/BarChart/CircularBarChartDoubleQuadrupled";
-import ViolinChart from "./Components/ViolinChart/ViolinChart";
-import Dropdown from "./Components/Dropdown";
-import Button from "./Components/Button";
-import ScatterPlot from "./Components/ScatterPlot/ScatterPlot";
-import Heatmap from "./Components/Heatmap/Heatmap";
-import Card from "./Components/Card/Card";
-import CustomBarChart from "./Components/BarChart/CustomBarChart";
-import ChordDiagram from "./Components/Circle/ChordDiagram";
-import DoubleStackedBarChart from "./Components/BarChart/DoubleStackedBarChart";
-import CurvesBarChart from "./Components/BarChart/CurvesBarChart";
+
+import Header from "./Components/Sections/Header";
+import SectionTypes from "./Components/Sections/SectionTypes";
+import SectionExplore from "./Components/Sections/SectionExplore";
+import SectionTeamStats from "./Components/Sections/SectionTeamStats";
+import TeamPanel from "./Components/TeamPanel/TeamPanel";
+import Footer from "./Components/Sections/Footer";
 
 const types = [
   "grass",
@@ -69,10 +61,9 @@ const columnsAgainst = [
 class App extends Component {
   constructor(props) {
     super(props);
-    this.colorScale = scaleThreshold()
-      .domain([5, 100, 500, 999])
-      .range(["#75739F", "#5EAFC6", "#41A368", "#93C464", "#FE9922"]);
-    this.colorScale_type = scaleOrdinal().domain(types).range(schemeSet3);
+    // this.colorScale = scaleThreshold()
+    //   .domain([5, 100, 500, 999])
+    //   .range(["#75739F", "#5EAFC6", "#41A368", "#93C464", "#FE9922"]);
     this.state = {
       selectedType: "water",
       selectedGeneration: 0, //"all"
@@ -88,6 +79,7 @@ class App extends Component {
     this.getFilteredDataByType = this.getFilteredDataByType.bind(this);
     this.handlScatterPlotClick = this.handlScatterPlotClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleButtonRemoveClick = this.handleButtonRemoveClick.bind(this);
   }
 
   handleDropdownChange(e, stateFieldString) {
@@ -99,6 +91,7 @@ class App extends Component {
   }
 
   handlScatterPlotClick(e) {
+    console.log(e.target.dataset.name);
     this.setState({ selectedName: e.target.dataset.name });
     // this.setState({ selectedType: e.target.__data__[0] });
   }
@@ -106,6 +99,16 @@ class App extends Component {
   handleButtonClick(e) {
     const new_team = [...this.state.team].concat(this.state.selectedName);
     this.setState({ team: new_team });
+  }
+
+  handleButtonRemoveClick(e, d) {
+    const nameToRemove = e.target.parentElement.dataset.name;
+
+    let team = this.state.team;
+    this.setState({ team: team.filter((d) => d !== nameToRemove) });
+
+    // const new_team = [...this.state.team].concat(this.state.selectedName);
+    // this.setState({ team: new_team });
   }
 
   getFilteredDataByType(data, filter) {
@@ -127,6 +130,8 @@ class App extends Component {
   }
 
   render() {
+    this.colorScale_type = scaleOrdinal().domain(types).range(schemeSet3);
+
     const dataFilteredByType = this.getFilteredDataByType(data, {
       field: ["type1", "type2"],
       value: this.state.selectedType,
@@ -143,147 +148,44 @@ class App extends Component {
     );
     const dataTeam = data.filter((d) => this.state.team.includes(d.name));
 
-    const dataOneType = getDataByOneType(data);
-    const dataByTypes = groups(dataOneType, (d) => d.type);
-    const summarizedDataByType = summarizeGroupedData(
-      dataByTypes,
-      columnsAgainst,
-      median
-    );
-
     return (
       <div className="App">
-        {/* <header className="App-header"></header> */}
-        {/* <BarChart
-          colorScale={this.colorScale}
+        <Header/>
+        <SectionTypes
           data={data}
-          size={[500, 400]}
-          yvariable="weight_kg"
-        /> */}
-
-        <Heatmap
-          data={summarizedDataByType}
-          size={[500, 500]}
-          vars={columnsAgainst}
-          items={summarizedDataByType.map((d) => d.name)}
+          columnsAgainst={columnsAgainst}
+          types={types}
+          colorScale_type={this.colorScale_type}
+          baseStats={baseStats}
+          valueDropdownTypeStat={this.state.valueDropdownTypeStat}
+          handleDropdownChange={this.handleDropdownChange}
+          handleViolinClick={this.handleViolinClick}
         />
-
-        <ChordDiagram
-          data={dataFlow}
-          size={[500, 500]}
-          items={types}
-          fillScale={this.colorScale_type}
-        />
-
-        <Dropdown
-          label="Stat"
-          options={baseStats.map((t) => ({ label: t, value: t }))}
-          value={this.state.valueDropdownTypeStat}
-          onChange={(e) =>
-            this.handleDropdownChange(e, "valueDropdownTypeStat")
-          }
-        />
-        <ViolinChart
-          fillScale={this.colorScale_type}
-          data={dataOneType} //TODO: remove it as it's needed only to calc max ranges
-          dataGrouped={dataByTypes}
-          size={[800, 200]}
-          yvariable={this.state.valueDropdownTypeStat}
-          onClick={this.handleViolinClick}
-        />
-        <Dropdown
-          label="Type"
-          options={types.map((t) => ({ label: t, value: t }))}
-          value={this.state.selectedType}
-          onChange={(e) => this.handleDropdownChange(e, "selectedType")}
-        />
-        <Dropdown
-          label="Generation"
-          options={range(0, 8).map((t) => ({
-            label: t == 0 ? "All" : t,
-            value: t,
-          }))}
-          value={this.state.selectedGeneration}
-          onChange={(e) => this.handleDropdownChange(e, "selectedGeneration")}
-        />
-        <Dropdown
-          label="Stat X"
-          options={baseStats.map((t) => ({ label: t, value: t }))}
-          value={this.state.valueDropdownStatX}
-          onChange={(e) => this.handleDropdownChange(e, "valueDropdownStatX")}
-        />
-        <Dropdown
-          label="Stat Y"
-          options={baseStats.map((t) => ({ label: t, value: t }))}
-          value={this.state.valueDropdownStatY}
-          onChange={(e) => this.handleDropdownChange(e, "valueDropdownStatY")}
-        />
-        <ScatterPlot
-          fillScale={this.colorScale_type}
-          data={dataFilteredByTypeAndGeneration}
+        <SectionExplore
+          dataFiltered={dataFilteredByTypeAndGeneration}
+          types={types}
+          baseStats={baseStats}
+          colorScale_type={this.colorScale_type}
           selectedType={this.state.selectedType}
-          size={[600, 600]}
-          yvariable={this.state.valueDropdownStatY}
-          xvariable={this.state.valueDropdownStatX}
-          onClick={this.handlScatterPlotClick}
+          selectedName={this.state.selectedName}
+          selectedGeneration={this.state.selectedGeneration}
+          valueDropdownStatX={this.state.valueDropdownStatX}
+          valueDropdownStatY={this.state.valueDropdownStatY}
+          handlScatterPlotClick={this.handlScatterPlotClick}
+          handleDropdownChange={this.handleDropdownChange}
+          handleButtonClick={this.handleButtonClick}
         />
-        <Card data={dataFilteredByName[0]} />
-        <Button text="Add to the team" onClick={this.handleButtonClick} />
-        {/* <CircularBarChartQuadrupled
-          data={dataTeam}
-          size={[600, 600]}
-          y1variable={"defense"}
-          y1innervariable={"attack"}
-          y2variable={"sp_defense"}
-          y2innervariable={"sp_attack"}
-        /> */}
+        
+        <TeamPanel data={dataTeam} onRemove={this.handleButtonRemoveClick} />
 
-        <DoubleStackedBarChart
-          data={dataTeam}
-          size={[600, 300]}
-          items={this.state.team}
-          variables={["hp", "defense"]}
-          circlevariables={["hp", "sp_defense"]}
-          leftvariable={"attack"}
-          circleleftvariable={"sp_attack"}
-        />
-
-        <Heatmap
-          data={dataTeam}
-          size={[800, 300]}
-          vars={columnsAgainst}
-          items={this.state.team}
-        />
-
-        <BarChart
-          data={dataTeam}
-          size={[600, 300]}
-          xvariable={"speed"}
-          items={this.state.team}
-          text={dataTeam.map((d) => ({
-            name: d.name,
-            x: d.speed,
-            text: `faster than ${format(".0%")(d.speed_rank / data.length)}`,
-          }))}
-        />
-
-        <CustomBarChart
-          data={dataTeam}
-          size={[600, 300]}
-          xvariable={"weight_kg"}
-          yvariable={"height_m"}
-          colorvariable={"experience_growth"}
-          items={this.state.team}
-        />
-
-        <CurvesBarChart
-          data={dataTeam}
-          size={[600, 300]}
-          items={this.state.team}
-          leftvariable={"capture_rate"}
-          rightvariable={"base_egg_steps"}
-          rvariable={"base_happiness"}
-        />
+        {this.state.team.length >0 && 
+        <SectionTeamStats
+        data={data}
+        team={this.state.team}
+        dataTeam={dataTeam}
+        columnsAgainst={columnsAgainst}
+        />}
+      <Footer/>
       </div>
     );
   }

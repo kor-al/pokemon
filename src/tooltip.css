@@ -17,13 +17,22 @@
     background-color: transparent;
     border-radius: 5px;
     transition: opacity ease-in-out 300ms;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .tooltip__img {
-    clip-path: circle(30%);
+    display: block;
+    /* clip-path: circle(50%); */
     width: 100px;
     height: 100px;
-    margin-left:-10px;
-    margin-top:-10px;
+    margin: 0 auto;
+    /* margin-left:-10px; */
+    /* margin-top:-10px; */
+  }
+
+.tooltip__text {
+    max-width: 150px;
   }

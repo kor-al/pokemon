@@ -22,6 +22,8 @@ const Axis = ({ d3Axis, scale, translateX, translateY }) => {
   );
 };
 
+
+
 class ScatterPlot extends Component {
   constructor(props) {
     super(props);
@@ -36,11 +38,16 @@ class ScatterPlot extends Component {
     this.mouseleave = this.mouseleave.bind(this);
   }
 
-  mouseover = function(e) {
+  mouseover = function(e,d) {
     let point=e.target
     this.tooltip.style.opacity = 1
     point.style.strokeOpacity = 1;
     point.style.strokeWidth = 2;
+
+    this.tooltip.innerHTML = `
+    <img class="tooltip__img" src=${process.env.PUBLIC_URL + "/pokemons/" + d.pokedex_number + ".png"}>
+    <div class="tooltip__text">${d.name}</div>
+    <div class="tooltip__text">${d.classfication}</div>`
   }
   
   mousemove = function(e,d) {
@@ -51,10 +58,11 @@ class ScatterPlot extends Component {
     // </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
     // </br>${formatNameString(this.props.yvariable)}: ${d[this.props.yvariable]}
     // `
-    this.tooltip.innerHTML = `
-    <img class="tooltip__img" src=${process.env.PUBLIC_URL + "/pokemons/" + d.name + ".png"}>
-    `
-
+    // this.tooltip.innerHTML = `
+    // <img class="tooltip__img" src=${process.env.PUBLIC_URL + "/pokemons/" + d.name + ".png"}>
+    // <div class="tooltip__text">${d.name}</div>
+    // <div class="tooltip__text">${d.classfication}</div>
+    // `
     this.tooltip.style.top = (e.pageY)+"px"
     this.tooltip.style.left = (e.pageX) + "px"
   }
@@ -111,7 +119,7 @@ class ScatterPlot extends Component {
           }}
           className={`circle ${d.name}`}
           onClick={this.props.onClick}
-          onMouseOver={(e) => this.mouseover(e)}
+          onMouseOver={(e) => this.mouseover(e,d)}
           onMouseMove={(e) => this.mousemove(e, d)}
           onMouseOut={(e) => this.mouseleave(e)}
         />
@@ -136,7 +144,8 @@ class ScatterPlot extends Component {
             />
           </g>
         </svg>
-        <div ref={(node) => (this.tooltip = node)} className="tooltip-transparent"/>
+        <div ref={(node) => (this.tooltip = node)} className="tooltip-transparent">
+          </div>
       </div>
     );
   }

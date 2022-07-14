@@ -1,0 +1,16 @@
+.header{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    justify-content: space-between;
+}
+
+.header__logo{
+    /* margin-right: 3rem; */
+}
+
+.header__title {
+    margin-top: 3rem;
+}
