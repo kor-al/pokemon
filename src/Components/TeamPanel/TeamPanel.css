@@ -52,19 +52,6 @@ li+li{
     margin-left: 0.5rem;
 }
 
-.member__button{
-    position: absolute;
-    top:-10%;
-    right: -10%;
-    padding: 0.5rem;
-    background-color: rgb(247, 159, 159);
-    line-height: 0.6;
-    color:white;
-    border-radius: 50%;
-    border: none;
-}
-
-
 @media screen and (max-width:800px) {
     ul.team__list{
         flex-wrap: wrap;
