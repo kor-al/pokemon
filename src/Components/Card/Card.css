@@ -1,13 +1,131 @@
-.card{
-    width: 22rem;
-    padding: 2rem;
-    border-radius: 10px;
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 25rem;
+  padding: 2rem 2rem 2rem 2rem;
+  border-radius: 10px;
 }
 
-.typeIcon{
-    width: 40px;
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.card__portrait{
-    /* width: 20rem; */
+.card__name {
+  text-align: left;
 }
+
+.card__name > h3 {
+  margin: 0;
+}
+
+.card__name > p {
+  margin: 0;
+}
+
+.card__types {
+  width: 6rem;
+  text-align: right;
+}
+
+.typeIcon {
+  width: 2rem;
+}
+
+.card__portrait {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.card__info{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.card__info > .info{
+    display: inline;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.info.classification{
+    text-align: left;
+}
+
+.info + .info{
+    /* margin-left: 1rem; */
+}
+
+span.highlight{
+    color: var(--pokemon-blue);
+}
+
+span.dim{
+    color: rgb(144, 144, 144)
+}
+
+.card__label {
+  min-width: 7rem;
+  text-align: left;
+  margin-top: 0.3rem;
+}
+
+.card__weakness {
+    margin-top: 1rem;;
+}
+
+.card__weakness,
+.card__resistance {
+  display: flex;
+  margin-bottom: 0.2rem;
+}
+
+.card__weakness > .typeIcon,
+.card__resistance > .typeIcon {
+  width: 1.75rem;
+}
+
+.resistance__wrapper,.rweakness__wrapper{
+    text-align: left;
+}
+
+
+.meter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.meter__label {
+  text-align: left;
+  width: 7rem;
+}
+
+.meter__value {
+  margin-left: 0.5rem;
+  color: var(--pokemon-blue);
+}
+
+.meter__rect {
+  display: inline-block;
+}
+
+.meter__rect--bcg {
+  position: relative;
+  background-color: rgba(129, 129, 129, 0.521);
+}
+
+.meter__rect--value {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--pokemon-blue);
+}
+
+/* span.meter__rect--value.HP{
+    background-color: var(--hp);
+} */

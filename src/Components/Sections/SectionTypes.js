@@ -35,6 +35,7 @@ class SectionTypes extends Component {
           <Heatmap
             data={summarizedDataByType}
             size={[500, 500]}
+            marginLeft={100}
             vars={this.props.columnsAgainst}
             items={summarizedDataByType.map((d) => d.name)}
           />

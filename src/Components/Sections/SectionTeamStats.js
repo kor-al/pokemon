@@ -17,16 +17,18 @@ class SectionTeamStats extends Component {
   render() {
     return (
       <section className="sectionTeamStats pad">
-        <h2><span className="step">4</span>Improve your team stats</h2>
+        <h2>
+          <span className="step">4</span>Improve your team stats
+        </h2>
         <div className="SectionTeamStats__graphics">
-
           <Heatmap
             data={this.props.dataTeam}
             size={[500, 300]}
+            marginLeft={150}
             vars={this.props.columnsAgainst}
             items={this.props.team}
           />
-                    <DoubleStackedBarChart
+          <DoubleStackedBarChart
             data={this.props.dataTeam}
             size={[500, 300]}
             items={this.props.team}

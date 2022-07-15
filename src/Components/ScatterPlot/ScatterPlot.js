@@ -1,12 +1,10 @@
 import React, { Component, useRef, useEffect } from "react";
-import { scaleLinear, scaleBand } from "d3-scale";
-import { min, max, bin, groups, range } from "d3-array";
+import { scaleLinear} from "d3-scale";
+import { max} from "d3-array";
 import { rgb } from "d3-color";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { symbol, symbolStar } from "d3-shape";
-import { formatNameString } from "../../preprocess";
-
 
 const Axis = ({ d3Axis, scale, translateX, translateY }) => {
   const anchor = useRef();

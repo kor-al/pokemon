@@ -3,3 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.scatter__header{
+    text-align: right;
+}

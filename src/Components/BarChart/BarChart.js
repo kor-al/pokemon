@@ -26,7 +26,7 @@ class BarChart extends Component {
   constructor(props) {
     super(props);
 
-    this.margin = { top: 10, right: 150, bottom: 50, left: 100 };
+    this.margin = { top: 10, right: 150, bottom: 50, left: 150 };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
 

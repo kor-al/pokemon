@@ -24,7 +24,7 @@ const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
 class DoubleStackedBarChart extends Component {
   constructor(props) {
     super(props);
-    this.margin = { top: 10, right: 10, bottom: 50, left: 200 };
+    this.margin = { top: 10, right: 30, bottom: 50, left: 150 };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     this.yScalePadding = 0.3;
@@ -305,11 +305,7 @@ class DoubleStackedBarChart extends Component {
     return (
       <div className="stackedbar">
         <svg width={this.props.size[0]} height={this.props.size[1]}>
-          <g
-            transform={`translate(${this.props.size[0] / 2}, ${
-              this.margin.top
-            })`}
-          >
+          <g transform={`translate(${this.margin.left+this.width/2}, ${this.margin.top})`}>
             {grects}
             {gcircles}
             <g className={`${this.props.leftvariable}`}>{leftRects}</g>

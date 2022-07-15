@@ -1,8 +1,8 @@
 import React, { Component, useRef, useEffect } from "react";
-import { scaleLinear, scaleBand, scaleSequential } from "d3-scale";
+import { scaleLinear, scaleBand, scaleSequential, scaleSequentialPow } from "d3-scale";
 import { min, max, bin, groups, range } from "d3-array";
 import { area, curveCatmullRom } from "d3-shape";
-import { interpolateInferno, interpolateGreens } from "d3-scale-chromatic";
+import { interpolateInferno, interpolateGreens, interpolateRdYlBu, interpolateSpectral, interpolateRdYlGn} from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 
@@ -11,7 +11,7 @@ import { axisLeft, axisBottom } from "d3-axis";
 class Heatmap extends Component {
   constructor(props) {
     super(props);
-    this.margin = { top: 100, right: 10, bottom: 30, left: 100 };
+    this.margin = { top: 100, right: 10, bottom: 30, left: this.props.marginLeft };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     this.tyleSize = {height: 50, width:50}
@@ -81,9 +81,10 @@ class Heatmap extends Component {
       .range([this.height, 0])
       .padding(0.1);
 
-    var colorScale = scaleSequential()
-      .interpolator(interpolateGreens)
+    var colorScale = scaleSequentialPow( t => interpolateRdYlGn(1-t))
+      // .interpolator(interpolateGreens)
       .domain([0, this.maxValue]);
+      // .domain([0, 0.25, 0.5, 1, 2]);
 
     const tiles = this.props.data.map((d, i) => {
       return (

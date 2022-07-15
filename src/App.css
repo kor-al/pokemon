@@ -5,25 +5,10 @@
   --pokemon-yellow: #FFCC00;
   --pokemon-darkyellow: #D5A100;
 
-  --grass: green;
-  --fire:orange;
-  /* "fire",
-  "water",
-  "bug",
-  "normal",
-  "poison",
-  "electric",
-  "ground",
-  "fairy",
-  "fighting",
-  "psychic",
-  "rock",
-  "ghost",
-  "ice",
-  "dragon",
-  "dark",
-  "steel",
-  "flying", */
+  --hp:#8fdb7c;
+  --defense: #94d5fd;
+  --attack: #ff9888;
+  
 }
 
 
@@ -74,6 +59,13 @@ img{
   .pad{
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+@media screen and (max-width:500px) {
+  .pad{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 

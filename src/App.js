@@ -66,6 +66,7 @@ class App extends Component {
     //   .range(["#75739F", "#5EAFC6", "#41A368", "#93C464", "#FE9922"]);
     this.state = {
       selectedType: "water",
+      selectedTypeSecond: "any",
       selectedGeneration: 0, //"all"
       valueDropdownTypeStat: "attack",
       valueDropdownType: "water",
@@ -111,31 +112,55 @@ class App extends Component {
     // this.setState({ team: new_team });
   }
 
-  getFilteredDataByType(data, filter) {
-    if (filter.value != undefined) {
-      const filteredData = data.filter((d) => {
-        if (filter.field.length) {
-          return (
-            d[filter.field[0]] === filter.value ||
-            d[filter.field[1]] === filter.value
-          );
-        } else {
-          return d[filter.field] === filter.value;
-        }
-      });
-      return filteredData;
-    } else {
-      return data;
-    }
+  // getFilteredDataByType(data, filter) {
+  //   if (filter.value != undefined) {
+
+  //     const filteredData = data.filter((d) => {
+  //       if (filter.field.length) {
+  //         return (
+  //           d[filter.field[0]] === filter.value ||
+  //           d[filter.field[1]] === filter.value
+  //         );
+  //       } else {
+  //         return d[filter.field] === filter.value;
+  //       }
+  //     });
+  //     return filteredData;
+  //   } else {
+  //     return data;
+  //   }
+  // }
+
+  getFilteredDataByType(data, filters) {
+    let filteredData = data;
+    filters.forEach((f) => {
+      let filterValue = f.value;
+      console.log(f.field, filterValue)
+      if (filterValue === "any") return;
+      if (filterValue === "no") filterValue = "";
+      if (filterValue !== undefined && f.field.length == 2) {
+        filteredData = filteredData.filter((d) => {
+          return d[f.field[0]] === filterValue || d[f.field[1]] === filterValue;
+        });
+      }
+    });
+    console.log(filteredData)
+    return filteredData
   }
 
   render() {
     this.colorScale_type = scaleOrdinal().domain(types).range(schemeSet3);
 
-    const dataFilteredByType = this.getFilteredDataByType(data, {
-      field: ["type1", "type2"],
-      value: this.state.selectedType,
-    });
+    const dataFilteredByType = this.getFilteredDataByType(data, [
+      {
+        field: ["type1", "type2"],
+        value: this.state.selectedType,
+      },
+      {
+        field: ["type1", "type2"],
+        value: this.state.selectedTypeSecond,
+      },
+    ]);
 
     let dataFilteredByTypeAndGeneration = dataFilteredByType;
     if (this.state.selectedGeneration != 0) {
@@ -150,7 +175,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header/>
+        <Header />
         <SectionTypes
           data={data}
           columnsAgainst={columnsAgainst}
@@ -167,6 +192,7 @@ class App extends Component {
           baseStats={baseStats}
           colorScale_type={this.colorScale_type}
           selectedType={this.state.selectedType}
+          selectedTypeSecond={this.state.selectedTypeSecond}
           selectedName={this.state.selectedName}
           selectedGeneration={this.state.selectedGeneration}
           valueDropdownStatX={this.state.valueDropdownStatX}
@@ -175,17 +201,18 @@ class App extends Component {
           handleDropdownChange={this.handleDropdownChange}
           handleButtonClick={this.handleButtonClick}
         />
-        
+
         <TeamPanel data={dataTeam} onRemove={this.handleButtonRemoveClick} />
 
-        {this.state.team.length >0 && 
-        <SectionTeamStats
-        data={data}
-        team={this.state.team}
-        dataTeam={dataTeam}
-        columnsAgainst={columnsAgainst}
-        />}
-      <Footer/>
+        {this.state.team.length > 0 && (
+          <SectionTeamStats
+            data={data}
+            team={this.state.team}
+            dataTeam={dataTeam}
+            columnsAgainst={columnsAgainst}
+          />
+        )}
+        <Footer />
       </div>
     );
   }
