@@ -1,9 +1,14 @@
 .card {
   position: relative;
   width: 100%;
-  max-width: 25rem;
-  padding: 2rem 2rem 2rem 2rem;
+  max-width: 20rem;
+  padding: 1.6rem;
   border-radius: 10px;
+}
+
+.card__wrapper{
+    text-align: center;
+    align-self: flex-end;
 }
 
 .card__header {
@@ -69,9 +74,10 @@ span.dim{
 }
 
 .card__label {
-  min-width: 7rem;
+  min-width: 6rem;
   text-align: left;
-  margin-top: 0.3rem;
+  margin-top: 0.1rem;
+  font-size: 0.9rem;
 }
 
 .card__weakness {
@@ -84,9 +90,9 @@ span.dim{
   margin-bottom: 0.2rem;
 }
 
-.card__weakness > .typeIcon,
-.card__resistance > .typeIcon {
-  width: 1.75rem;
+.weakness__wrapper >.typeIcon,
+.resistance__wrapper > .typeIcon {
+  width: 1.6rem;
 }
 
 .resistance__wrapper,.rweakness__wrapper{
@@ -102,7 +108,8 @@ span.dim{
 
 .meter__label {
   text-align: left;
-  width: 7rem;
+  width: 6rem;
+  font-size: 0.9rem;
 }
 
 .meter__value {
@@ -117,6 +124,8 @@ span.dim{
 .meter__rect--bcg {
   position: relative;
   background-color: rgba(129, 129, 129, 0.521);
+  opacity: 0.5;
+  border-radius: 5px;
 }
 
 .meter__rect--value {
@@ -124,6 +133,7 @@ span.dim{
   left: 0;
   top: 0;
   background-color: var(--pokemon-blue);
+  border-radius: 5px;
 }
 
 /* span.meter__rect--value.HP{

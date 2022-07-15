@@ -27,8 +27,8 @@ class Card extends Component {
     this.weaknesses_img = [];
     this.resistances_img = [];
 
-    this.meterMaxWidth = 180;
-    this.meterHeight = 20;
+    this.meterMaxWidth = 128;
+    this.meterHeight = 16;
 
     this.hpScale = scaleLinear()
       .domain([0, 255])

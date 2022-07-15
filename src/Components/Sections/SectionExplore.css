@@ -2,8 +2,19 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 }
 
 .scatter__header{
     text-align: right;
+}
+
+.explore__helper{
+    text-align: left;
+    display: block;
+    /* width: 40%; */
+    flex: 1 1 300px;
+    max-width: 100%;
+    min-width: 300px;
+    flex-shrink: 2;
 }

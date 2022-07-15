@@ -1,0 +1,50 @@
+button{
+    font-family: inherit;
+}
+
+.button--cta{
+    background-color: var(--pokemon-blue);
+     /* #6BB044; */ 
+    color:var(--pokemon-yellow);
+    border-radius: 5px;
+    border: none;
+    margin-top: 2rem;
+    font-weight: 700;
+    border-bottom: 3px solid var(--pokemon-darkblue);
+    border-left: 3px solid var(--pokemon-darkblue);
+}
+
+.button__icon{
+    /* background-color:  #4e8e29; */
+     line-height: 1;
+     margin-top: 0.3rem;;
+    display: inline-block;
+    font-family: 'Pokemon', monospace;
+    /* margin-right: 1rem; */
+    font-size: 3rem;
+    text-shadow: 1px -1px 0 var(--pokemon-darkyellow);
+    /* border-radius: 50%; */
+}
+
+.button__text{
+    font-size: 1.1rem;
+}
+
+.button__wrapper{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0 1rem;
+}
+
+.member__button{
+    position: absolute;
+    top:-10%;
+    right: -10%;
+    padding: 0.5rem;
+    background-color: rgb(247, 159, 159);
+    line-height: 0.6;
+    color:white;
+    border-radius: 50%;
+    border: none;
+}

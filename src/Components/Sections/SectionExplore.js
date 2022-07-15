@@ -98,12 +98,16 @@ class SectionExplore extends Component {
               onClick={this.props.handlScatterPlotClick}
             />
           </div>
+          {dataFilteredByName.length == 0 && (
+            <p className="explore__helper">Click on circles and stars to learn more abot pokemons and add them to your team </p>
+          )}
           {dataFilteredByName.length > 0 && (
             <div className="card__wrapper">
               {/* <div className="card__vspace"/> */}
               <Card data={dataFilteredByName[0]} />
               <Button
-                text="Add to the team"
+                text={<div className={"button__wrapper"}><span className={"button__icon"}>+</span><span  className={"button__text"}>{"Add to the team"}</span></div>}
+                className={"button--cta"}
                 onClick={this.props.handleButtonClick}
               />
             </div>
