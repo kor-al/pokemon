@@ -46,7 +46,7 @@ img{
 @media screen and (max-width:1256px) {
   .App {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
   }
 }
 

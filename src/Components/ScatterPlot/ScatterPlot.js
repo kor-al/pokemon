@@ -80,9 +80,9 @@ class ScatterPlot extends Component {
       d.type1 === this.props.selectedType &&
       d.type2 !== this.props.selectedType
     ) {
-      return this.props.fillScale(d.type2);
+      return d.type2//this.props.fillScale(d.type2);
     }
-    return this.props.fillScale(d.type1);
+    return d.type1//this.props.fillScale(d.type1);
   }
 
   render() {
@@ -107,15 +107,15 @@ class ScatterPlot extends Component {
           transform={`translate(${xScale(d[this.props.xvariable])},${yScale(
             d[this.props.yvariable]
           )})`}
-          fill={this.getFillColor(d)}
-          stroke={rgb(this.getFillColor(d)).darker(1)}
+          // fill={this.getFillColor(d)}
+          // stroke={rgb(this.getFillColor(d)).darker(1)}
           r={8}
           style={{
             strokeOpacity: 1,
             strokeWidth: 1,
             opacity: 0.5,
           }}
-          className={`circle ${d.name}`}
+          className={`circle ${this.getFillColor(d)}`}
           onClick={this.props.onClick}
           onMouseOver={(e) => this.mouseover(e,d)}
           onMouseMove={(e) => this.mousemove(e, d)}

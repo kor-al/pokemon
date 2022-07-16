@@ -38,6 +38,10 @@
   width: 2rem;
 }
 
+.typeIcon + .typeIcon {
+    margin-left: 0.3rem;
+}
+
 .card__portrait {
   display: block;
   width: 80%;
@@ -48,6 +52,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 
 
 
@@ -93,6 +98,11 @@ span.dim{
 .weakness__wrapper >.typeIcon,
 .resistance__wrapper > .typeIcon {
   width: 1.6rem;
+}
+
+.weakness__wrapper >.typeIcon + .typeIcon,
+.resistance__wrapper > .typeIcon+ .typeIcon{
+    margin-left: 0.3rem;
 }
 
 .resistance__wrapper,.rweakness__wrapper{

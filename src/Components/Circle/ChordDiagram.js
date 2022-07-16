@@ -89,10 +89,10 @@ class ChordDiagram extends Component {
     var itemArcs = res.groups.map((d, i) => (
       <path
         key={"path" + i}
-        className={"arc"}
+        className={"arc "+ this.props.items[d.index]}
         data-name={`${d.index}`}
         d={arcGen(d)}
-        style={{ fill: this.props.fillScale(this.props.items[d.index]) }}
+        // style={{ fill: this.props.fillScale(this.props.items[d.index]) }}
         onMouseOver={(e) => this.onMouseOver(e)}
         onMouseOut={(e) => this.onMouseOut(e)}
       />
@@ -111,6 +111,7 @@ class ChordDiagram extends Component {
       return (
         <text
           key={"text" + i}
+          className={"label "+this.props.items[d.index]}
           data-name={`${d.index}`}
           textAnchor={anchor}
           alignmentBaseline="middle"
@@ -132,11 +133,11 @@ class ChordDiagram extends Component {
     var ribbons = res.map((d, i) => (
       <path
         key={"ribbon" + i}
-        className={"ribbon"}
+        className={"ribbon " + this.props.items[d.source.index]}
         d={ribbonGen(d)}
         data-source={`${d.source.index}`}
         data-target={`${d.target.index}`}
-        style={{ fill: this.props.fillScale(this.props.items[d.source.index]) }}
+        // style={{ fill: this.props.fillScale(this.props.items[d.source.index]) }}
       />
     ));
 

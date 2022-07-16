@@ -1,5 +1,5 @@
 :root {
-    /* --grass: #38BF4B;
+  /* --grass: #38BF4B;
     --fire:#FF9741;
     --water: #3692DC;
     --bug: #83C300;
@@ -17,155 +17,436 @@
     --dark: #5B5466;
     --steel: #5A8EA2;
     --flying: #89AAE3; */
-    --grass:   56, 191, 75 ;
-    --fire:  255, 151, 65 ;
-    --water:   54, 146, 220 ;
-    --bug:   131, 195, 0 ;
-    --normal:   145, 154, 162 ;
-    --poison:  181, 103, 206 ;
-    --electric:  251, 209, 0 ;
-    --ground:   232, 114, 54 ;
-    --fairy:  251, 137, 235 ;
-    --fighting:  224, 48, 106 ;
-    --psychic:  255, 102, 117 ;
-    --rock:   200, 182, 134 ;
-    --ghost:  76, 106, 178 ;
-    --ice:   76, 209, 192 ;
-    --dragon:   0, 111, 201 ;
-    --dark:   91, 84, 102 ;
-    --steel:   90, 142, 162 ;
-    --flying:   137, 170, 227 ;
+  --grass: 56, 191, 75;
+  --fire: 255, 151, 65;
+  --water: 54, 146, 220;
+  --bug: 131, 195, 0;
+  --normal: 145, 154, 162;
+  --poison: 181, 103, 206;
+  --electric: 251, 209, 0;
+  --ground: 232, 114, 54;
+  --fairy: 251, 137, 235;
+  --fighting: 224, 48, 106;
+  --psychic: 255, 102, 117;
+  --rock: 200, 182, 134;
+  --ghost: 76, 106, 178;
+  --ice: 76, 209, 192;
+  --dragon: 0, 111, 201;
+  --dark: 91, 84, 102;
+  --steel: 90, 142, 162;
+  --flying: 137, 170, 227;
 
-    --type_opacity:0.4;
-    --violin--opacity: 0.5;
-    --violin--stroke-opacity:0.8
+  --type_opacity: 0.4;
+  --violin--opacity: 0.5;
+  --violin--stroke-opacity: 0.8;
+  --ribbon--opacity: 0.5;
+  --ribbon-stroke--opacity: 0.8;
+  --arc--opacity: 0.5;
+  --arc-stroke--opacity: 0;
+  --chord--label-opacity: 1;
+  --circle--opacity:0.8;
+  --circle-stroke--opacity:1;
+
+}
+
+.grass--transparent {
+  background-color: rgba(var(--grass), var(--type_opacity));
+}
+.fire--transparent {
+  background-color: rgba(var(--fire), var(--type_opacity));
+}
+.water--transparent {
+  background-color: rgba(var(--water), var(--type_opacity));
+}
+.bug--transparent {
+  background-color: rgba(var(--bug), var(--type_opacity));
+}
+.normal--transparent {
+  background-color: rgba(var(--normal), var(--type_opacity));
+}
+.poison--transparent {
+  background-color: rgba(var(--poison), var(--type_opacity));
+}
+.electric--transparent {
+  background-color: rgba(var(--electric), var(--type_opacity));
+}
+.ground--transparent {
+  background-color: rgba(var(--ground), var(--type_opacity));
+}
+.fairy--transparent {
+  background-color: rgba(var(--fairy), var(--type_opacity));
+}
+.fighting--transparent {
+  background-color: rgba(var(--fighting), var(--type_opacity));
+}
+.psychic--transparent {
+  background-color: rgba(var(--psychic), var(--type_opacity));
+}
+.rock--transparent {
+  background-color: rgba(var(--rock), var(--type_opacity));
+}
+.ghost--transparent {
+  background-color: rgba(var(--ghost), var(--type_opacity));
+}
+.ice--transparent {
+  background-color: rgba(var(--ice), var(--type_opacity));
+}
+.dragon--transparent {
+  background-color: rgba(var(--dragon), var(--type_opacity));
+}
+.dark--transparent {
+  background-color: rgba(var(--dark), var(--type_opacity));
+}
+.steel--transparent {
+  background-color: rgba(var(--steel), var(--type_opacity));
+}
+.flying--transparent {
+  background-color: rgba(var(--flying), var(--type_opacity));
+}
+
+.violin g.grass {
+  fill: rgba(var(--grass), var(--violin--opacity));
+  stroke: rgba(var(--grass), var(--violin--stroke-opacity));
+}
+.violin g.fire {
+  fill: rgba(var(--fire), var(--violin--opacity));
+  stroke: rgba(var(--fire), var(--violin--opacity));
+}
+.violin g.water {
+  fill: rgba(var(--water), var(--violin--opacity));
+  stroke: rgba(var(--water), var(--violin--stroke-opacity));
+}
+.violin g.bug {
+  fill: rgba(var(--bug), var(--violin--opacity));
+  stroke: rgba(var(--bug), var(--violin--stroke-opacity));
+}
+.violin g.normal {
+  fill: rgba(var(--normal), var(--violin--opacity));
+  stroke: rgba(var(--normal), var(--violin--stroke-opacity));
+}
+.violin g.poison {
+  fill: rgba(var(--poison), var(--violin--opacity));
+  stroke: rgba(var(--poison), var(--violin--stroke-opacity));
+}
+.violin g.electric {
+  fill: rgba(var(--electric), var(--violin--opacity));
+  stroke: rgba(var(--electric), var(--violin--stroke-opacity));
+}
+.violin g.ground {
+  fill: rgba(var(--ground), var(--violin--opacity));
+  stroke: rgba(var(--ground), var(--violin--stroke-opacity));
+}
+.violin g.fairy {
+  fill: rgba(var(--fairy), var(--violin--opacity));
+  stroke: rgba(var(--fairy), var(--violin--stroke-opacity));
+}
+.violin g.fighting {
+  fill: rgba(var(--fighting), var(--violin--opacity));
+  stroke: rgba(var(--fighting), var(--violin--stroke-opacity));
+}
+.violin g.psychic {
+  fill: rgba(var(--psychic), var(--violin--opacity));
+  stroke: rgba(var(--psychic), var(--violin--stroke-opacity));
+}
+.violin g.rock {
+  fill: rgba(var(--rock), var(--violin--opacity));
+  stroke: rgba(var(--rock), var(--violin--stroke-opacity));
+}
+.violin g.ghost {
+  fill: rgba(var(--ghost), var(--violin--opacity));
+  stroke: rgba(var(--ghost), var(--violin--stroke-opacity));
+}
+.violin g.ice {
+  fill: rgba(var(--ice), var(--violin--opacity));
+  stroke: rgba(var(--ice), var(--violin--stroke-opacity));
+}
+.violin g.dragon {
+  fill: rgba(var(--dragon), var(--violin--opacity));
+  stroke: rgba(var(--dragon), var(--violin--stroke-opacity));
+}
+.violin g.dark {
+  fill: rgba(var(--dark), var(--violin--opacity));
+  stroke: rgba(var(--dark), var(--violin--stroke-opacity));
+}
+.violin g.steel {
+  fill: rgba(var(--steel), var(--violin--opacity));
+  stroke: rgba(var(--steel), var(--violin--stroke-opacity));
+}
+.violin g.flying {
+  fill: rgba(var(--flying), var(--violin--opacity));
+  stroke: rgba(var(--flying), var(--violin--stroke-opacity));
+}
+
+.ribbon.grass {
+  fill: rgba(var(--grass), var(--ribbon--opacity));
+  stroke: rgba(var(--grass), var(--ribbon-stroke--opacity));
+}
+.ribbon.fire {
+  fill: rgba(var(--fire), var(--ribbon--opacity));
+  stroke: rgba(var(--fire), var(--ribbon-stroke--opacity));
+}
+.ribbon.water {
+  fill: rgba(var(--water), var(--ribbon--opacity));
+  stroke: rgba(var(--water), var(--ribbon-stroke--opacity));
+}
+.ribbon.bug {
+  fill: rgba(var(--bug), var(--ribbon--opacity));
+  stroke: rgba(var(--bug), var(--ribbon-stroke--opacity));
+}
+.ribbon.normal {
+  fill: rgba(var(--normal), var(--ribbon--opacity));
+  stroke: rgba(var(--normal), var(--ribbon-stroke--opacity));
+}
+.ribbon.poison {
+  fill: rgba(var(--poison), var(--ribbon--opacity));
+  stroke: rgba(var(--poison), var(--ribbon-stroke--opacity));
+}
+.ribbon.electric {
+  fill: rgba(var(--electric), var(--ribbon--opacity));
+  stroke: rgba(var(--electric), var(--ribbon-stroke--opacity));
+}
+.ribbon.ground {
+  fill: rgba(var(--ground), var(--ribbon--opacity));
+  stroke: rgba(var(--ground), var(--ribbon-stroke--opacity));
+}
+.ribbon.fairy {
+  fill: rgba(var(--fairy), var(--ribbon--opacity));
+  stroke: rgba(var(--fairy), var(--ribbon-stroke--opacity));
+}
+.ribbon.fighting {
+  fill: rgba(var(--fighting), var(--ribbon--opacity));
+  stroke: rgba(var(--fighting), var(--ribbon-stroke--opacity));
+}
+.ribbon.psychic {
+  fill: rgba(var(--psychic), var(--ribbon--opacity));
+  stroke: rgba(var(--psychic), var(--ribbon-stroke--opacity));
+}
+.ribbon.rock {
+  fill: rgba(var(--rock), var(--ribbon--opacity));
+  stroke: rgba(var(--rock), var(--ribbon-stroke--opacity));
+}
+.ribbon.ghost {
+  fill: rgba(var(--ghost), var(--ribbon--opacity));
+  stroke: rgba(var(--ghost), var(--ribbon-stroke--opacity));
+}
+.ribbon.ice {
+  fill: rgba(var(--ice), var(--ribbon--opacity));
+  stroke: rgba(var(--ice), var(--ribbon-stroke--opacity));
+}
+.ribbon.dragon {
+  fill: rgba(var(--dragon), var(--ribbon--opacity));
+  stroke: rgba(var(--dragon), var(--ribbon-stroke--opacity));
+}
+.ribbon.dark {
+  fill: rgba(var(--dark), var(--ribbon--opacity));
+  stroke: rgba(var(--dark), var(--ribbon-stroke--opacity));
+}
+.ribbon.steel {
+  fill: rgba(var(--steel), var(--ribbon--opacity));
+  stroke: rgba(var(--steel), var(--ribbon-stroke--opacity));
+}
+.ribbon.flying {
+  fill: rgba(var(--flying), var(--ribbon--opacity));
+  stroke: rgba(var(--flying), var(--ribbon-stroke--opacity));
+}
+
+.arc.grass {
+  fill: rgba(var(--grass), var(--arc--opacity));
+  stroke: rgba(var(--grass), var(--arc-stroke--opacity));
+}
+.arc.fire {
+  fill: rgba(var(--fire), var(--arc--opacity));
+  stroke: rgba(var(--fire), var(--arc-stroke--opacity));
+}
+.arc.water {
+  fill: rgba(var(--water), var(--arc--opacity));
+  stroke: rgba(var(--water), var(--arc-stroke--opacity));
+}
+.arc.bug {
+  fill: rgba(var(--bug), var(--arc--opacity));
+  stroke: rgba(var(--bug), var(--arc-stroke--opacity));
+}
+.arc.normal {
+  fill: rgba(var(--normal), var(--arc--opacity));
+  stroke: rgba(var(--normal), var(--arc-stroke--opacity));
+}
+.arc.poison {
+  fill: rgba(var(--poison), var(--arc--opacity));
+  stroke: rgba(var(--poison), var(--arc-stroke--opacity));
+}
+.arc.electric {
+  fill: rgba(var(--electric), var(--arc--opacity));
+  stroke: rgba(var(--electric), var(--arc-stroke--opacity));
+}
+.arc.ground {
+  fill: rgba(var(--ground), var(--arc--opacity));
+  stroke: rgba(var(--ground), var(--arc-stroke--opacity));
+}
+.arc.fairy {
+  fill: rgba(var(--fairy), var(--arc--opacity));
+  stroke: rgba(var(--fairy), var(--arc-stroke--opacity));
+}
+.arc.fighting {
+  fill: rgba(var(--fighting), var(--arc--opacity));
+  stroke: rgba(var(--fighting), var(--arc-stroke--opacity));
+}
+.arc.psychic {
+  fill: rgba(var(--psychic), var(--arc--opacity));
+  stroke: rgba(var(--psychic), var(--arc-stroke--opacity));
+}
+.arc.rock {
+  fill: rgba(var(--rock), var(--arc--opacity));
+  stroke: rgba(var(--rock), var(--arc-stroke--opacity));
+}
+.arc.ghost {
+  fill: rgba(var(--ghost), var(--arc--opacity));
+  stroke: rgba(var(--ghost), var(--arc-stroke--opacity));
+}
+.arc.ice {
+  fill: rgba(var(--ice), var(--arc--opacity));
+  stroke: rgba(var(--ice), var(--arc-stroke--opacity));
+}
+.arc.dragon {
+  fill: rgba(var(--dragon), var(--arc--opacity));
+  stroke: rgba(var(--dragon), var(--arc-stroke--opacity));
+}
+.arc.dark {
+  fill: rgba(var(--dark), var(--arc--opacity));
+  stroke: rgba(var(--dark), var(--arc-stroke--opacity));
+}
+.arc.steel {
+  fill: rgba(var(--steel), var(--arc--opacity));
+  stroke: rgba(var(--steel), var(--arc-stroke--opacity));
+}
+.arc.flying {
+  fill: rgba(var(--flying), var(--arc--opacity));
+  stroke: rgba(var(--flying), var(--arc-stroke--opacity));
+}
+
+/* .grass.label{
+    fill: rgba(var(--grass), var(--chord--label-opacity));
   }
+  .fire.label{
+    fill: rgba(var(--fire), var(--chord--label-opacity));
+  }
+  .water.label{
+    fill: rgba(var(--water), var(--chord--label-opacity));
+  }
+  .bug.label{
+    fill: rgba(var(--bug), var(--chord--label-opacity));
+  }
+  .normal.label{
+    fill: rgba(var(--normal), var(--chord--label-opacity));
+  }
+  .poison.label{
+    fill: rgba(var(--poison), var(--chord--label-opacity));
+  }
+  .electric.label{
+    fill: rgba(var(--electric), var(--chord--label-opacity));
+  }
+  .ground.label{
+    fill: rgba(var(--ground), var(--chord--label-opacity));
+  }
+  .fairy.label{
+    fill: rgba(var(--fairy), var(--chord--label-opacity));
+  }
+  .fighting.label{
+    fill: rgba(var(--fighting), var(--chord--label-opacity));
+  }
+  .psychic.label{
+    fill: rgba(var(--psychic), var(--chord--label-opacity));
+  }
+  .rock.label{
+    fill: rgba(var(--rock), var(--chord--label-opacity));
+  }
+  .ghost.label{
+    fill: rgba(var(--ghost), var(--chord--label-opacity));
+  }
+  .ice.label{
+    fill: rgba(var(--ice), var(--chord--label-opacity));
+  }
+  .dragon.label{
+    fill: rgba(var(--dragon), var(--chord--label-opacity));
+  }
+  .dark.label{
+    fill: rgba(var(--dark), var(--chord--label-opacity));
+  }
+  .steel.label{
+    fill: rgba(var(--steel), var(--chord--label-opacity));
+  }
+  .flying.label{
+    fill: rgba(var(--flying), var(--chord--label-opacity));
+  } */
 
-
-.grass--transparent{
-    background-color: rgba(var(--grass), var(--type_opacity));
-}
-.fire--transparent{
-    background-color: rgba(var(--fire), var(--type_opacity));
-}
-.water--transparent{
-    background-color: rgba(var(--water), var(--type_opacity));
-}
-.bug--transparent{
-    background-color: rgba(var(--bug), var(--type_opacity));
-}
-.normal--transparent{
-    background-color: rgba(var(--normal), var(--type_opacity));
-}
-.poison--transparent{
-    background-color: rgba(var(--poison), var(--type_opacity));
-}
-.electric--transparent{
-    background-color: rgba(var(--electric), var(--type_opacity));
-}
-.ground--transparent{
-    background-color: rgba(var(--ground), var(--type_opacity));
-}
-.fairy--transparent{
-    background-color: rgba(var(--fairy), var(--type_opacity));
-}
-.fighting--transparent{
-    background-color: rgba(var(--fighting), var(--type_opacity));
-}
-.psychic--transparent{
-    background-color: rgba(var(--psychic), var(--type_opacity));
-}
-.rock--transparent{
-    background-color: rgba(var(--rock), var(--type_opacity));
-}
-.ghost--transparent{
-    background-color: rgba(var(--ghost), var(--type_opacity));
-}
-.ice--transparent{
-    background-color: rgba(var(--ice), var(--type_opacity));
-}
-.dragon--transparent{
-    background-color: rgba(var(--dragon), var(--type_opacity));
-}
-.dark--transparent{
-    background-color: rgba(var(--dark), var(--type_opacity));
-}
-.steel--transparent{
-    background-color: rgba(var(--steel), var(--type_opacity));
-}
-.flying--transparent{
-    background-color: rgba(var(--flying), var(--type_opacity));
-}
-
-.violin g.grass{
-    fill: rgba(var(--grass), var(--violin--opacity));
-    stroke: rgba(var(--grass), var(--violin--stroke-opacity));
-}
- .violin g.fire{
-    fill: rgba(var(--fire), var(--violin--opacity));
-    stroke: rgba(var(--fire), var(--violin--opacity));
-}
- .violin g.water{
-    fill: rgba(var(--water), var(--violin--opacity));
-    stroke: rgba(var(--water), var(--violin--stroke-opacity));
-}
- .violin g.bug{
-    fill: rgba(var(--bug), var(--violin--opacity));
-    stroke: rgba(var(--bug), var(--violin--stroke-opacity));
-}
- .violin g.normal{
-    fill: rgba(var(--normal), var(--violin--opacity));
-    stroke: rgba(var(--normal), var(--violin--stroke-opacity));
-}
- .violin g.poison{
-    fill: rgba(var(--poison), var(--violin--opacity));
-    stroke: rgba(var(--poison), var(--violin--stroke-opacity));
-}
- .violin g.electric{
-    fill: rgba(var(--electric), var(--violin--opacity));
-    stroke: rgba(var(--electric), var(--violin--stroke-opacity));
-}
- .violin g.ground{
-    fill: rgba(var(--ground), var(--violin--opacity));
-    stroke: rgba(var(--ground), var(--violin--stroke-opacity));
-}
- .violin g.fairy{
-    fill: rgba(var(--fairy), var(--violin--opacity));
-    stroke: rgba(var(--fairy), var(--violin--stroke-opacity));
-}
- .violin g.fighting{
-    fill: rgba(var(--fighting), var(--violin--opacity));
-    stroke: rgba(var(--fighting), var(--violin--stroke-opacity));
-}
- .violin g.psychic{
-    fill: rgba(var(--psychic), var(--violin--opacity));
-    stroke: rgba(var(--psychic), var(--violin--stroke-opacity));
-}
- .violin g.rock{
-    fill: rgba(var(--rock), var(--violin--opacity));
-    stroke: rgba(var(--rock), var(--violin--stroke-opacity));
-}
- .violin g.ghost{
-    fill: rgba(var(--ghost), var(--violin--opacity));
-    stroke: rgba(var(--ghost), var(--violin--stroke-opacity));
-}
- .violin g.ice{
-    fill: rgba(var(--ice), var(--violin--opacity));
-    stroke: rgba(var(--ice), var(--violin--stroke-opacity));
-}
- .violin g.dragon{
-    fill: rgba(var(--dragon), var(--violin--opacity));
-    stroke: rgba(var(--dragon), var(--violin--stroke-opacity));
-}
- .violin g.dark{
-    fill: rgba(var(--dark), var(--violin--opacity));
-    stroke: rgba(var(--dark), var(--violin--stroke-opacity));
-}
- .violin g.steel{
-    fill: rgba(var(--steel), var(--violin--opacity));
-    stroke: rgba(var(--steel), var(--violin--stroke-opacity));
-}
- .violin g.flying{
-    fill: rgba(var(--flying), var(--violin--opacity));
-    stroke: rgba(var(--flying), var(--violin--stroke-opacity));
-}
+  .circle.grass {
+    fill: rgba(var(--grass), var(--circle--opacity));
+    stroke: rgba(var(--grass), var(--circle-stroke--opacity));
+  }
+  .circle.fire {
+    fill: rgba(var(--fire), var(--circle--opacity));
+    stroke: rgba(var(--fire), var(--circle-stroke--opacity));
+  }
+  .circle.water {
+    fill: rgba(var(--water), var(--circle--opacity));
+    stroke: rgba(var(--water), var(--circle-stroke--opacity));
+  }
+  .circle.bug {
+    fill: rgba(var(--bug), var(--circle--opacity));
+    stroke: rgba(var(--bug), var(--circle-stroke--opacity));
+  }
+  .circle.normal {
+    fill: rgba(var(--normal), var(--circle--opacity));
+    stroke: rgba(var(--normal), var(--circle-stroke--opacity));
+  }
+  .circle.poison {
+    fill: rgba(var(--poison), var(--circle--opacity));
+    stroke: rgba(var(--poison), var(--circle-stroke--opacity));
+  }
+  .circle.electric {
+    fill: rgba(var(--electric), var(--circle--opacity));
+    stroke: rgba(var(--electric), var(--circle-stroke--opacity));
+  }
+  .circle.ground {
+    fill: rgba(var(--ground), var(--circle--opacity));
+    stroke: rgba(var(--ground), var(--circle-stroke--opacity));
+  }
+  .circle.fairy {
+    fill: rgba(var(--fairy), var(--circle--opacity));
+    stroke: rgba(var(--fairy), var(--circle-stroke--opacity));
+  }
+  .circle.fighting {
+    fill: rgba(var(--fighting), var(--circle--opacity));
+    stroke: rgba(var(--fighting), var(--circle-stroke--opacity));
+  }
+  .circle.psychic {
+    fill: rgba(var(--psychic), var(--circle--opacity));
+    stroke: rgba(var(--psychic), var(--circle-stroke--opacity));
+  }
+  .circle.rock {
+    fill: rgba(var(--rock), var(--circle--opacity));
+    stroke: rgba(var(--rock), var(--circle-stroke--opacity));
+  }
+  .circle.ghost {
+    fill: rgba(var(--ghost), var(--circle--opacity));
+    stroke: rgba(var(--ghost), var(--circle-stroke--opacity));
+  }
+  .circle.ice {
+    fill: rgba(var(--ice), var(--circle--opacity));
+    stroke: rgba(var(--ice), var(--circle-stroke--opacity));
+  }
+  .circle.dragon {
+    fill: rgba(var(--dragon), var(--circle--opacity));
+    stroke: rgba(var(--dragon), var(--circle-stroke--opacity));
+  }
+  .circle.dark {
+    fill: rgba(var(--dark), var(--circle--opacity));
+    stroke: rgba(var(--dark), var(--circle-stroke--opacity));
+  }
+  .circle.steel {
+    fill: rgba(var(--steel), var(--circle--opacity));
+    stroke: rgba(var(--steel), var(--circle-stroke--opacity));
+  }
+  .circle.flying {
+    fill: rgba(var(--flying), var(--circle--opacity));
+    stroke: rgba(var(--flying), var(--circle-stroke--opacity));
+  }

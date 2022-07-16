@@ -83,6 +83,10 @@ class App extends Component {
     this.handleButtonRemoveClick = this.handleButtonRemoveClick.bind(this);
   }
 
+  onResize() {
+    this.setState({ screenWidth: window.innerWidth, screenHeight: window.innerHeight})
+}
+
   handleDropdownChange(e, stateFieldString) {
     this.setState({ [stateFieldString]: e.target.value });
   }
