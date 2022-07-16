@@ -1,72 +1,54 @@
-.circle.grass {
-    fill: rgba(var(--grass), var(--circle--opacity));
-    stroke: rgba(var(--grass), var(--circle-stroke--opacity));
-  }
-  .circle.fire {
-    fill: rgba(var(--fire), var(--circle--opacity));
-    stroke: rgba(var(--fire), var(--circle-stroke--opacity));
-  }
-  .circle.water {
-    fill: rgba(var(--water), var(--circle--opacity));
-    stroke: rgba(var(--water), var(--circle-stroke--opacity));
-  }
-  .circle.bug {
-    fill: rgba(var(--bug), var(--circle--opacity));
-    stroke: rgba(var(--bug), var(--circle-stroke--opacity));
-  }
-  .circle.normal {
-    fill: rgba(var(--normal), var(--circle--opacity));
-    stroke: rgba(var(--normal), var(--circle-stroke--opacity));
-  }
-  .circle.poison {
-    fill: rgba(var(--poison), var(--circle--opacity));
-    stroke: rgba(var(--poison), var(--circle-stroke--opacity));
-  }
-  .circle.electric {
-    fill: rgba(var(--electric), var(--circle--opacity));
-    stroke: rgba(var(--electric), var(--circle-stroke--opacity));
-  }
-  .circle.ground {
-    fill: rgba(var(--ground), var(--circle--opacity));
-    stroke: rgba(var(--ground), var(--circle-stroke--opacity));
-  }
-  .circle.fairy {
-    fill: rgba(var(--fairy), var(--circle--opacity));
-    stroke: rgba(var(--fairy), var(--circle-stroke--opacity));
-  }
-  .circle.fighting {
-    fill: rgba(var(--fighting), var(--circle--opacity));
-    stroke: rgba(var(--fighting), var(--circle-stroke--opacity));
-  }
-  .circle.psychic {
-    fill: rgba(var(--psychic), var(--circle--opacity));
-    stroke: rgba(var(--psychic), var(--circle-stroke--opacity));
-  }
-  .circle.rock {
-    fill: rgba(var(--rock), var(--circle--opacity));
-    stroke: rgba(var(--rock), var(--circle-stroke--opacity));
-  }
-  .circle.ghost {
-    fill: rgba(var(--ghost), var(--circle--opacity));
-    stroke: rgba(var(--ghost), var(--circle-stroke--opacity));
-  }
-  .circle.ice {
-    fill: rgba(var(--ice), var(--circle--opacity));
-    stroke: rgba(var(--ice), var(--circle-stroke--opacity));
-  }
-  .circle.dragon {
-    fill: rgba(var(--dragon), var(--circle--opacity));
-    stroke: rgba(var(--dragon), var(--circle-stroke--opacity));
-  }
-  .circle.dark {
-    fill: rgba(var(--dark), var(--circle--opacity));
-    stroke: rgba(var(--dark), var(--circle-stroke--opacity));
-  }
-  .circle.steel {
-    fill: rgba(var(--steel), var(--circle--opacity));
-    stroke: rgba(var(--steel), var(--circle-stroke--opacity));
-  }
-  .circle.flying {
-    fill: rgba(var(--flying), var(--circle--opacity));
-    stroke: rgba(var(--flying), var(--circle-stroke--opacity));
-  }
+span.grass {
+  color: rgba(var(--grass), var(--span--opacity));
+}
+span.fire {
+  color: rgba(var(--fire), var(--span--opacity));
+}
+span.water {
+  color: rgba(var(--water), var(--span--opacity));
+}
+span.bug {
+  color: rgba(var(--bug), var(--span--opacity));
+}
+span.normal {
+  color: rgba(var(--normal), var(--span--opacity));
+}
+span.poison {
+  color: rgba(var(--poison), var(--span--opacity));
+}
+span.electric {
+  color: rgba(var(--electric), var(--span--opacity));
+}
+span.ground {
+  color: rgba(var(--ground), var(--span--opacity));
+}
+span.fairy {
+  color: rgba(var(--fairy), var(--span--opacity));
+}
+span.fighting {
+  color: rgba(var(--fighting), var(--span--opacity));
+}
+span.psychic {
+  color: rgba(var(--psychic), var(--span--opacity));
+}
+span.rock {
+  color: rgba(var(--rock), var(--span--opacity));
+}
+span.ghost {
+  color: rgba(var(--ghost), var(--span--opacity));
+}
+span.ice {
+  color: rgba(var(--ice), var(--span--opacity));
+}
+span.dragon {
+  color: rgba(var(--dragon), var(--span--opacity));
+}
+span.dark {
+  color: rgba(var(--dark), var(--span--opacity));
+}
+span.steel {
+  color: rgba(var(--steel), var(--span--opacity));
+}
+span.flying {
+  color: rgba(var(--flying), var(--span--opacity));
+}
