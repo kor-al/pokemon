@@ -39,7 +39,6 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
-            items={this.props.team}
             variables={["hp", "defense"]}
             circlevariables={["hp", "sp_defense"]}
             leftvariable={"attack"}
@@ -53,7 +52,6 @@ class SectionTeamStats extends Component {
               min([300, this.props.size.screenWidth]),
             ]}
             xvariable={"speed"}
-            items={this.props.team}
             text={this.props.dataTeam.map((d) => ({
               name: d.name,
               x: d.speed,
@@ -69,7 +67,6 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
-            items={this.props.team}
             xvariable={"weight_kg"}
             yvariable={"height_m"}
             colorvariable={"experience_growth"}

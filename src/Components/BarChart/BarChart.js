@@ -51,9 +51,7 @@ class BarChart extends Component {
     this.tooltip.innerHTML = `
     ${d.name}, ${d.classfication}
     </br>Types: ${d.type1}${d.type2 == "" ? "" : ", " + d.type2}
-    </br>${formatNameString(this.props.xvariable)}: ${
-      d[this.props.xvariable]
-    }
+    </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";
     this.tooltip.style.left = e.pageX + 10 + "px";
@@ -138,6 +136,19 @@ class BarChart extends Component {
       </text>
     ));
 
+    var xText = (
+      <text
+        key={`label-scale`}
+        x={this.width+20}
+        y={this.height+13}
+        textAnchor="start"
+        alignmentBaseline="middle"
+        fontSize={12}
+      >
+        {this.props.xvariable}
+      </text>
+    );
+
     var text = this.props.text.map((d, i) => (
       <text
         className={d.name}
@@ -160,12 +171,13 @@ class BarChart extends Component {
               {rects}
               {text}
             </g>
+            {xText}
             <Axis
               d3Axis={axisBottom}
               scale={xScale}
               translateX={0}
               translateY={this.height + 10}
-              ticks={this.width > 100? 6 : 1}
+              ticks={this.width > 100 ? 6 : 1}
             />
             {labels}
           </g>

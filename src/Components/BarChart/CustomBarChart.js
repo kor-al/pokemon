@@ -1,11 +1,40 @@
 import React, { Component, useRef, useEffect } from "react";
-import { scaleLinear, scaleBand, scaleOrdinal } from "d3-scale";
-import { min, max, bin, groups, range } from "d3-array";
-import { arc } from "d3-shape";
-import { select, selectAll } from "d3-selection";
-import { axisLeft, axisBottom } from "d3-axis";
-import { schemeSet1 } from "d3-scale-chromatic";
+import {
+  scaleLinear,
+  scaleBand,
+  scaleOrdinal,
+  scaleSequential,
+} from "d3-scale";
+import { min, max, ascending, sort, descending, map } from "d3-array";
+import { select } from "d3-selection";
+import { axisBottom, axisLeft, axisTop } from "d3-axis";
+import { schemeSet1, schemeBlues } from "d3-scale-chromatic";
 import { formatNameString } from "../../preprocess";
+import { interpolateBlues } from "d3-scale-chromatic";
+
+const Legend = ({ scale, uniqueValues, width, xTranslate, yTranslate }) => {
+  const step = (width * 0.5) / uniqueValues.length;
+  const legend = uniqueValues.map((d, i) => {
+    return (
+      <rect
+        x={width - step / 2 - step * i}
+        y={-30}
+        width={step}
+        key={`legend-rect-${i}`}
+        height={20}
+        fill={scale(d)}
+        stroke={"black"}
+        strokeOpacity={0.5}
+      ></rect>
+    );
+  });
+
+  return (
+    <g transform={`translate(${xTranslate},${yTranslate})`} className="legend">
+      {legend}
+    </g>
+  );
+};
 
 const Axis = ({ d3Axis, scale, ticks, translateX, translateY }) => {
   const anchor = useRef();
@@ -28,10 +57,20 @@ const Axis = ({ d3Axis, scale, ticks, translateX, translateY }) => {
 class CustomBarChart extends Component {
   constructor(props) {
     super(props);
-    this.margin = { top: 10, right: 30, bottom: 30, left: 30 };
+    this.margin = { top: 50, right: 30, bottom: 30, left: 60 };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
-
+    this.colorVar="experience_growth"
+    this.catScale = scaleOrdinal()
+    .domain([600000, 800000, 1000000, 1059860, 1250000, 1640000])
+    .range([
+      "Erratic",
+      "Fast",
+      "Medium Fast",
+      "Medium Slow",
+      "Slow",
+      "Fluctu­ating",
+    ]);
 
     this.mouseover = this.mouseover.bind(this);
     this.mousemove = this.mousemove.bind(this);
@@ -49,13 +88,9 @@ class CustomBarChart extends Component {
     const point = e.target;
     this.tooltip.innerHTML = `
     ${d.name}, ${d.classfication}
-    </br>Types: ${d.type1}${d.type2 == "" ? "" : ", " + d.type2}
-    </br>${formatNameString(this.props.xvariable)}: ${
-      d[this.props.xvariable]
-    }
-    </br>${formatNameString(this.props.yvariable)}: ${
-      d[this.props.yvariable]
-    }
+    </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
+    </br>${formatNameString(this.props.yvariable)}: ${d[this.props.yvariable]}
+    </br>${formatNameString(this.colorVar)}: ${this.catScale(d[this.colorVar])} (${d[this.colorVar]})
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";
     this.tooltip.style.left = e.pageX + 10 + "px";
@@ -73,6 +108,13 @@ class CustomBarChart extends Component {
   render() {
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
+
+    const sortedData = this.props.data
+      .slice()
+      .sort((a, b) =>
+        descending(a[this.props.xvariable], b[this.props.xvariable])
+      );
+
     const maxData = {
       y: max(
         this.props.data.map((d) =>
@@ -89,7 +131,7 @@ class CustomBarChart extends Component {
     let nameScale = scaleBand()
       .range([0, this.width])
       .domain(
-        this.props.data.map(function (d) {
+        sortedData.map(function (d) {
           return d.name;
         })
       )
@@ -99,27 +141,11 @@ class CustomBarChart extends Component {
     let xScale = scaleLinear()
       .domain([0.1, maxData.x])
       .range([0, nameScale.bandwidth()]);
-    let yScale = scaleLinear().domain([0, maxData.y]).range([0.1, this.height]);
+    let yScale = scaleLinear().domain([0, maxData.y]).range([this.height, 0.1]);
 
-    let colorScale = scaleOrdinal()
-      .domain(
-        this.props.data
-          .map(function (d) {
-            return d.experience_growth;
-          })
-          .sort()
-      )
-      .range([
-        "#f7fbff",
-        "#deebf7",
-        "#c6dbef",
-        "#9ecae1",
-        "#6baed6",
-        "#4292c6",
-        "#2171b5",
-        "#08519c",
-        "#08306b",
-      ]);
+    let colorScale = scaleOrdinal(schemeBlues[6]).domain([
+      600000, 800000, 1000000, 1059860, 1250000, 1640000,
+    ]);
 
     const boxes = this.props.data.map((d, i) => {
       if (!isNaN(d[this.props.yvariable]) && !isNaN(d[this.props.xvariable])) {
@@ -134,14 +160,14 @@ class CustomBarChart extends Component {
             style={{
               stroke: "black",
               strokeOpacity: 0.5,
-              fill: colorScale(d.experience_growth),
+              fill: colorScale(d[this.colorVar]),
               // fill: colorScale(d[this.props.colorvariable]),
               x:
                 nameScale(d.name) +
                 nameScale.bandwidth() / 2 -
                 xScale(d[this.props.xvariable]) / 2,
-              y: this.height - yScale(d[this.props.yvariable]),
-              height: yScale(d[this.props.yvariable]),
+              y: yScale(d[this.props.yvariable]),
+              height: this.height - yScale(d[this.props.yvariable]),
               width: xScale(d[this.props.xvariable]),
               rx: 4,
               ry: 4,
@@ -160,7 +186,7 @@ class CustomBarChart extends Component {
             style={{
               stroke: "black",
               strokeOpacity: 0.5,
-              fill: colorScale(d.experience_growth),
+              fill: colorScale(d[this.colorVar]),
               // fill: colorScale(d[this.props.colorvariable]),
               cx: nameScale(d.name) + nameScale.bandwidth() / 2,
               cy: this.height - 20,
@@ -171,17 +197,57 @@ class CustomBarChart extends Component {
       }
     });
 
+    const xLabel = (
+      <g transform={`translate(${nameScale.bandwidth() / 2},${-25})`}>
+        <text textAnchor="middle" x={0} y={0}>
+          {"weight (kg)"}
+        </text>
+      </g>
+    );
+    const yLabel = (
+      <g transform={`rotate(${-90})`}>
+        <text textAnchor="middle" x={-this.height / 2} y={-50}>
+          {"height (m)"}
+        </text>
+      </g>
+    );
+
     return (
       <div className="sizeplot">
         <svg width={this.props.size[0]} height={this.props.size[1]}>
           <g transform={`translate(${this.margin.left}, ${this.margin.top})`}>
             {boxes}
+            {xLabel}
+            {yLabel}
+            <Legend
+              uniqueValues={[
+                ...new Set(this.props.data.map((d) => d[this.colorVar])),
+              ]}
+              scale={colorScale}
+              width={this.width}
+              xTranslate={0}
+              yTranslate={0}
+            />
             <Axis
               d3Axis={axisBottom}
               scale={nameScale}
               translateX={0}
               translateY={this.height}
               ticks={3}
+            />
+            <Axis
+              d3Axis={axisLeft}
+              scale={yScale}
+              translateX={-10}
+              translateY={0}
+              ticks={3}
+            />
+            <Axis
+              d3Axis={axisTop}
+              scale={xScale}
+              translateX={0}
+              translateY={-10}
+              ticks={0}
             />
           </g>
         </svg>

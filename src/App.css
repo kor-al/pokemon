@@ -6,9 +6,12 @@
   --pokemon-darkyellow: #d5a100;
   --main-font: "Red Hat Mono";
 
-  --hp: #8fdb7c;
-  --defense: #94d5fd;
-  --attack: #ff9888;
+  --hp: #2d9e00;
+  --speed: #511dfb;
+  --defense: #63bef6;;
+  --sp-defense: #005bcb;
+  --attack: #ffa353;
+  --sp-attack: #df3f06
 }
 
 html {

@@ -1,55 +1,84 @@
 .defense{
-    fill:green;
+    fill:var(--defense);
     opacity: 0.5;
 }
+
+.defense rect{
+    stroke:var(--defense);
+    stroke-width: 0;
+}
+
+
 .sp_defense{
-    fill:green;
+    fill:var(--sp-defense);
     opacity: 0.5;
 }
 
 .sp_defense line{
-    stroke:green;
+    stroke:var(--sp-defense);
     opacity: 0.5;
+}
+
+.sp_defense circle{
+    stroke:var(--sp-defense);
 }
 
 .hp{
-    fill: red;
+    fill: var(--hp);
     opacity: 0.5;
 }
 
+.hp rect{
+    stroke: var(--hp);
+    stroke-width: 0;
+}
+
 .attack{
-    fill:orange;
+    fill:var(--attack);
     opacity: 0.5;
     stroke-width: 0;
 }
 
 .attack rect{
-    stroke:rgb(255, 140, 0);
+    stroke:var(--attack);
     stroke-width: 0;
 }
 
 
 .sp_attack{
-    fill:rgb(179, 75, 15);
+    fill:var(--sp-attack);;
     opacity: 0.5;
     stroke-width: 0;
 }
 
 
 .sp_attack line{
-    stroke:rgb(179, 75, 15);
+    stroke:var(--sp-attack);;
     opacity: 0.5;
+}
+
+.sp_attack circle{
+    stroke:var(--sp-attack);
 }
 
 .speed{
     opacity: 0.5;
-    fill:blue;
+    fill:var(--speed);
+}
+
+.speed rect{
+    stroke:var(--speed);
+    stroke-width: 0;
 }
 
 .speed > line{
-    stroke: blue;
+    stroke: var(--speed);
 }
 
 /* .speed > line{
     stroke: blue
 } */
+
+.legend{
+    font-size: 0.8rem;
+}
