@@ -75,7 +75,8 @@ class CurvesBarChart extends Component {
   };
 
   render() {
-
+    this.width = this.props.size[0] - this.margin.left - this.margin.right;
+    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
 
     const maxData = {
       xr: max(this.props.data.map((d) => varToInt(d[this.props.rightvariable]))),

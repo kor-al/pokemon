@@ -6,6 +6,7 @@ import BarChart from "../BarChart/BarChart";
 import CustomBarChart from "../BarChart/CustomBarChart";
 import CurvesBarChart from "../BarChart/CurvesBarChart";
 import { format } from "d3-format";
+import { min } from "d3-array";
 
 import "./SectionTeamStats.css";
 
@@ -17,20 +18,27 @@ class SectionTeamStats extends Component {
   render() {
     return (
       <section className="sectionTeamStats pad">
-        <h2>
-          <span className="step">4</span>Improve your team stats
-        </h2>
+        <div className="section__header">
+          <span className="step">4</span>
+          <h2>Improve your team stats</h2>
+        </div>
         <div className="SectionTeamStats__graphics">
           <Heatmap
             data={this.props.dataTeam}
-            size={[500, 300]}
+            size={[
+              min([500, this.props.size.screenWidth]),
+              min([300, this.props.size.screenWidth]),
+            ]}
             marginLeft={150}
             vars={this.props.columnsAgainst}
             items={this.props.team}
           />
           <DoubleStackedBarChart
             data={this.props.dataTeam}
-            size={[500, 300]}
+            size={[
+              min([500, this.props.size.screenWidth]),
+              min([300, this.props.size.screenWidth]),
+            ]}
             items={this.props.team}
             variables={["hp", "defense"]}
             circlevariables={["hp", "sp_defense"]}
@@ -40,7 +48,10 @@ class SectionTeamStats extends Component {
 
           <BarChart
             data={this.props.dataTeam}
-            size={[500, 300]}
+            size={[
+              min([500, this.props.size.screenWidth]),
+              min([300, this.props.size.screenWidth]),
+            ]}
             xvariable={"speed"}
             items={this.props.team}
             text={this.props.dataTeam.map((d) => ({
@@ -54,7 +65,10 @@ class SectionTeamStats extends Component {
 
           <CustomBarChart
             data={this.props.dataTeam}
-            size={[500, 300]}
+            size={[
+              min([500, this.props.size.screenWidth]),
+              min([300, this.props.size.screenWidth]),
+            ]}
             items={this.props.team}
             xvariable={"weight_kg"}
             yvariable={"height_m"}
@@ -63,7 +77,10 @@ class SectionTeamStats extends Component {
 
           <CurvesBarChart
             data={this.props.dataTeam}
-            size={[500, 300]}
+            size={[
+              min([500, this.props.size.screenWidth]),
+              min([300, this.props.size.screenWidth]),
+            ]}
             items={this.props.team}
             leftvariable={"capture_rate"}
             rightvariable={"base_egg_steps"}

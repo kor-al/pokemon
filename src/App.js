@@ -73,6 +73,8 @@ class App extends Component {
       valueDropdownStatX: "attack",
       valueDropdownStatY: "defense",
       team: [],
+      screenWidth: 1256,
+      screenHeight: 1000,
     };
 
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -81,11 +83,25 @@ class App extends Component {
     this.handlScatterPlotClick = this.handlScatterPlotClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleButtonRemoveClick = this.handleButtonRemoveClick.bind(this);
+    this.onResize = this.onResize.bind(this);
+  }
+
+  componentDidMount() {
+    //TODO: replace with hooks?
+    window.addEventListener("resize", this.onResize, false);
+    console.log("mount")
+    this.onResize();
   }
 
   onResize() {
-    this.setState({ screenWidth: window.innerWidth, screenHeight: window.innerHeight})
-}
+    this.setState({
+      screenWidth: window.innerWidth - 32, //2rem padding
+      screenHeight: window.innerHeight,
+    });
+
+    console.log(this.state.screenHeight);
+    console.log(this.state.screenWidth);
+  }
 
   handleDropdownChange(e, stateFieldString) {
     this.setState({ [stateFieldString]: e.target.value });
@@ -96,7 +112,6 @@ class App extends Component {
   }
 
   handlScatterPlotClick(e) {
-    console.log(e.target.dataset.name);
     this.setState({ selectedName: e.target.dataset.name });
     // this.setState({ selectedType: e.target.__data__[0] });
   }
@@ -116,30 +131,10 @@ class App extends Component {
     // this.setState({ team: new_team });
   }
 
-  // getFilteredDataByType(data, filter) {
-  //   if (filter.value != undefined) {
-
-  //     const filteredData = data.filter((d) => {
-  //       if (filter.field.length) {
-  //         return (
-  //           d[filter.field[0]] === filter.value ||
-  //           d[filter.field[1]] === filter.value
-  //         );
-  //       } else {
-  //         return d[filter.field] === filter.value;
-  //       }
-  //     });
-  //     return filteredData;
-  //   } else {
-  //     return data;
-  //   }
-  // }
-
   getFilteredDataByType(data, filters) {
     let filteredData = data;
     filters.forEach((f) => {
       let filterValue = f.value;
-      console.log(f.field, filterValue)
       if (filterValue === "any") return;
       if (filterValue === "no") filterValue = "";
       if (filterValue !== undefined && f.field.length == 2) {
@@ -148,8 +143,7 @@ class App extends Component {
         });
       }
     });
-    console.log(filteredData)
-    return filteredData
+    return filteredData;
   }
 
   render() {
@@ -181,6 +175,10 @@ class App extends Component {
       <div className="App">
         <Header />
         <SectionTypes
+          size={{
+            screenWidth: this.state.screenWidth,
+            screenHeight: this.state.screenHeight,
+          }}
           data={data}
           columnsAgainst={columnsAgainst}
           types={types}
@@ -191,6 +189,10 @@ class App extends Component {
           handleViolinClick={this.handleViolinClick}
         />
         <SectionExplore
+          size={{
+            screenWidth: this.state.screenWidth,
+            screenHeight: this.state.screenHeight,
+          }}
           dataFiltered={dataFilteredByTypeAndGeneration}
           types={types}
           baseStats={baseStats}
@@ -210,6 +212,10 @@ class App extends Component {
 
         {this.state.team.length > 0 && (
           <SectionTeamStats
+            size={{
+              screenWidth: this.state.screenWidth,
+              screenHeight: this.state.screenHeight,
+            }}
             data={data}
             team={this.state.team}
             dataTeam={dataTeam}

@@ -69,6 +69,8 @@ class BarChart extends Component {
   };
 
   render() {
+    this.width = this.props.size[0] - this.margin.left - this.margin.right;
+    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     const sortedData = this.props.data
       .slice()
       .sort((a, b) =>
@@ -142,6 +144,7 @@ class BarChart extends Component {
         key={`text${i}`}
         x={xScale(d.x) + 10}
         y={yScale(d.name) + yScale.bandwidth() / 2}
+        fontSize={12}
         textAnchor="start"
         alignmentBaseline="middle"
       >
@@ -162,7 +165,7 @@ class BarChart extends Component {
               scale={xScale}
               translateX={0}
               translateY={this.height + 10}
-              ticks={6}
+              ticks={this.width > 100? 6 : 1}
             />
             {labels}
           </g>

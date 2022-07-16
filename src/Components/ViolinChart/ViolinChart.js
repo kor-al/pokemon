@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
-import { min, max, bin, groups, range, log } from "d3-array";
+import { min, max, bin,range } from "d3-array";
 import { area, curveCatmullRom } from "d3-shape";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
+import "./ViolinChart.css"
 
 class ViolinChart extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class ViolinChart extends Component {
       tooltip.style("opacity", 0)
     }
 
-    var margin = { top: 10, right: 30, bottom: 30, left: 40 };
+    var margin = { top: 10, right: 30, bottom: 100, left: 40 };
     const width = this.props.size[0] - margin.left - margin.right;
     const height = this.props.size[1] - margin.top - margin.bottom;
     const nodeg_translated = select(node)
@@ -73,6 +74,7 @@ class ViolinChart extends Component {
     nodeg_translated
       .append("g")
       .attr("transform", "translate(0," + height + ")")
+      .attr("class", "violin__xaxis")
       .call(axisBottom(xScale));
 
     var histFunc = (group) => {

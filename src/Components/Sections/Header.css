@@ -4,8 +4,17 @@
     flex-wrap: wrap;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    justify-content: space-between;
+    justify-content: space-around;
 }
+
+
+/* @media screen and (max-width:500px) {
+    .header{
+        justify-content: space-around;
+    }
+  } */
+
+
 
 .header__logo{
     /* margin-right: 3rem; */

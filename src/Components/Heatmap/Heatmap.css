@@ -1,0 +1,13 @@
+@media screen and (max-width: 500px) {
+  .sectionTypes__graphics .heatmap text {
+    font-size: 0.7rem;
+  }
+
+  .sectionTypes__graphics .heatmap {
+    margin-left: -13%;
+  }
+
+  .SectionTeamStats__graphics .heatmap__label-x {
+    font-size: 0.7rem;
+  }
+}

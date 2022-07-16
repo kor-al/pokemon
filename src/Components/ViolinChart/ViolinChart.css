@@ -1,0 +1,16 @@
+.violin__xaxis g.tick text {
+  /* transform: rotate(-90deg) translate(-6%, -6%); */
+  transform: rotate(-90deg) translate(-3rem, -6%);
+  font-size: 1rem;
+}
+
+.violin path{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .violin__xaxis g.tick text {
+    transform: rotate(-90deg) translate(-3rem, -5%);
+    font-size: 0.8rem;
+  }
+}

@@ -21,3 +21,8 @@
     background-color: white;
     border-radius: 50%;
 }
+
+.curvesbar text, .sizeplot text{
+    font-size: 0.7rem;
+
+}

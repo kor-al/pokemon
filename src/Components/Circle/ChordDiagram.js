@@ -62,6 +62,12 @@ class ChordDiagram extends Component {
   };
 
   init() {
+    //update (because resize added)
+    this.width = this.props.size[0] - this.margin.left - this.margin.right;
+    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
+    this.innerRadius = Math.min(this.width, this.height) * 0.39;
+    this.outerRadius = this.innerRadius * 1.1;
+
     this.mapping = this.mapItemsToIndex(this.props.items);
     this.props.data.forEach((flow) => {
       if (!this.matrix[this.mapping[flow.type2]]) {

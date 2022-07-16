@@ -1,10 +1,7 @@
-import React, { Component, useRef, useEffect } from "react";
-import { scaleLinear, scaleBand, scaleSequential, scaleSequentialPow } from "d3-scale";
-import { min, max, bin, groups, range } from "d3-array";
-import { area, curveCatmullRom } from "d3-shape";
+import React, { Component } from "react";
+import { scaleLinear, scaleBand, scaleSequential} from "d3-scale";
 import { interpolateInferno, interpolateGreens, interpolateRdYlBu, interpolateSpectral, interpolateRdYlGn} from "d3-scale-chromatic";
-import { select } from "d3-selection";
-import { axisLeft, axisBottom } from "d3-axis";
+import "./Heatmap.css"
 
 
 
@@ -32,7 +29,7 @@ class Heatmap extends Component {
   
   mousemove = function(e) {
     const tile=e.target
-    this.tooltip.innerHTML = `Type ${tile.dataset.name} against ${tile.dataset.var} is ${tile.dataset.val}`
+    this.tooltip.innerHTML = `${tile.dataset.name} against <span class=${tile.dataset.var.slice(8)}>${tile.dataset.var.slice(8)}</span> is ${tile.dataset.val}`
     this.tooltip.style.top = (e.pageY+10)+"px"
     this.tooltip.style.left = (e.pageX+10) + "px"
   }
@@ -71,6 +68,9 @@ class Heatmap extends Component {
   };
 
   render() {
+    this.width = this.props.size[0] - this.margin.left - this.margin.right;
+    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
+
     let xScale = scaleBand()
       .domain(this.props.vars)
       .range([0, this.width])
@@ -81,7 +81,7 @@ class Heatmap extends Component {
       .range([this.height, 0])
       .padding(0.1);
 
-    var colorScale = scaleSequentialPow( t => interpolateRdYlGn(1-t))
+    var colorScale = scaleSequential( t => interpolateRdYlGn(1-t))
       // .interpolator(interpolateGreens)
       .domain([0, this.maxValue]);
       // .domain([0, 0.25, 0.5, 1, 2]);
@@ -111,7 +111,7 @@ class Heatmap extends Component {
         let translateX = 10;
         let translateY =xScale(d) + xScale.bandwidth()/2
         return (
-          <text key={"text" + i} textAnchor = "start" alignmentBaseline="middle"
+          <text key={"text" + i} textAnchor = "start" alignmentBaseline="middle" className="heatmap__label-x"
           transform={`rotate(${rotate}) translate(${translateX}, ${translateY})`}>
             {d.slice(8)}
           </text>

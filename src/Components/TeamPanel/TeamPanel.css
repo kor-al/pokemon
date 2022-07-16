@@ -1,6 +1,7 @@
 ul.team__list{
     list-style-type: none;
     display: flex;
+    margin-top: 3rem;
 }
 
 

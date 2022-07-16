@@ -2,7 +2,7 @@ import React, { Component} from "react";
 import dataFlow from "../../pokemonTypesCounts";
 import { getDataByOneType, summarizeGroupedData } from "../../preprocess";
 import { groups } from "d3-array";
-import { median } from "d3-array";
+import { median, max, min } from "d3-array";
 import "./SectionTypes.css";
 
 import Dropdown from "../Dropdown";
@@ -27,6 +27,7 @@ class SectionTypes extends Component {
     );
     const dataOneType = getDataByOneType(this.props.data);
     const dataOneTypeByTypes = groups(dataOneType, (d) => d.type); //all pokemons with types in first and secons positions
+    console.log(100, this.props.size.screenWidth/5)
 
     return (
       <section className="sectionTypes pad">
@@ -34,15 +35,15 @@ class SectionTypes extends Component {
         <div className="sectionTypes__graphics">
           <Heatmap
             data={summarizedDataByType}
-            size={[500, 500]}
-            marginLeft={100}
+            size={[min([500, this.props.size.screenWidth]), min([500, this.props.size.screenWidth])]}
+            marginLeft={min([110, this.props.size.screenWidth/4])}
             vars={this.props.columnsAgainst}
             items={summarizedDataByType.map((d) => d.name)}
           />
 
           <ChordDiagram
             data={dataFlow}
-            size={[500, 500]}
+            size={[min([500, this.props.size.screenWidth]), min([500, this.props.size.screenWidth])]}
             items={this.props.types}
             fillScale={this.props.colorScale_type}
           />
@@ -63,7 +64,7 @@ class SectionTypes extends Component {
               fillScale={this.props.colorScale_type}
               data={dataOneType} //TODO: remove it as it's needed only to calc max ranges
               dataGrouped={dataOneTypeByTypes}
-              size={[900, 200]}
+              size={[min([950, this.props.size.screenWidth]), min([300, this.props.size.screenWidth])]}
               yvariable={this.props.valueDropdownTypeStat}
               onClick={this.props.handleViolinClick}
             />

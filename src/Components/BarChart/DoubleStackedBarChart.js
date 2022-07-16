@@ -78,6 +78,8 @@ class DoubleStackedBarChart extends Component {
   };
 
   render() {
+    this.width = this.props.size[0] - this.margin.left - this.margin.right;
+    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     const stackedVariablesSumMax = (vars) =>
       vars.reduce(
         (prev, next) => prev + max(this.props.data.map((d) => d[next])),

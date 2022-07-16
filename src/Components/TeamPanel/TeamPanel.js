@@ -16,11 +16,15 @@ const Member = ({ data, onremove }) => {
       <div className="member__info">{data.name}</div>
       <div className="member__type">
         <img
+          alt={data.type1}
+          title={data.type1}
           className="member__typeIcon"
           src={process.env.PUBLIC_URL + "/types/" + data.type1 + ".svg"}
         />
         {data.type2 !== "" && (
           <img
+            alt={data.type2}
+            title={data.type2}
             className="member__typeIcon"
             src={process.env.PUBLIC_URL + "/types/" + data.type2 + ".svg"}
           />
@@ -28,6 +32,7 @@ const Member = ({ data, onremove }) => {
       </div>
       <Button
         className="member__button"
+        title={"Remove from your team"}
         text="X"
         onClick={(e, d) => onremove(e, d)}
       />

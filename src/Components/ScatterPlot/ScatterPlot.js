@@ -1,10 +1,11 @@
 import React, { Component, useRef, useEffect } from "react";
 import { scaleLinear} from "d3-scale";
 import { max} from "d3-array";
-import { rgb } from "d3-color";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { symbol, symbolStar } from "d3-shape";
+
+import "./ScatterPlot.css"
 
 const Axis = ({ d3Axis, scale, translateX, translateY }) => {
   const anchor = useRef();
@@ -26,8 +27,6 @@ class ScatterPlot extends Component {
   constructor(props) {
     super(props);
     this.margin = { top: 10, right: 30, bottom: 30, left: 40 };
-    this.width = this.props.size[0] - this.margin.left - this.margin.right;
-    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
 
     this.getFillColor = this.getFillColor.bind(this);
 
@@ -86,6 +85,8 @@ class ScatterPlot extends Component {
   }
 
   render() {
+    this.width = this.props.size[0] - this.margin.left - this.margin.right;
+    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     const maxData = {
       x: max(this.props.data.map((d) => d[this.props.xvariable])),
       y: max(this.props.data.map((d) => d[this.props.yvariable])),
