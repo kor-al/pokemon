@@ -1,7 +1,42 @@
 .footer{
     display:flex;
-    height:10rem;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
     background-color: var(--pokemon-blueish);
+    color: var(--pokemon-darkblue);
+    padding-top:2rem;
+    padding-bottom:2rem;
 }
+
+.footer__text{
+    margin: 2rem auto 2rem 0;
+}
+
+.footer__text p{
+    margin: 0;
+}
+
+
+
+.footer__img
+{
+    height: 4rem;
+}
+
+.footer__img + .footer__img
+{
+    margin-left: 1rem;
+}
+
+.footer__text{
+    opacity: 0.8;
+}
+
+
+@media screen and (max-width: 850px) {
+    .footer {
+      font-size: 0.8rem;
+    }
+  }
+  

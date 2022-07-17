@@ -29,7 +29,7 @@ class Heatmap extends Component {
   
   mousemove = function(e) {
     const tile=e.target
-    this.tooltip.innerHTML = `${tile.dataset.name} against <span class=${tile.dataset.var.slice(8)}>${tile.dataset.var.slice(8)}</span> is ${tile.dataset.val}`
+    this.tooltip.innerHTML = `${tile.dataset.name} - damage by <span class=${tile.dataset.var.slice(8)}>${tile.dataset.var.slice(8)}</span> is ${tile.dataset.val}`
     this.tooltip.style.top = (e.pageY+10)+"px"
     this.tooltip.style.left = (e.pageX+10) + "px"
   }
@@ -48,7 +48,8 @@ class Heatmap extends Component {
         key={`tile-${i}`}
         x={xScale(variable)}
         y={yScale(d.name)}
-        fill={colorScale(d[variable])}
+        // fill={colorScale(d[variable])}
+        className={"tile damage-"+d[variable]*100}
         height={yScale.bandwidth()}
         width={xScale.bandwidth()}
         rx={4}
@@ -59,10 +60,6 @@ class Heatmap extends Component {
         onMouseOver={(e) => this.mouseover(e)}
         onMouseMove={(e) => this.mousemove(e)}
         onMouseOut={(e) => this.mouseleave(e)}
-        style={{
-          stroke: "black",
-          strokeOpacity: 0.5
-        }}
       />
     ));
   };
@@ -119,6 +116,15 @@ class Heatmap extends Component {
         );
       });
 
+      const axisName = <text key={"axisNameX"} fontWeight="bold" x={this.width/2} y={-this.margin.top+10} textAnchor = "middle" alignmentBaseline="middle">
+          Attacker
+          </text>
+
+// const axisYName = <text key={"axisNameY"} transform={`rotate(-90) translate(${0},${0})`} fontWeight="bold" x={-this.height/2} y={-this.margin.left+10} textAnchor = "middle" alignmentBaseline="middle">
+// Defender
+// </text>
+
+
     return (
       <div className="heatmap" >
       <svg width={this.props.size[0]} height={this.props.size[1]}>
@@ -126,6 +132,8 @@ class Heatmap extends Component {
           {tiles}
           {labelsX}
           {labelsY}
+          {axisName}
+          {/* {axisYName} */}
         </g>
       </svg>
       <div ref={(node) => (this.tooltip = node)} className="tooltip"/>
