@@ -52,8 +52,9 @@ class Recommend extends Component {
   }
 
   identifyRecommendedType() {
+      console.log(this.props.dataRef)
     this.recommendedTypes = new Set();
-    this.props.refData.map((d) => {
+    this.props.dataRef.map((d) => {
       this.team_weaknesses_type.forEach((w) => {
         if (d[w.variable] < 1) this.recommendedTypes.add(d.name);
       });
