@@ -5,8 +5,10 @@ import Heatmap from "../Heatmap/Heatmap";
 import BarChart from "../BarChart/BarChart";
 import CustomBarChart from "../BarChart/CustomBarChart";
 import CurvesBarChart from "../BarChart/CurvesBarChart";
+import Recommend from "../Heatmap/Recommend";
 import { format } from "d3-format";
-import { min } from "d3-array";
+import { min, median, groups } from "d3-array";
+import { summarizeGroupedData } from "../../preprocess";
 
 import "./SectionTeamStats.css";
 
@@ -16,6 +18,7 @@ class SectionTeamStats extends Component {
   }
 
   render() {
+
     return (
       <section className="sectionTeamStats pad">
         <div className="section__header">
@@ -29,17 +32,28 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
-            marginLeft={this.props.size.screenWidth>400? 150 : 100}
+            marginLeft={this.props.size.screenWidth > 400 ? 150 : 100}
             vars={this.props.columnsAgainst}
             items={this.props.team}
           />
+
+          <Recommend
+            data={this.props.dataTeam}
+            dataRef={this.props.dataRef}
+            size={[
+              min([500, this.props.size.screenWidth]),
+              min([300, this.props.size.screenWidth]),
+            ]}
+            vars={this.props.columnsAgainst}
+          />
+
           <DoubleStackedBarChart
             data={this.props.dataTeam}
             size={[
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
-            marginLeft={this.props.size.screenWidth>400? 150 : 100}
+            marginLeft={this.props.size.screenWidth > 400 ? 150 : 100}
             variables={["hp", "defense"]}
             circlevariables={["hp", "sp_defense"]}
             leftvariable={"attack"}
@@ -52,7 +66,7 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
-            marginLeft={this.props.size.screenWidth>400? 150 : 100}
+            marginLeft={this.props.size.screenWidth > 400 ? 150 : 100}
             xvariable={"speed"}
             text={this.props.dataTeam.map((d) => ({
               name: d.name,
@@ -65,10 +79,7 @@ class SectionTeamStats extends Component {
 
           <CustomBarChart
             data={this.props.dataTeam}
-            size={[
-              min([500, this.props.size.screenWidth]),
-             350
-            ]}
+            size={[min([500, this.props.size.screenWidth]), 350]}
             xvariable={"weight_kg"}
             yvariable={"height_m"}
             colorvariable={"experience_growth"}
@@ -76,10 +87,7 @@ class SectionTeamStats extends Component {
 
           <CurvesBarChart
             data={this.props.dataTeam}
-            size={[
-              min([500, this.props.size.screenWidth]),
-              350
-            ]}
+            size={[min([500, this.props.size.screenWidth]), 350]}
             items={this.props.team}
             leftvariable={"capture_rate"}
             rightvariable={"base_egg_steps"}
