@@ -29,7 +29,7 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
-            marginLeft={150}
+            marginLeft={this.props.size.screenWidth>400? 150 : 100}
             vars={this.props.columnsAgainst}
             items={this.props.team}
           />
@@ -39,6 +39,7 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
+            marginLeft={this.props.size.screenWidth>400? 150 : 100}
             variables={["hp", "defense"]}
             circlevariables={["hp", "sp_defense"]}
             leftvariable={"attack"}
@@ -51,6 +52,7 @@ class SectionTeamStats extends Component {
               min([500, this.props.size.screenWidth]),
               min([300, this.props.size.screenWidth]),
             ]}
+            marginLeft={this.props.size.screenWidth>400? 150 : 100}
             xvariable={"speed"}
             text={this.props.dataTeam.map((d) => ({
               name: d.name,
@@ -65,7 +67,7 @@ class SectionTeamStats extends Component {
             data={this.props.dataTeam}
             size={[
               min([500, this.props.size.screenWidth]),
-              min([300, this.props.size.screenWidth]),
+             350
             ]}
             xvariable={"weight_kg"}
             yvariable={"height_m"}
@@ -76,7 +78,7 @@ class SectionTeamStats extends Component {
             data={this.props.dataTeam}
             size={[
               min([500, this.props.size.screenWidth]),
-              min([300, this.props.size.screenWidth]),
+              350
             ]}
             items={this.props.team}
             leftvariable={"capture_rate"}

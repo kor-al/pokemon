@@ -144,7 +144,7 @@ const Legend = ({ circleleftvariable, circlerightvariable, leftvar, centervar, r
 class DoubleStackedBarChart extends Component {
   constructor(props) {
     super(props);
-    this.margin = { top: 50, right: 30, bottom: 30, left: 150 };
+    this.margin = { top: 50, right: 30, bottom: 50, left:this.props.marginLeft };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     this.yScalePadding = 0.3;
@@ -156,7 +156,6 @@ class DoubleStackedBarChart extends Component {
 
   mouseover = function (e) {
     let el = e.target;
-    console.log(el);
     if (el.tagName == "line" || el.tagName === "circle") {
       el = el.parentElement;
       console.log(el);
@@ -204,6 +203,7 @@ class DoubleStackedBarChart extends Component {
   };
 
   render() {
+    this.margin = { top: 50, right: 30, bottom: 50, left:this.props.marginLeft };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
 
@@ -464,14 +464,14 @@ class DoubleStackedBarChart extends Component {
               scale={xScale}
               translateX={0}
               translateY={this.height}
-              ticks={5}
+              ticks={this.width>200? 5: 2}
             />
             <Axis
               d3Axis={axisBottom}
               scale={xLeftScale}
               translateX={-this.width / 2}
               translateY={this.height}
-              ticks={5}
+              ticks={this.width>300? 5: 3}
             />
           </g>
         </svg>

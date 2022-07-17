@@ -12,31 +12,76 @@ import { schemeSet1, schemeBlues } from "d3-scale-chromatic";
 import { formatNameString } from "../../preprocess";
 import { interpolateBlues } from "d3-scale-chromatic";
 
-const Legend = ({ scale, uniqueValues, width, xTranslate, yTranslate }) => {
-  const step = (width * 0.5) / uniqueValues.length;
-  const legend = uniqueValues.map((d, i) => {
-    return (
-      <rect
-        x={width - step / 2 - step * i}
-        y={-30}
-        width={step}
-        key={`legend-rect-${i}`}
-        height={20}
-        fill={scale(d)}
-        stroke={"black"}
-        strokeOpacity={0.5}
-      ></rect>
-    );
-  });
+const Legend = ({
+  scale,
+  uniqueValues,
+  width,
+  height,
+  xTranslate,
+  yTranslate,
+}) => {
+  const step = width / 2 / uniqueValues.length;
+  const legend = uniqueValues
+    .sort((a, b) => ascending(a, b))
+    .map((d, i) => {
+      return (
+        <rect
+          x={width - step - step * i}
+          y={-65}
+          width={step}
+          key={`legend-rect-${i}`}
+          height={10}
+          fill={scale(d)}
+          stroke={"black"}
+          strokeOpacity={0.5}
+        ></rect>
+      );
+    });
+
+  // const legend = uniqueValues.map((d, i) => {
+  //   return (
+  //     <rect
+  //       x={width +20}
+  //       y={0 + step*i}
+  //       height={step}
+  //       key={`legend-rect-${i}`}
+  //       width={20}
+  //       fill={scale(d)}
+  //       stroke={"black"}
+  //       strokeOpacity={0.5}
+  //     ></rect>
+  //   );
+  // });
+
+  const label_title = (
+    <text x={width / 2 - 10} y={-55} textAnchor="end">
+      exp. growth
+    </text>
+  );
+
+  const label_start = (
+    <text x={width / 2} y={-70} textAnchor="start">
+      slower
+    </text>
+  );
+
+  const label_end = (
+    <text x={width} y={-70} textAnchor="end">
+      faster
+    </text>
+  );
 
   return (
     <g transform={`translate(${xTranslate},${yTranslate})`} className="legend">
+      {label_title}
+      {uniqueValues.length>1 && label_start}
+      {uniqueValues.length>1 && label_end}
       {legend}
     </g>
   );
 };
 
-const Axis = ({ d3Axis, scale, ticks, translateX, translateY }) => {
+const Axis = ({ d3Axis, scale, ticks, translateX, translateY, className }) => {
   const anchor = useRef();
 
   const axis = d3Axis(scale).ticks(ticks);
@@ -47,7 +92,7 @@ const Axis = ({ d3Axis, scale, ticks, translateX, translateY }) => {
 
   return (
     <g
-      className="axis"
+      className={"axis " + className}
       transform={`translate(${translateX}, ${translateY})`}
       ref={anchor}
     />
@@ -57,20 +102,20 @@ const Axis = ({ d3Axis, scale, ticks, translateX, translateY }) => {
 class CustomBarChart extends Component {
   constructor(props) {
     super(props);
-    this.margin = { top: 50, right: 30, bottom: 30, left: 60 };
+    this.margin = { top: 80, right: 20, bottom: 80, left: 60 };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
-    this.colorVar="experience_growth"
+    this.colorVar = "experience_growth";
     this.catScale = scaleOrdinal()
-    .domain([600000, 800000, 1000000, 1059860, 1250000, 1640000])
-    .range([
-      "Erratic",
-      "Fast",
-      "Medium Fast",
-      "Medium Slow",
-      "Slow",
-      "Fluctu­ating",
-    ]);
+      .domain([600000, 800000, 1000000, 1059860, 1250000, 1640000])
+      .range([
+        "Erratic",
+        "Fast",
+        "Medium Fast",
+        "Medium Slow",
+        "Slow",
+        "Fluctu­ating",
+      ]);
 
     this.mouseover = this.mouseover.bind(this);
     this.mousemove = this.mousemove.bind(this);
@@ -90,7 +135,9 @@ class CustomBarChart extends Component {
     ${d.name}, ${d.classfication}
     </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
     </br>${formatNameString(this.props.yvariable)}: ${d[this.props.yvariable]}
-    </br>${formatNameString(this.colorVar)}: ${this.catScale(d[this.colorVar])} (${d[this.colorVar]})
+    </br>${formatNameString(this.colorVar)}: ${this.catScale(
+      d[this.colorVar]
+    )} (${d[this.colorVar]})
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";
     this.tooltip.style.left = e.pageX + 10 + "px";
@@ -139,7 +186,7 @@ class CustomBarChart extends Component {
 
     //individual scales per item but max is common
     let xScale = scaleLinear()
-      .domain([0.1, maxData.x])
+      .domain([0, maxData.x])
       .range([0, nameScale.bandwidth()]);
     let yScale = scaleLinear().domain([0, maxData.y]).range([this.height, 0.1]);
 
@@ -225,6 +272,7 @@ class CustomBarChart extends Component {
               ]}
               scale={colorScale}
               width={this.width}
+              height={this.height}
               xTranslate={0}
               yTranslate={0}
             />
@@ -234,6 +282,7 @@ class CustomBarChart extends Component {
               translateX={0}
               translateY={this.height}
               ticks={3}
+              className={"axis__names"}
             />
             <Axis
               d3Axis={axisLeft}

@@ -1,84 +1,102 @@
-.defense{
-    fill:var(--defense);
-    opacity: 0.5;
+.defense {
+  fill: var(--defense);
+  opacity: 0.5;
 }
 
-.defense rect{
-    stroke:var(--defense);
-    stroke-width: 0;
+.defense rect {
+  stroke: var(--defense);
+  stroke-width: 0;
 }
 
-
-.sp_defense{
-    fill:var(--sp-defense);
-    opacity: 0.5;
+.sp_defense {
+  fill: var(--sp-defense);
+  opacity: 0.5;
 }
 
-.sp_defense line{
-    stroke:var(--sp-defense);
-    opacity: 0.5;
+.sp_defense line {
+  stroke: var(--sp-defense);
+  opacity: 0.5;
 }
 
-.sp_defense circle{
-    stroke:var(--sp-defense);
+.sp_defense circle {
+  stroke: var(--sp-defense);
 }
 
-.hp{
-    fill: var(--hp);
-    opacity: 0.5;
+.hp {
+  fill: var(--hp);
+  opacity: 0.5;
 }
 
-.hp rect{
-    stroke: var(--hp);
-    stroke-width: 0;
+.hp rect {
+  stroke: var(--hp);
+  stroke-width: 0;
 }
 
-.attack{
-    fill:var(--attack);
-    opacity: 0.5;
-    stroke-width: 0;
+.attack {
+  fill: var(--attack);
+  opacity: 0.5;
+  stroke-width: 0;
 }
 
-.attack rect{
-    stroke:var(--attack);
-    stroke-width: 0;
+.attack rect {
+  stroke: var(--attack);
+  stroke-width: 0;
 }
 
-
-.sp_attack{
-    fill:var(--sp-attack);;
-    opacity: 0.5;
-    stroke-width: 0;
+.sp_attack {
+  fill: var(--sp-attack);
+  opacity: 0.5;
+  stroke-width: 0;
 }
 
-
-.sp_attack line{
-    stroke:var(--sp-attack);;
-    opacity: 0.5;
+.sp_attack line {
+  stroke: var(--sp-attack);
+  opacity: 0.5;
 }
 
-.sp_attack circle{
-    stroke:var(--sp-attack);
+.sp_attack circle {
+  stroke: var(--sp-attack);
 }
 
-.speed{
-    opacity: 0.5;
-    fill:var(--speed);
+.speed {
+  opacity: 0.5;
+  fill: var(--speed);
 }
 
-.speed rect{
-    stroke:var(--speed);
-    stroke-width: 0;
+.speed rect {
+  stroke: var(--speed);
+  stroke-width: 0;
 }
 
-.speed > line{
-    stroke: var(--speed);
+.speed > line {
+  stroke: var(--speed);
 }
 
 /* .speed > line{
     stroke: blue
 } */
 
-.legend{
-    font-size: 0.8rem;
+.legend {
+  font-size: 0.8rem;
+}
+
+.sizeplot g.tick text {
+  font-size: 0.7rem;
+}
+
+@media screen and (max-width: 500px) {
+  .stackedbar text {
+    font-size: 0.7rem;
+  }
+
+  .barplot text {
+    font-size: 0.7rem;
+  }
+
+  .sizeplot .axis__names g.tick text {
+    /* transform: rotate(-90deg) translate(-6%, -6%); */
+    transform: rotate(-90deg) translate(-0.5rem, -4%);
+    text-anchor: end;
+    font-size: 0.7rem;
+  }
 }

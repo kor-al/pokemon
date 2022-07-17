@@ -8,11 +8,11 @@
 }
 
 
-/* @media screen and (max-width:500px) {
+@media screen and (max-width:500px) {
     .header{
-        justify-content: space-around;
+        padding-bottom: 1rem;
     }
-  } */
+  }
 
 
 

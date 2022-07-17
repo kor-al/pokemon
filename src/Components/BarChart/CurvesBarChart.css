@@ -1,28 +1,46 @@
-.capture_rate{
-    stroke: #6fde6f;
+
+circle.base_happiness{
+    fill: var(--happiness);
+    stroke:  var(--egg-step);
+    stroke-opacity: 0.5;
+    stroke-width: 2;
 }
 
-.base_egg_steps{
-    stroke: #ff913c;
+circle.base_happiness-caught{
+    stroke:  var(--catch-rate);
 }
 
-.base_happiness{
-    fill:#ff9ac6fa;
-    stroke:#f162a0fa;
+
+
+path.capture_rate{
+    stroke: var(--catch-rate);
 }
 
-.base_happiness-caught:before{
-    content: "";
-    position: absolute;
-    left:0;
-    right:0;
-    width:10px;
-    height: 10px;
-    background-color: white;
-    border-radius: 50%;
+text.capture_rate, textPath.capture_rate{
+    fill: var(--catch-rate);
+}
+
+path.base_egg_steps{
+    stroke: var(--egg-step);
+}
+
+text.base_egg_steps, textPath.base_egg_steps{
+    fill: var(--egg-step);
 }
 
 .curvesbar text, .sizeplot text{
     font-size: 0.7rem;
+}
 
+.curvesbar g.tick text {
+    font-size: 0.7rem;
+  }
+
+@media screen and (max-width: 500px) {
+.curvesbar g.tick text {
+    /* transform: rotate(-90deg) translate(-6%, -6%); */
+    transform: rotate(-90deg) translate(-0.5rem, -4%);
+    text-anchor: end;
+    font-size: 0.7rem;
+  }
 }

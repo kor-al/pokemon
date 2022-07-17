@@ -12,7 +12,7 @@ function ExploreHeader(props) {
   return (
     <div className="scatter__header">
       <p>
-        Show pokemons'
+        Show 
         <Dropdown
           className="dropdown--inline"
           label=""

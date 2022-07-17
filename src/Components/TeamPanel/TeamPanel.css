@@ -72,3 +72,9 @@ li+li{
         top:20%;
     }
   }
+
+@media screen and (max-width:500px) {
+    li.team__item{
+        width:8rem;
+    }
+  }

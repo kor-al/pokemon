@@ -68,6 +68,7 @@ class Heatmap extends Component {
   };
 
   render() {
+    this.margin = { top: 100, right: 10, bottom: 30, left: this.props.marginLeft };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
 

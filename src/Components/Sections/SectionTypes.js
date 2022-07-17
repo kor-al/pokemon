@@ -31,7 +31,8 @@ class SectionTypes extends Component {
 
     return (
       <section className="sectionTypes pad">
-        <h2><span className="step">1</span>Choose types of your pokemons</h2>
+        <div className="section__header"><span className="step">1</span>
+        <h2>Choose types of your pokemons</h2></div>
         <div className="sectionTypes__graphics">
           <Heatmap
             data={summarizedDataByType}

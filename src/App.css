@@ -11,7 +11,11 @@
   --defense: #63bef6;;
   --sp-defense: #005bcb;
   --attack: #ffa353;
-  --sp-attack: #df3f06
+  --sp-attack: #df3f06;
+  --happiness: #ffffaffa;
+  --catch-rate: #17bd9a;
+  --egg-step: #e026b9;
+
 }
 
 html {
