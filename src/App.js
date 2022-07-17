@@ -6,6 +6,8 @@ import data from "./pokemons";
 // import dataFlow from "./pokemonTypesCounts";
 import { scaleThreshold, scaleOrdinal } from "d3-scale";
 import { schemeSet3, schemeCategory10 } from "d3-scale-chromatic";
+import { median, groups } from "d3-array";
+import { summarizeGroupedData } from "./preprocess";
 
 import Header from "./Components/Sections/Header";
 import SectionTypes from "./Components/Sections/SectionTypes";
@@ -89,7 +91,7 @@ class App extends Component {
   componentDidMount() {
     //TODO: replace with hooks?
     window.addEventListener("resize", this.onResize, false);
-    console.log("mount")
+    console.log("mount");
     this.onResize();
   }
 
@@ -166,10 +168,18 @@ class App extends Component {
         (d) => d.generation == this.state.selectedGeneration
       );
     }
-    const dataFilteredByName = data.filter(
-      (d) => d.name == this.state.selectedName
-    );
     const dataTeam = data.filter((d) => this.state.team.includes(d.name));
+
+    //For the heatmap:------
+    const dataByTypes = groups(
+      data.filter((d) => d.type2 === ""),
+      (d) => d.type1
+    ); //only one-typed pokemons
+    const summarizedDataByType = summarizeGroupedData(
+      dataByTypes,
+      columnsAgainst,
+      median
+    );
 
     return (
       <div className="App">
@@ -219,6 +229,7 @@ class App extends Component {
             data={data}
             team={this.state.team}
             dataTeam={dataTeam}
+            dataRef={summarizedDataByType}
             columnsAgainst={columnsAgainst}
           />
         )}

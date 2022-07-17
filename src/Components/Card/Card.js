@@ -61,12 +61,14 @@ class Card extends Component {
       this.weaknesses_img = this.weaknesses_img.map((d) => (
         <img
           className="typeIcon"
+          title={d.slice(8)}
           src={process.env.PUBLIC_URL + "/types/" + d.slice(8) + ".svg"}
         />
       ));
       this.resistances_img = this.resistances_img.map((d) => (
         <img
           className="typeIcon"
+          title={d.slice(8)}
           src={process.env.PUBLIC_URL + "/types/" + d.slice(8) + ".svg"}
         />
       ));
@@ -76,11 +78,13 @@ class Card extends Component {
       <div className={"card " + this.props.data.type1 + "--transparent"}>
         <div className="card__header">
           <div className="card__name">
-            <h3>{this.props.data.name}</h3><p>{this.props.data.japanese_name}</p>
+            <h3>{this.props.data.name}</h3>
+            <p>{this.props.data.japanese_name}</p>
           </div>
           <div className="card__types">
             <img
               className="typeIcon"
+              title={this.props.data.type1}
               src={
                 process.env.PUBLIC_URL +
                 "/types/" +
@@ -91,6 +95,7 @@ class Card extends Component {
             {this.props.data.type2 != "" && (
               <img
                 className="typeIcon"
+                title={this.props.data.type2}
                 src={
                   process.env.PUBLIC_URL +
                   "/types/" +
@@ -140,15 +145,11 @@ class Card extends Component {
         </div>
         <div className="card__weakness">
           <span className={"card__label"}>Weakness</span>
-          <div className="weakness__wrapper">
-          {this.weaknesses_img}
-          </div>
+          <div className="weakness__wrapper">{this.weaknesses_img}</div>
         </div>
         <div className="card__resistance">
           <span className={"card__label"}>Resistance</span>
-          <div className="resistance__wrapper">
-          {this.resistances_img}
-          </div>
+          <div className="resistance__wrapper">{this.resistances_img}</div>
         </div>
       </div>
     );

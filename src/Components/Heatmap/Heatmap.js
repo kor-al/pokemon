@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { scaleLinear, scaleBand, scaleSequential} from "d3-scale";
-import { interpolateInferno, interpolateGreens, interpolateRdYlBu, interpolateSpectral, interpolateRdYlGn} from "d3-scale-chromatic";
+import {  interpolateRdYlGn} from "d3-scale-chromatic";
 import "./Heatmap.css"
 
 
