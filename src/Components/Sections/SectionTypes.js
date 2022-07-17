@@ -32,23 +32,9 @@ class SectionTypes extends Component {
     return (
       <section className="sectionTypes pad">
         <div className="section__header"><span className="step">1</span>
-        <h2>Choose types of your pokemons</h2></div>
+        <h2>Compare and choose Pokémon types</h2></div>
         <div className="sectionTypes__graphics">
-          <Heatmap
-            data={summarizedDataByType}
-            size={[min([500, this.props.size.screenWidth]), min([500, this.props.size.screenWidth])]}
-            marginLeft={min([110, this.props.size.screenWidth/4])}
-            vars={this.props.columnsAgainst}
-            items={summarizedDataByType.map((d) => d.name)}
-          />
-
-          <ChordDiagram
-            data={dataFlow}
-            size={[min([500, this.props.size.screenWidth]), min([500, this.props.size.screenWidth])]}
-            items={this.props.types}
-            fillScale={this.props.colorScale_type}
-          />
-          <div className="violin__wrapper">
+        <div className="violin__wrapper">
           <p>Click on a colored shape to select a type</p>
             <Dropdown
               label="Stat"
@@ -70,6 +56,21 @@ class SectionTypes extends Component {
               onClick={this.props.handleViolinClick}
             />
           </div>
+        <div className="heatmap__wrapper">
+          <Heatmap
+            data={summarizedDataByType}
+            size={[min([500, this.props.size.screenWidth]), min([500, this.props.size.screenWidth])]}
+            marginLeft={min([110, this.props.size.screenWidth/4])}
+            vars={this.props.columnsAgainst}
+            items={summarizedDataByType.map((d) => d.name)}
+          />
+        </div>
+          <ChordDiagram
+            data={dataFlow}
+            size={[min([500, this.props.size.screenWidth]), min([500, this.props.size.screenWidth])]}
+            items={this.props.types}
+            fillScale={this.props.colorScale_type}
+          />
         </div>
       </section>
     );

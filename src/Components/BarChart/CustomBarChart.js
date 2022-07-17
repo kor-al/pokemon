@@ -102,7 +102,7 @@ const Axis = ({ d3Axis, scale, ticks, translateX, translateY, className }) => {
 class CustomBarChart extends Component {
   constructor(props) {
     super(props);
-    this.margin = { top: 80, right: 20, bottom: 80, left: 60 };
+    this.margin = { top: 100, right: 20, bottom: 80, left: 60 };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     this.colorVar = "experience_growth";

@@ -42,6 +42,7 @@ body {
   /* font-family: typography.$body-font-family;
   font-size: typography.$base-font-size; */
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 img {
@@ -82,7 +83,7 @@ h2 {
 }
 
 section {
-  margin-bottom: 4rem;
+  /* margin-bottom: 4rem; */
 }
 
 .section__header {

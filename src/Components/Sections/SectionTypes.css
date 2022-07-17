@@ -3,3 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.sectionTypes .section__header{
+    margin-bottom: 0rem;
+}

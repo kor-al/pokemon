@@ -63,7 +63,7 @@ class SectionExplore extends Component {
       <section className="sectionExplore pad">
         <div className="section__header">
           <span className="step">2</span>
-          <h2>Explore pokemons of{" "}
+          <h2>Explore Pokémon of{" "}
             <Dropdown
               className="dropdown--h2"
               label="type"

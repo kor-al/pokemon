@@ -5,6 +5,12 @@
     align-items: center;
 }
 
+.sectionExplore .section__header {
+    margin-top: 2rem;
+    margin-bottom: 0;
+
+}
+
 .scatter__header{
     text-align: right;
 }

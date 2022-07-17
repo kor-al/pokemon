@@ -37,6 +37,10 @@
     fill: var(--damage-0);
 }
 
+.heatmap{
+    position: relative;
+}
+
 
 @media screen and (max-width: 500px) {
   .heatmap text {
