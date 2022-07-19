@@ -1,7 +1,7 @@
 import "./App.css";
 import "./types.css";
 import "./tooltip.css";
-import "./arrows.css"
+import "./arrows.css";
 import React, { Component } from "react";
 import data from "./pokemons";
 // import dataFlow from "./pokemonTypesCounts";
@@ -70,6 +70,7 @@ class App extends Component {
     this.state = {
       selectedType: "water",
       selectedTypeSecond: "any",
+      selectedResistance: "any",
       selectedGeneration: 0, //"all"
       valueDropdownTypeStat: "attack",
       valueDropdownType: "water",
@@ -108,6 +109,7 @@ class App extends Component {
 
   handleViolinClick(e) {
     this.setState({ selectedType: e.target.__data__[0] });
+    document.getElementById("scatter__header").scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
   }
 
   handlScatterPlotClick(e) {
@@ -159,12 +161,18 @@ class App extends Component {
       },
     ]);
 
-    let dataFilteredByTypeAndGeneration = dataFilteredByType;
-    if (this.state.selectedGeneration !== 0) {
-      dataFilteredByTypeAndGeneration = dataFilteredByType.filter(
-        (d) => d.generation === this.state.selectedGeneration
-      );
-    }
+    let dataFiltered = dataFilteredByType.filter((d) => {
+      let condition = true
+      if (this.state.selectedGeneration != 0){
+        condition = (d.generation === +this.state.selectedGeneration);
+      }
+      if (this.state.selectedResistance !== "any") {
+        let conditionResist = d[this.state.selectedResistance] < 1; // ||d.resistance[0].includes(this.selectedResistance)
+        condition = (condition && conditionResist);
+      }
+      return condition;
+    });
+
     const dataTeam = data.filter((d) => this.state.team.includes(d.name));
 
     //For the heatmap:------
@@ -201,14 +209,16 @@ class App extends Component {
             screenWidth: this.state.screenWidth,
             screenHeight: this.state.screenHeight,
           }}
-          dataFiltered={dataFilteredByTypeAndGeneration}
+          dataFiltered={dataFiltered}
           types={types}
           baseStats={baseStats}
+          columnsAgainst={columnsAgainst}
           colorScale_type={this.colorScale_type}
           selectedType={this.state.selectedType}
           selectedTypeSecond={this.state.selectedTypeSecond}
           selectedName={this.state.selectedName}
           selectedGeneration={this.state.selectedGeneration}
+          selectedResistance={this.state.selectedResistance}
           valueDropdownStatX={this.state.valueDropdownStatX}
           valueDropdownStatY={this.state.valueDropdownStatY}
           handlScatterPlotClick={this.handlScatterPlotClick}
