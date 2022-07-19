@@ -1,3 +1,18 @@
 .scatter path{
     cursor: help;
 }
+
+
+.scatter__header{
+    text-align: right;
+}
+
+.explore__helper{
+    text-align: left;
+    position:relative;
+    /* width: 40%; */
+    /* flex: 1 1 300px; */
+    max-width: 20rem; /* as a card width */
+    /* min-width: 300px; */
+    flex-shrink: 2;
+}

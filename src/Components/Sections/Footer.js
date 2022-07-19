@@ -25,6 +25,7 @@ function Footer(props) {
         </p> */}
       </div>
       <img
+          alt="Pokeball"
           className="footer__img"
           src={process.env.PUBLIC_URL + "/pokeball-grad-no-shadow-02.svg"}
         />

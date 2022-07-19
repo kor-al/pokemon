@@ -5,8 +5,8 @@ import "./arrows.css"
 import React, { Component } from "react";
 import data from "./pokemons";
 // import dataFlow from "./pokemonTypesCounts";
-import { scaleThreshold, scaleOrdinal } from "d3-scale";
-import { schemeSet3, schemeCategory10 } from "d3-scale-chromatic";
+import { scaleOrdinal } from "d3-scale";
+import { schemeSet3 } from "d3-scale-chromatic";
 import { median, groups } from "d3-array";
 import { summarizeGroupedData } from "./preprocess";
 
@@ -92,7 +92,6 @@ class App extends Component {
   componentDidMount() {
     //TODO: replace with hooks?
     window.addEventListener("resize", this.onResize, false);
-    console.log("mount");
     this.onResize();
   }
 
@@ -101,9 +100,6 @@ class App extends Component {
       screenWidth: window.innerWidth - 32, //2rem padding
       screenHeight: window.innerHeight,
     });
-
-    console.log(this.state.screenHeight);
-    console.log(this.state.screenWidth);
   }
 
   handleDropdownChange(e, stateFieldString) {
@@ -140,7 +136,7 @@ class App extends Component {
       let filterValue = f.value;
       if (filterValue === "any") return;
       if (filterValue === "no") filterValue = "";
-      if (filterValue !== undefined && f.field.length == 2) {
+      if (filterValue !== undefined && f.field.length === 2) {
         filteredData = filteredData.filter((d) => {
           return d[f.field[0]] === filterValue || d[f.field[1]] === filterValue;
         });
@@ -164,9 +160,9 @@ class App extends Component {
     ]);
 
     let dataFilteredByTypeAndGeneration = dataFilteredByType;
-    if (this.state.selectedGeneration != 0) {
+    if (this.state.selectedGeneration !== 0) {
       dataFilteredByTypeAndGeneration = dataFilteredByType.filter(
-        (d) => d.generation == this.state.selectedGeneration
+        (d) => d.generation === this.state.selectedGeneration
       );
     }
     const dataTeam = data.filter((d) => this.state.team.includes(d.name));

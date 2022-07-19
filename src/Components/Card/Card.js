@@ -1,4 +1,4 @@
-import React, { Component, useRef, useEffect } from "react";
+import React, { Component} from "react";
 import { scaleLinear } from "d3-scale";
 import "./Card.css";
 
@@ -45,8 +45,6 @@ class Card extends Component {
 
   render() {
     if (this.props.data !== undefined) {
-      console.log(this.hpScale(this.props.data.hp));
-
       if (Array.isArray(this.props.data.weakness[0])) {
         this.weaknesses_img = this.props.data.weakness[0];
       } else {
@@ -58,16 +56,20 @@ class Card extends Component {
         this.resistances_img = this.props.data.resistance;
       }
 
-      this.weaknesses_img = this.weaknesses_img.map((d) => (
+      this.weaknesses_img = this.weaknesses_img.map((d, i) => (
         <img
+          key={"weak_typeIcon" + i}
           className="typeIcon"
+          alt={d.slice(8)}
           title={d.slice(8)}
           src={process.env.PUBLIC_URL + "/types/" + d.slice(8) + ".svg"}
         />
       ));
-      this.resistances_img = this.resistances_img.map((d) => (
+      this.resistances_img = this.resistances_img.map((d, i) => (
         <img
+          key={"resist_typeIcon" + i}
           className="typeIcon"
+          alt={d.slice(8)}
           title={d.slice(8)}
           src={process.env.PUBLIC_URL + "/types/" + d.slice(8) + ".svg"}
         />
@@ -85,6 +87,7 @@ class Card extends Component {
             <img
               className="typeIcon"
               title={this.props.data.type1}
+              alt={this.props.data.type1}
               src={
                 process.env.PUBLIC_URL +
                 "/types/" +
@@ -92,10 +95,11 @@ class Card extends Component {
                 ".svg"
               }
             />
-            {this.props.data.type2 != "" && (
+            {this.props.data.type2 !== "" && (
               <img
                 className="typeIcon"
                 title={this.props.data.type2}
+                alt={this.props.data.type2}
                 src={
                   process.env.PUBLIC_URL +
                   "/types/" +
@@ -108,6 +112,7 @@ class Card extends Component {
         </div>
         <img
           className="card__portrait"
+          alt={this.props.data.name}
           src={
             process.env.PUBLIC_URL +
             "/pokemons/" +

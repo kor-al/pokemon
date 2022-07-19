@@ -14,7 +14,7 @@ const Axis = ({ d3Axis, scale, translateX, translateY }) => {
 
   useEffect(() => {
     select(anchor.current).call(axis);
-  }, [scale]);
+  }, [scale,axis]);
 
   return (
     <g transform={`translate(${translateX}, ${translateY})`} ref={anchor} />
@@ -24,7 +24,7 @@ const Axis = ({ d3Axis, scale, translateX, translateY }) => {
 const Legend = ({ symbols, labels, width, hight }) => {
   const legend = labels.map((label, i) => {
     return (
-      <g transform={`translate(${20},${5 + 20*i })`}>
+      <g key={"legendg" + i} transform={`translate(${20},${5 + 20*i })`}>
         <path
           key={"legendcircle" + i}
           d={symbols[i]()}
@@ -36,7 +36,7 @@ const Legend = ({ symbols, labels, width, hight }) => {
           }}
           // className={`circle ${this.getTypeColoring(d)}`}
         />
-        <text x={20} y={2} alignmentBaseline="middle">{label}</text>
+        <text key={"legendtext" + i} x={20} y={2} alignmentBaseline="middle">{label}</text>
       </g>
     );
   });
@@ -70,7 +70,6 @@ class ScatterPlot extends Component {
   };
 
   mousemove = function (e, d) {
-    const point = e.target;
     // this.tooltip.innerHTML = `
     // ${d.name}, ${d.classfication}
     // </br>Types: ${d.type1}${d.type2 == ""? "": ", " + d.type2}

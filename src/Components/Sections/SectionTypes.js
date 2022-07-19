@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import dataFlow from "../../pokemonTypesCounts";
-import { getDataByOneType, summarizeGroupedData } from "../../preprocess";
+import { getDataByOneType } from "../../preprocess";
 import { groups } from "d3-array";
-import { median, max, min } from "d3-array";
+import { min } from "d3-array";
 import "./SectionTypes.css";
 
 import Dropdown from "../Dropdown";
@@ -27,7 +27,6 @@ class SectionTypes extends Component {
     // );
     const dataOneType = getDataByOneType(this.props.data);
     const dataOneTypeByTypes = groups(dataOneType, (d) => d.type); //all pokemons with types in first and secons positions
-    console.log(100, this.props.size.screenWidth / 5);
 
     return (
       <section className="sectionTypes pad">
@@ -42,7 +41,7 @@ class SectionTypes extends Component {
                 Click on a colored shape to select a type
               </p>
               <div className="arrow">
-                <img className="arrow__img" src={process.env.PUBLIC_URL + "/arrows/arow-right-short-01.svg"} />
+                <img className="arrow__img"  alt={"arrow pointer"} src={process.env.PUBLIC_URL + "/arrows/arow-right-short-01.svg"} />
               </div>
             </div>
             <Dropdown
@@ -74,7 +73,7 @@ class SectionTypes extends Component {
               Choose types that have reduced damage against different attacks
               </p>
               <div className="arrow">
-                <img className="arrow__img" src={process.env.PUBLIC_URL + "/arrows/arrow-down.svg"} />
+                <img className="arrow__img"  alt={"arrow pointer"} src={process.env.PUBLIC_URL + "/arrows/arrow-down.svg"} />
               </div>
             </div>
             <Heatmap
@@ -95,7 +94,7 @@ class SectionTypes extends Component {
               vary on the combination of types
               </p>
               <div className="arrow">
-                <img className="arrow__img" src={process.env.PUBLIC_URL + "/arrows/arrow-down-right.svg"} />
+                <img className="arrow__img" alt={"arrow pointer"} src={process.env.PUBLIC_URL + "/arrows/arrow-down-right.svg"} />
               </div>
             </div>
             <ChordDiagram

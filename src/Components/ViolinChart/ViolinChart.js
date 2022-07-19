@@ -28,8 +28,6 @@ class ViolinChart extends Component {
 
     var tooltip = select(this.tooltip)
 
-    console.log(tooltip)
-
     const mouseover = function(e,d) {
       tooltip.style("opacity", 1)
       // select(this)
@@ -37,7 +35,6 @@ class ViolinChart extends Component {
       //   .style("opacity", 1)
     }
     const mousemove = function(e,d) {
-      const element = e.target
       tooltip
         .html(`Type ${d[0]}, total ${d[1].length} pokemons`)
         .style("left", (e.pageX +10 + "px"))
@@ -56,7 +53,6 @@ class ViolinChart extends Component {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     const yMax = max(this.props.data.map((d) => d[this.props.yvariable]));
-    const yMin = min(this.props.data.map((d) => d[this.props.yvariable]));
     var yScale = scaleLinear().domain([0, yMax]).range([height, 0]);
     // if (this.props.yvariable == "height_m"){
     //   yScale = scaleLinear().domain([0, 2]).range([height, 0]);
@@ -65,7 +61,6 @@ class ViolinChart extends Component {
     const types = this.props.fillScale.domain();
     var xScale = scaleBand().domain(types).range([0, width]).padding(0.2); // This is important: it is the space between 2 groups. 0 means no padding. 1 is the maximum.
     const dataByTypes = this.props.dataGrouped;
-    const step = this.props.size[0] / dataByTypes.length;
 
     // Build and Show the Y scale
     nodeg_translated.append("g").call(axisLeft(yScale));
@@ -125,7 +120,6 @@ class ViolinChart extends Component {
         const hist = histFunc(yData);
         const histData = hist(yData);
         const maxBinData = max(histData.map((d) => d.length));
-        const minBinData = 0;
         const groupScale = scaleLinear()
           .range([0, xScale.bandwidth()])
           .domain([-maxBinData, maxBinData]);

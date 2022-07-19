@@ -1,26 +1,11 @@
-.sectionExplore__graphics{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+.sectionExplore__graphics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .sectionExplore .section__header {
-    margin-top: 2rem;
-    margin-bottom: 0;
-
-}
-
-.scatter__header{
-    text-align: right;
-}
-
-.explore__helper{
-    text-align: left;
-    position:relative;
-    /* width: 40%; */
-    flex: 1 1 300px;
-    max-width: 100%;
-    min-width: 300px;
-    flex-shrink: 2;
+  margin-top: 2rem;
+  margin-bottom: 0;
 }
