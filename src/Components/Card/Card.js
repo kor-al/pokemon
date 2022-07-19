@@ -149,11 +149,11 @@ class Card extends Component {
           />
         </div>
         <div className="card__weakness">
-          <span className={"card__label"}>Weakness</span>
+          <span className={"card__label"}>Top Weaknesses</span>
           <div className="weakness__wrapper">{this.weaknesses_img}</div>
         </div>
         <div className="card__resistance">
-          <span className={"card__label"}>Resistance</span>
+          <span className={"card__label"}>Top Resistances</span>
           <div className="resistance__wrapper">{this.resistances_img}</div>
         </div>
       </div>

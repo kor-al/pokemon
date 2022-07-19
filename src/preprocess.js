@@ -1,7 +1,8 @@
 //https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
-function formatNameString(string) {
-  let stringFirstUppercase = string.charAt(0).toUpperCase() + string.slice(1); //to uppercase
-  return stringFirstUppercase.replace(/_/g, " ");
+function formatNameString(string, capitalize=true) {
+  let result = string;
+  if (capitalize) result = string.charAt(0).toUpperCase() + string.slice(1); //to uppercase
+  return result.replace(/_/g, " ");
 }
 
 const getDataByOneType = (data) => {

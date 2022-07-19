@@ -7,14 +7,17 @@ import Dropdown from "../Dropdown";
 import Button from "../Button";
 import ScatterPlot from "../ScatterPlot/ScatterPlot";
 import Card from "../Card/Card";
+import { formatNameString } from "../../preprocess";
 
 function ExploreHeader(props) {
+  let resistance_options = [...props.columnsAgainst];
+  resistance_options.push("any");
+
   return (
-    <div className="scatter__header">
+    <div className="scatter__header" id="scatter__header">
       <p>
-        Show 
+        Show
         <Dropdown
-          className="dropdown--inline"
           label=""
           options={props.baseStats.map((t) => ({
             label: t,
@@ -25,7 +28,6 @@ function ExploreHeader(props) {
         />
         vs
         <Dropdown
-          className="dropdown--inline"
           label=""
           options={props.baseStats.map((t) => ({
             label: t,
@@ -35,16 +37,25 @@ function ExploreHeader(props) {
           onChange={(e) => props.handleDropdownChange(e, "valueDropdownStatY")}
         />
       </p>
+      <p><Dropdown
+        label="Resistance"
+        options={resistance_options.map((t) => ({
+          label: formatNameString(t, false),
+          value: t,
+        }))}
+        value={props.selectedResistance}
+        onChange={(e) => props.handleDropdownChange(e, "selectedResistance")}
+      />
       <Dropdown
-        className="dropdown--inline"
         label="Generation"
         options={range(0, 8).map((t) => ({
-          label: t == 0 ? "All" : t,
+          label: t == 0 ? "all" : t,
           value: t,
         }))}
         value={props.selectedGeneration}
         onChange={(e) => props.handleDropdownChange(e, "selectedGeneration")}
-      />
+      /></p>
+      
     </div>
   );
 }
@@ -63,7 +74,8 @@ class SectionExplore extends Component {
       <section className="sectionExplore pad">
         <div className="section__header">
           <span className="step">2</span>
-          <h2>Explore Pokémon of{" "}
+          <h2>
+            Explore Pokémon of{" "}
             <Dropdown
               className="dropdown--h2"
               label="type"
@@ -108,10 +120,15 @@ class SectionExplore extends Component {
           </div>
           {dataFilteredByName.length == 0 && (
             <div className="explore__helper">
-              <p>Click on circles and stars to learn more abot pokemons and add
-              them to your team</p>
+              <p>
+                Click on circles and stars to learn more abot pokemons and add
+                them to your team
+              </p>
               <div className="arrow">
-                <img className="arrow__img" src={process.env.PUBLIC_URL + "/arrows/arrow-left-01.svg"} />
+                <img
+                  className="arrow__img"
+                  src={process.env.PUBLIC_URL + "/arrows/arrow-left-01.svg"}
+                />
               </div>
             </div>
           )}
