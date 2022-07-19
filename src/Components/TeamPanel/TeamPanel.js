@@ -6,12 +6,12 @@ import "./TeamPanel.css";
 const Member = ({ data, onremove }) => {
   return (
     <div className="member" data-name={data.name}>
-      <div
-        className={"member__background " + data.type1 + "--transparent"}
-      />
+      <div className={"member__background " + data.type1 + "--transparent"} />
       <img
         className="member__image"
-        src={process.env.PUBLIC_URL + "/pokemons/" + data.pokedex_number + ".png"}
+        src={
+          process.env.PUBLIC_URL + "/pokemons/" + data.pokedex_number + ".png"
+        }
       />
       <div className="member__info">{data.name}</div>
       <div className="member__type">
@@ -58,11 +58,12 @@ class TeamPanel extends Component {
 
     return (
       <section className="team pad">
-        <h2>
-          <span className="step">3</span>Build a team
-        </h2>
+        <div className="section__header">
+          <span className="step">3</span>
+          <h2>Build your Pokémon team</h2>
+        </div>
         {this.props.data.length == 0 && (
-          <p>Add up to 6 pokemons to your team with the plot above!</p>
+          <p>Add up to 6 Pokémon to your team with the plot above!</p>
         )}
         {this.props.data.length > 0 && cards}
       </section>

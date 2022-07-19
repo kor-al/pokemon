@@ -5,23 +5,24 @@
     align-items: center;
     background-color: var(--pokemon-blueish);
     color: var(--pokemon-darkblue);
-    padding-top:2rem;
-    padding-bottom:2rem;
+    padding-top:4rem;
+    padding-bottom:4rem;
+    gap:2rem;
 }
 
 .footer__text{
-    margin: 2rem auto 2rem 0;
+    /* margin: 2rem auto 2rem 0; */
+    opacity: 0.8;
+    flex: 1 1 80%;
 }
 
 .footer__text p{
     margin: 0;
 }
 
-
-
 .footer__img
 {
-    height: 4rem;
+    height: 5rem;
 }
 
 .footer__img + .footer__img
@@ -29,10 +30,9 @@
     margin-left: 1rem;
 }
 
-.footer__text{
-    opacity: 0.8;
+.footer__text p + p{
+    margin-top: 1rem;
 }
-
 
 @media screen and (max-width: 850px) {
     .footer {

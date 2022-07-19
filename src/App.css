@@ -112,6 +112,12 @@ span.step {
   text-shadow: 1px -1px 0 var(--pokemon-darkyellow);
 }
 
+.advice{
+  max-width: 500px;
+  position: relative;
+}
+
+
 /* AXIS */
 /* .domain{stroke:none;} */
 g.tick line {

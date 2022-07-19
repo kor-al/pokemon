@@ -1,0 +1,43 @@
+.arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.violin__wrapper .arrow {
+  width: 50px;
+  top: 0.7rem;
+  right: 2rem;
+}
+
+.heatmap__wrapper .arrow {
+  width: 28px;
+  top: 3.5rem;
+  left: 0rem;
+}
+
+.chord__wrapper .arrow {
+  width: 30px;
+  top: 3rem;
+  right: 1rem;
+}
+
+.explore__helper .arrow {
+  width: 60px;
+  left: 1rem;
+  bottom: -3rem;
+  transform: scaleY(-1);
+}
+
+@media screen and (max-width: 500px) {
+  .violin__wrapper .arrow {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .explore__helper .arrow {
+    display: none;
+  }
+}
+

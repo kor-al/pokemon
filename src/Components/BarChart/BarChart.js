@@ -26,10 +26,6 @@ class BarChart extends Component {
   constructor(props) {
     super(props);
 
-    this.margin = { top: 10, right: 150, bottom: 50,  left:this.props.marginLeft };
-    this.width = this.props.size[0] - this.margin.left - this.margin.right;
-    this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
-
     this.yScalePadding = 0.3;
 
     this.mouseover = this.mouseover.bind(this);

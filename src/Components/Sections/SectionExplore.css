@@ -17,7 +17,7 @@
 
 .explore__helper{
     text-align: left;
-    display: block;
+    position:relative;
     /* width: 40%; */
     flex: 1 1 300px;
     max-width: 100%;

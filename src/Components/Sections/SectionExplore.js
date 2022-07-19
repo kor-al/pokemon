@@ -107,10 +107,13 @@ class SectionExplore extends Component {
             />
           </div>
           {dataFilteredByName.length == 0 && (
-            <p className="explore__helper">
-              Click on circles and stars to learn more abot pokemons and add
-              them to your team{" "}
-            </p>
+            <div className="explore__helper">
+              <p>Click on circles and stars to learn more abot pokemons and add
+              them to your team</p>
+              <div className="arrow">
+                <img className="arrow__img" src={process.env.PUBLIC_URL + "/arrows/arrow-left-01.svg"} />
+              </div>
+            </div>
           )}
           {dataFilteredByName.length > 0 && (
             <div className="card__wrapper">

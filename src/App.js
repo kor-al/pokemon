@@ -1,7 +1,7 @@
 import "./App.css";
 import "./types.css";
 import "./tooltip.css";
-import "./helper.css"
+import "./arrows.css"
 import React, { Component } from "react";
 import data from "./pokemons";
 // import dataFlow from "./pokemonTypesCounts";
@@ -191,6 +191,7 @@ class App extends Component {
             screenHeight: this.state.screenHeight,
           }}
           data={data}
+          summarizedDataByType={summarizedDataByType}
           columnsAgainst={columnsAgainst}
           types={types}
           colorScale_type={this.colorScale_type}
