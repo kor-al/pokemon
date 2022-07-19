@@ -1,9 +1,16 @@
-.sectionTypes__graphics{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.sectionTypes__graphics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.sectionTypes .section__header{
-    margin-bottom: 0rem;
+.sectionTypes .section__header {
+  margin-bottom: 0rem;
+}
+
+@media screen and (max-width: 500px) {
+  .chord {
+    display: block;
+    margin: 0 auto;
+  }
 }

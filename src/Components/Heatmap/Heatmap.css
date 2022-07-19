@@ -1,42 +1,40 @@
 :root {
-    --damage-400: #c1121f;
-    --damage-200: #fcb1a6;
-    --damage-100: #fff;
-    --damage-50: #aad576;
-    --damage-25: #73a942;;
-    --damage-0: #1a7431;;
-  
-  }
-
-.tile{
-    stroke: var(--pokemon-blue);
-    stroke-opacity: 0.5;
+  --damage-400: #c1121f;
+  --damage-200: #fcb1a6;
+  --damage-100: #fff;
+  --damage-50: #aad576;
+  --damage-25: #73a942;
+  --damage-0: #1a7431;
 }
 
-.tile.damage-400{
-    fill: var(--damage-400);
+.tile {
+  stroke: var(--pokemon-blue);
+  stroke-opacity: 0.5;
 }
 
-.tile.damage-200{
-    fill: var(--damage-200);
+.tile.damage-400 {
+  fill: var(--damage-400);
 }
 
-.tile.damage-100{
-    fill: var(--damage-100);
+.tile.damage-200 {
+  fill: var(--damage-200);
 }
 
-.tile.damage-50{
-    fill: var(--damage-50);
+.tile.damage-100 {
+  fill: var(--damage-100);
 }
 
-.tile.damage-25{
-    fill: var(--damage-25);
+.tile.damage-50 {
+  fill: var(--damage-50);
 }
 
-.tile.damage-0{
-    fill: var(--damage-0);
+.tile.damage-25 {
+  fill: var(--damage-25);
 }
 
+.tile.damage-0 {
+  fill: var(--damage-0);
+}
 
 @media screen and (max-width: 500px) {
   .heatmap text {

@@ -27,3 +27,14 @@
 .recommend ul {
   list-style-type: none;
 }
+
+@media screen and (max-width: 500px) {
+    .recommend {
+      font-size: 0.7rem;
+      max-width: 300px;
+    }
+    .recommend .typeIcon {
+        width:1.6;
+    }
+  }
+  

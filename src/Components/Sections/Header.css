@@ -3,7 +3,7 @@
   align-items: center;
   flex-wrap: wrap;
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
   justify-content: space-around;
 }
 
@@ -18,5 +18,8 @@
 @media screen and (max-width: 500px) {
   .header {
     padding-bottom: 1rem;
+  }
+  .header__title{
+      text-align: center;
   }
 }

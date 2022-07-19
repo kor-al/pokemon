@@ -92,6 +92,7 @@ section {
   flex-wrap: nowrap;
   align-items: center;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 span.step {
@@ -151,6 +152,7 @@ g.tick text {
 }
 
 @media screen and (max-width: 500px) {
+
   h1 {
     font-size: 1.8rem;
   }

@@ -5,19 +5,21 @@
   font-size: 1rem;
 }
 
-.violin path{
-    cursor: pointer;
+.violin path {
+  cursor: pointer;
 }
 
-.violin path:hover{
-    /* filter: brightness(70%); */
-    stroke-width: 3;
+.violin path:hover {
+  /* filter: brightness(70%); */
+  stroke-width: 3;
 }
-
 
 @media screen and (max-width: 500px) {
   .violin__xaxis g.tick text {
     transform: rotate(-90deg) translate(-0.5rem, -5%);
     font-size: 0.8rem;
+  }
+  .violin {
+    text-align: center;
   }
 }
