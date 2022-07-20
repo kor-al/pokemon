@@ -60,7 +60,7 @@ class SectionTypes extends Component {
               data={dataOneType} //TODO: remove it as it's needed only to calc max ranges
               dataGrouped={dataOneTypeByTypes}
               size={[
-                min([1000, this.props.size.screenWidth]),
+                min([1064, this.props.size.screenWidth]),
                 min([300, this.props.size.screenWidth]),
               ]}
               yvariable={this.props.valueDropdownTypeStat}

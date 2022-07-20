@@ -1,14 +1,16 @@
 .card {
   position: relative;
   width: 100%;
-  max-width: 20rem;
   padding: 1.6rem;
   border-radius: 10px;
 }
 
-.card__wrapper{
-    text-align: center;
-    align-self: flex-end;
+.card__wrapper {
+  position: relative;
+  text-align: center;
+  align-self: flex-end;
+  max-width: 23rem;
+  margin-top: 5rem;
 }
 
 .card__header {
@@ -39,7 +41,7 @@
 }
 
 .typeIcon + .typeIcon {
-    margin-left: 0.3rem;
+  margin-left: 0.3rem;
 }
 
 .card__portrait {
@@ -48,34 +50,31 @@
   margin: 0 auto;
 }
 
-.card__info{
-    display: flex;
-    justify-content: space-between;
+.card__info {
+  display: flex;
+  justify-content: space-between;
 }
 
-
-
-
-.card__info > .info{
-    display: inline;
-    font-size: 0.8rem;
-    text-align: right;
+.card__info > .info {
+  display: inline;
+  font-size: 0.8rem;
+  text-align: right;
 }
 
-.info.classification{
-    text-align: left;
+.info.classification {
+  text-align: left;
 }
 
-.info + .info{
-    /* margin-left: 1rem; */
+.info + .info {
+  /* margin-left: 1rem; */
 }
 
-span.highlight{
-    color: var(--pokemon-blue);
+span.highlight {
+  color: var(--pokemon-blue);
 }
 
-span.dim{
-    color: rgb(144, 144, 144)
+span.dim {
+  color: rgb(144, 144, 144);
 }
 
 .card__label {
@@ -86,7 +85,7 @@ span.dim{
 }
 
 .card__weakness {
-    margin-top: 1rem;;
+  margin-top: 1rem;
 }
 
 .card__weakness,
@@ -95,20 +94,20 @@ span.dim{
   margin-bottom: 0.2rem;
 }
 
-.weakness__wrapper >.typeIcon,
+.weakness__wrapper > .typeIcon,
 .resistance__wrapper > .typeIcon {
   width: 1.6rem;
 }
 
-.weakness__wrapper >.typeIcon + .typeIcon,
-.resistance__wrapper > .typeIcon+ .typeIcon{
-    margin-left: 0.3rem;
+.weakness__wrapper > .typeIcon + .typeIcon,
+.resistance__wrapper > .typeIcon + .typeIcon {
+  margin-left: 0.3rem;
 }
 
-.resistance__wrapper,.weakness__wrapper{
-    text-align: left;
+.resistance__wrapper,
+.weakness__wrapper {
+  text-align: left;
 }
-
 
 .meter {
   display: flex;
@@ -149,3 +148,19 @@ span.dim{
 /* span.meter__rect--value.HP{
     background-color: var(--hp);
 } */
+
+.card__warning {
+  position: absolute;
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: rgb(215, 43, 43);
+  text-align: left;
+  height: 1.5rem;
+}
+
+
+@media screen and (max-width: 1070px) {
+    .card__wrapper {
+        margin-top: 2rem;
+      }
+  }

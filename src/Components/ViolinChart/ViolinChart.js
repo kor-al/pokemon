@@ -45,7 +45,7 @@ class ViolinChart extends Component {
       tooltip.style("opacity", 0)
     }
 
-    var margin = { top: 10, right: 20, bottom: 100, left: 40 };
+    var margin = { top: 20, right: 20, bottom: 100, left: 40 };
     const width = this.props.size[0] - margin.left - margin.right;
     const height = this.props.size[1] - margin.top - margin.bottom;
     const nodeg_translated = select(node)

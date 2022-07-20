@@ -1,5 +1,5 @@
 .recommend {
-  max-width: 400px;
+  max-width: 500px;
   /* margin: 0 0 0 auto; */
   display: flex;
   align-items: center;
@@ -26,6 +26,19 @@
 
 .recommend ul {
   list-style-type: none;
+}
+
+.recommend__success{
+    display: flex;
+    align-items: center;
+    gap:3rem;
+    margin-left: 1.7rem;
+}
+
+.successIcon{
+    position: relative;
+    height: 6rem;
+    /* margin-right: 2rem; */
 }
 
 @media screen and (max-width: 500px) {

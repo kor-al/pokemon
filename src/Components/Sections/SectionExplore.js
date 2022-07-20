@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { range, min, max } from "d3-array";
+import { range, min } from "d3-array";
 
 import "./SectionExplore.css";
 
@@ -37,25 +37,26 @@ function ExploreHeader(props) {
           onChange={(e) => props.handleDropdownChange(e, "valueDropdownStatY")}
         />
       </p>
-      <p><Dropdown
-        label="Resistance"
-        options={resistance_options.map((t) => ({
-          label: formatNameString(t, false),
-          value: t,
-        }))}
-        value={props.selectedResistance}
-        onChange={(e) => props.handleDropdownChange(e, "selectedResistance")}
-      />
-      <Dropdown
-        label="Generation"
-        options={range(0, 8).map((t) => ({
-          label: t == 0 ? "all" : t,
-          value: t,
-        }))}
-        value={props.selectedGeneration}
-        onChange={(e) => props.handleDropdownChange(e, "selectedGeneration")}
-      /></p>
-      
+      <p>
+        <Dropdown
+          label="Resistance"
+          options={resistance_options.map((t) => ({
+            label: formatNameString(t, false),
+            value: t,
+          }))}
+          value={props.selectedResistance}
+          onChange={(e) => props.handleDropdownChange(e, "selectedResistance")}
+        />
+        <Dropdown
+          label="Generation"
+          options={range(0, 8).map((t) => ({
+            label: t === 0 ? "all" : t,
+            value: t,
+          }))}
+          value={props.selectedGeneration}
+          onChange={(e) => props.handleDropdownChange(e, "selectedGeneration")}
+        />
+      </p>
     </div>
   );
 }
@@ -67,7 +68,7 @@ class SectionExplore extends Component {
 
   render() {
     const dataFilteredByName = this.props.dataFiltered.filter(
-      (d) => d.name == this.props.selectedName
+      (d) => d.name === this.props.selectedName
     );
 
     return (
@@ -103,6 +104,9 @@ class SectionExplore extends Component {
         </div>
 
         <div className="sectionExplore__graphics">
+          {/* <div className="scatter__filters">
+            <ExploreHeader {...this.props} />
+          </div> */}
           <div className="scatter__wrapper">
             <ExploreHeader {...this.props} />
             <ScatterPlot
@@ -118,7 +122,7 @@ class SectionExplore extends Component {
               onClick={this.props.handlScatterPlotClick}
             />
           </div>
-          {dataFilteredByName.length == 0 && (
+          {dataFilteredByName.length === 0 && (
             <div className="explore__helper">
               <p>
                 Click on circles and stars to learn more abot pokemons and add
@@ -127,6 +131,7 @@ class SectionExplore extends Component {
               <div className="arrow">
                 <img
                   className="arrow__img"
+                  alt="arrow pointer"
                   src={process.env.PUBLIC_URL + "/arrows/arrow-left-01.svg"}
                 />
               </div>
@@ -134,7 +139,7 @@ class SectionExplore extends Component {
           )}
           {dataFilteredByName.length > 0 && (
             <div className="card__wrapper">
-              {/* <div className="card__vspace"/> */}
+              <div className="card__vspace" />
               <Card data={dataFilteredByName[0]} />
               <Button
                 text={
@@ -147,6 +152,7 @@ class SectionExplore extends Component {
                 className={"button--cta"}
                 onClick={this.props.handleButtonClick}
               />
+              <div className="card__warning" id="warning"></div>
             </div>
           )}
         </div>

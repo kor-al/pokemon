@@ -17,6 +17,8 @@ import SectionTeamStats from "./Components/Sections/SectionTeamStats";
 import TeamPanel from "./Components/TeamPanel/TeamPanel";
 import Footer from "./Components/Sections/Footer";
 
+const MAXTEAMSIZE = 6
+
 const types = [
   "grass",
   "fire",
@@ -38,7 +40,7 @@ const types = [
   "flying",
 ];
 
-const baseStats = ["defense", "attack", "hp", "height_m", "weight_kg"];
+const baseStats = ["defense", "attack", "hp", "speed", "base_total", "height_m", "weight_kg"];
 
 const columnsAgainst = [
   "against_bug",
@@ -114,15 +116,33 @@ class App extends Component {
 
   handlScatterPlotClick(e) {
     this.setState({ selectedName: e.target.dataset.name });
+    this.showWarning("")
     // this.setState({ selectedType: e.target.__data__[0] });
   }
 
+  showWarning(text){
+    const warningDiv = document.getElementById("warning")
+    warningDiv.innerHTML = text
+  }
+
   handleButtonClick(e) {
+    //if this pokemon is already in the team
+    if (this.state.team.includes(this.state.selectedName)) {
+      this.showWarning("You have already added this Pokémon to your team, try another one!")
+      return
+    }
+    //if team is max size
+    if (this.state.team.length >= MAXTEAMSIZE){
+      this.showWarning(`Your team already has ${MAXTEAMSIZE} members. First, remove a Pokémon from your team then add another one.`)
+      return
+    }
+    //else - add a member
     const new_team = [...this.state.team].concat(this.state.selectedName);
     this.setState({ team: new_team });
   }
 
   handleButtonRemoveClick(e, d) {
+    this.showWarning("")
     const nameToRemove = e.target.parentElement.dataset.name;
 
     let team = this.state.team;
@@ -163,7 +183,7 @@ class App extends Component {
 
     let dataFiltered = dataFilteredByType.filter((d) => {
       let condition = true
-      if (this.state.selectedGeneration != 0){
+      if (this.state.selectedGeneration !== 0){
         condition = (d.generation === +this.state.selectedGeneration);
       }
       if (this.state.selectedResistance !== "any") {

@@ -51,13 +51,40 @@ class Recommend extends Component {
     );
   }
 
+  //   identifyRecommendedType() {
+  //     this.recommendedTypes = new Set();
+  //     this.props.dataRef.forEach((d) => {
+  //       this.team_weaknesses_type.forEach((w) => {
+  //         if (d[w.variable] < 1) this.recommendedTypes.add(d.name);
+  //       });
+  //     });
+  //   }
+
   identifyRecommendedType() {
-    this.recommendedTypes = new Set();
+    // {against_type : x} where x is count of how much it can be recommended
+    let countRecommendedTypes = {};
     this.props.dataRef.forEach((d) => {
       this.team_weaknesses_type.forEach((w) => {
-        if (d[w.variable] < 1) this.recommendedTypes.add(d.name);
+        if (d[w.variable] < 1) {
+          if (d.name in countRecommendedTypes)
+            countRecommendedTypes[d.name] += 1;
+          else countRecommendedTypes[d.name] = 1;
+        }
       });
     });
+
+    //make it sortable
+    this.recommendedTypes = [];
+    for (var type in countRecommendedTypes) {
+      this.recommendedTypes.push([type, countRecommendedTypes[type]]);
+    }
+    //sort by the number of occurrences
+    this.recommendedTypes.sort(function (a, b) {
+      return b[1] - a[1];
+    });
+
+    //take only types but not occurrences
+    this.recommendedTypes = this.recommendedTypes.map((d) => d[0]);
   }
 
   render() {
@@ -68,7 +95,7 @@ class Recommend extends Component {
       let type_name = t.variable.slice(8);
       return <TypeListItem type_name={type_name} i={i} />;
     });
-    const types = [...this.recommendedTypes].map((t, i) => {
+    const types = this.recommendedTypes.map((t, i) => {
       let type_name = t;
       return <TypeListItem type_name={type_name} i={i} />;
     });
@@ -82,12 +109,18 @@ class Recommend extends Component {
             </div>
           )}
           {weaktypes.length === 0 && (
-            <div className="recommend__good">
+            <div className="recommend__success">
               <p>
                 Your team is more or less impervious to attacks of all types.
                 For each attack type, you have at least one team member who is
                 resistant to it to some degree.
               </p>
+              <img
+                className="successIcon"
+                title={"Success! Cherrim (Pokémon)"}
+                alt={"Success"}
+                src={process.env.PUBLIC_URL + "/421Cherrim-Sunny.png"}
+              />
             </div>
           )}
           {types.length > 0 && (

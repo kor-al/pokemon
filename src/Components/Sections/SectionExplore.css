@@ -1,11 +1,43 @@
 .sectionExplore__graphics {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .sectionExplore .section__header {
   margin-top: 2rem;
   margin-bottom: 0;
+}
+
+.scatter__filters {
+  width: 100%;
+}
+
+.scatter__wrapper{
+    align-self: start;
+}
+
+.scatter__header {
+  text-align: left;
+}
+
+.explore__helper {
+  text-align: left;
+  position: relative;
+  /* width: 40%; */
+  /* flex: 1 1 300px; */
+  max-width: 20rem; /* as a card width */
+  /* min-width: 300px; */
+  flex-shrink: 2;
+}
+
+@media screen and (max-width: 1100px) {
+  .sectionExplore__graphics {
+    justify-content: space-around;
+  }
+
+  .scatter__header {
+    text-align: left;
+  }
 }

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
-import { max, sort, ascending } from "d3-array";
+import { max, ascending } from "d3-array";
 import { axisBottom } from "d3-axis";
 import { select } from "d3-selection";
 import { useRef, useEffect } from "react";
-import { symbol, symbolTriangle } from "d3-shape";
 import "./DoubleStackedBarChart.css";
 import { formatNameString } from "../../preprocess";
 
@@ -15,7 +14,7 @@ const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
 
   useEffect(() => {
     select(anchor.current).call(axis);
-  }, [scale]);
+  }, [scale, axis]);
 
   return (
     <g transform={`translate(${translateX}, ${translateY})`} ref={anchor} />
@@ -43,10 +42,10 @@ class BarChart extends Component {
   };
 
   mousemove = function (e, d) {
-    const point = e.target;
+    // const point = e.target;
     this.tooltip.innerHTML = `
     ${d.name}, ${d.classfication}
-    </br>Types: ${d.type1}${d.type2 == "" ? "" : ", " + d.type2}
+    </br>Types: ${d.type1}${d.type2 === "" ? "" : ", " + d.type2}
     </br>${formatNameString(this.props.xvariable)}: ${d[this.props.xvariable]}
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";
@@ -63,7 +62,7 @@ class BarChart extends Component {
   };
 
   render() {
-    this.margin = { top: 10, right: 150, bottom: 50,  left:this.props.marginLeft };
+    this.margin = { top: 50, right: 150, bottom: 50,  left:this.props.marginLeft };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     const sortedData = this.props.data
