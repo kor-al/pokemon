@@ -132,7 +132,7 @@ class Recommend extends Component {
           )}
           {types.length > 0 && (
             <div className="recommend__recommendation">
-              <p>Try to add pokemons of types</p>
+              <p>Try to add Pokémon of types</p>
               <ul className="recommend__list">{types}</ul>
             </div>
           )}
