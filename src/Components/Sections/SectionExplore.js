@@ -86,7 +86,7 @@ class SectionExplore extends Component {
                 this.props.handleDropdownChange(e, "selectedType")
               }
             />
-            and{" "}
+            and
             <Dropdown
               className="dropdown--h2"
               label=""
