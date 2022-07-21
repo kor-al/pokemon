@@ -104,9 +104,9 @@ const Legend = ({ width, height, dataLen }) => {
       <text>
         <textPath
           href="#curve-lpath0"
-          startOffset="30%"
+          startOffset="20%"
           className="capture_rate"
-          textAnchor="end"
+          textAnchor="start"
         >
           catch
         </textPath>
@@ -186,6 +186,8 @@ class CurvesBarChart extends Component {
       r: max(this.props.data.map((d) => varToInt(d[this.props.rvariable]))),
     };
 
+    const yStart= 2*this.height / 3
+
     var xScale = scaleBand()
       .domain(this.props.items)
       .range([this.width, 0])
@@ -201,30 +203,30 @@ class CurvesBarChart extends Component {
 
     var yRightScale = scaleLinear()
       .domain([0, maxData.xr])
-      .range([0, this.height / 2]);
+      .range([0, yStart]);
 
     var yLeftScale = scaleLinear()
       .domain([maxData.xl, 0])
-      .range([0, this.height / 2]);
+      .range([0, yStart]);
 
     var leftCurves = this.props.data.map((d, i) => {
       let xoffset = xScale.bandwidth() / 2;
       let xsource = xScale.bandwidth() / 2 + xScale(d.name);
       let leftpoints = [
         { x: xsource-2, y: this.height },
-        { x: xsource, y: this.height / 2 },
+        { x: xsource, y: yStart },
         {
           x: xsource - xoffset,
-          y: this.height / 2 - yLeftScale(d[this.props.leftvariable]),
+          y: yStart - yLeftScale(d[this.props.leftvariable]),
         },
       ];
 
       let rightpoints = [
         { x: xsource+2, y: this.height },
-        { x: xsource, y: this.height / 2 },
+        { x: xsource, y: yStart },
         {
           x: xsource + xoffset,
-          y: this.height / 2 - yRightScale(d[this.props.rightvariable]),
+          y: yStart - yRightScale(d[this.props.rightvariable]),
         },
       ];
       var curveGen = line()

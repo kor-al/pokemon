@@ -78,7 +78,7 @@ class SectionTeamStats extends Component {
 
           <CustomBarChart
             data={this.props.dataTeam}
-            size={[min([500, this.props.size.screenWidth]), 400]}
+            size={[min([500, this.props.size.screenWidth]), 350]}
             xvariable={"weight_kg"}
             yvariable={"height_m"}
             colorvariable={"experience_growth"}
@@ -86,7 +86,7 @@ class SectionTeamStats extends Component {
 
           <CurvesBarChart
             data={this.props.dataTeam}
-            size={[min([500, this.props.size.screenWidth]), 400]}
+            size={[min([500, this.props.size.screenWidth]), 350]}
             items={this.props.team}
             leftvariable={"capture_rate"}
             rightvariable={"base_egg_steps"}
