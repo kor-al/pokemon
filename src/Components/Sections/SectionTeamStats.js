@@ -7,8 +7,7 @@ import CustomBarChart from "../BarChart/CustomBarChart";
 import CurvesBarChart from "../BarChart/CurvesBarChart";
 import Recommend from "../Heatmap/Recommend";
 import { format } from "d3-format";
-import { min, median, groups } from "d3-array";
-import { summarizeGroupedData } from "../../preprocess";
+import { min} from "d3-array";
 
 import "./SectionTeamStats.css";
 
@@ -79,7 +78,7 @@ class SectionTeamStats extends Component {
 
           <CustomBarChart
             data={this.props.dataTeam}
-            size={[min([500, this.props.size.screenWidth]), 350]}
+            size={[min([500, this.props.size.screenWidth]), 400]}
             xvariable={"weight_kg"}
             yvariable={"height_m"}
             colorvariable={"experience_growth"}
@@ -87,7 +86,7 @@ class SectionTeamStats extends Component {
 
           <CurvesBarChart
             data={this.props.dataTeam}
-            size={[min([500, this.props.size.screenWidth]), 350]}
+            size={[min([500, this.props.size.screenWidth]), 400]}
             items={this.props.team}
             leftvariable={"capture_rate"}
             rightvariable={"base_egg_steps"}

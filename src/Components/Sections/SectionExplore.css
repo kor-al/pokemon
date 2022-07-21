@@ -14,8 +14,8 @@
   width: 100%;
 }
 
-.scatter__wrapper{
-    align-self: start;
+.scatter__wrapper {
+  align-self: start;
 }
 
 .scatter__header {
@@ -39,5 +39,11 @@
 
   .scatter__header {
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .explore__helper {
+    max-width: 500px;
   }
 }

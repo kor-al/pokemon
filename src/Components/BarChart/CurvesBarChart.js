@@ -1,6 +1,6 @@
 import React, { Component, useRef, useEffect } from "react";
-import { scaleLinear, scaleBand, scaleOrdinal } from "d3-scale";
-import { min, max, bin, groups, range } from "d3-array";
+import { scaleLinear, scaleBand } from "d3-scale";
+import { max } from "d3-array";
 import { line, curveBasis } from "d3-shape";
 import { select } from "d3-selection";
 import { axisLeft, axisBottom, axisRight } from "d3-axis";
@@ -16,7 +16,7 @@ const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
 
   useEffect(() => {
     select(anchor.current).call(axis);
-  }, [scale]);
+  }, [scale, axis]);
 
   return (
     <g transform={`translate(${translateX}, ${translateY})`} ref={anchor} />
@@ -81,7 +81,12 @@ const Legend = ({ width, height }) => {
 
   const circleLabel_caught = (
     <g transform={`translate(${0}, ${-40})`}>
-      <circle className="base_happiness base_happiness-caught" cx={0} cy={0} r={5} />{" "}
+      <circle
+        className="base_happiness base_happiness-caught"
+        cx={0}
+        cy={0}
+        r={5}
+      />{" "}
       <text x={20} y={0} textAnchor="start" alignmentBaseline="middle">
         base happiness after catching
       </text>
@@ -107,7 +112,7 @@ const Legend = ({ width, height }) => {
         </textPath>{" "}
         <textPath
           href="#curve-rpath0"
-          startOffset="90%"
+          startOffset="80%"
           className="base_egg_steps"
           textAnchor="end"
         >
@@ -153,7 +158,7 @@ class CurvesBarChart extends Component {
     }
     this.tooltip.innerHTML = `
     ${d.name}, ${d.classfication}
-    </br>Types: ${d.type1}${d.type2 == "" ? "" : ", " + d.type2}
+    </br>Types: ${d.type1}${d.type2 === "" ? "" : ", " + d.type2}
     </br>${formatNameString(variable)}: ${val}
     `;
     this.tooltip.style.top = e.pageY + 10 + "px";

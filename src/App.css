@@ -175,8 +175,4 @@ g.tick text {
   h2 {
     font-size: 1.1rem;
   }
-  .pad {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
 }
