@@ -28,6 +28,20 @@
   list-style-type: none;
 }
 
+.success__img{
+    position: relative;
+}
+
+.success__background{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6rem;
+    max-width: 6rem;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
 .recommend__success{
     display: flex;
     align-items: center;
@@ -37,8 +51,7 @@
 
 .successIcon{
     position: relative;
-    height: 6rem;
-    /* margin-right: 2rem; */
+    max-width: 3rem;
 }
 
 @media screen and (max-width: 500px) {

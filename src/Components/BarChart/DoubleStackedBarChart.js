@@ -155,7 +155,6 @@ class DoubleStackedBarChart extends Component {
     let el = e.target;
     if (el.tagName == "line" || el.tagName === "circle") {
       el = el.parentElement;
-      console.log(el);
       el.style.strokeWidth = 3;
     } else {
       el.style.strokeWidth = 3;
@@ -370,16 +369,17 @@ class DoubleStackedBarChart extends Component {
         <text
           key={"text" + i}
           y={yScale(d.name)}
-          x={
-            -this.width / 2 +
-            xLeftScale(
-              max([
-                d[this.props.circleleftvariable],
-                d[this.props.leftvariable],
-              ])
-            ) -
-            10
-          }
+          x={-this.width/2-10}
+          // x={
+          //   -this.width / 2 +
+          //   xLeftScale(
+          //     max([
+          //       d[this.props.circleleftvariable],
+          //       d[this.props.leftvariable],
+          //     ])
+          //   ) -
+          //   10
+          // }
           textAnchor={"end"}
           alignmentBaseline="middle"
         >

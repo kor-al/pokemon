@@ -36,6 +36,7 @@ li + li {
   height: 100px;
   position: absolute;
   clip-path: circle(50%);
+  pointer-events: none;
 }
 
 .member__info {

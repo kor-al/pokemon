@@ -23,7 +23,7 @@ const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
   );
 };
 
-const Legend = ({ width, height }) => {
+const Legend = ({ width, height, dataLen }) => {
   const leftLabelStart = (
     <text
       x={-height + 10}
@@ -104,20 +104,20 @@ const Legend = ({ width, height }) => {
       <text>
         <textPath
           href="#curve-lpath0"
-          startOffset="80%"
+          startOffset="30%"
           className="capture_rate"
           textAnchor="end"
         >
           catch
-        </textPath>{" "}
+        </textPath>
         <textPath
-          href="#curve-rpath0"
+          href="#curve-rpath0"//{dataLen>1? "#curve-rpath1" : "#curve-rpath0"}
           startOffset="80%"
           className="base_egg_steps"
           textAnchor="end"
         >
           hatch
-        </textPath>{" "}
+        </textPath>
       </text>
     </g>
   );
@@ -211,7 +211,7 @@ class CurvesBarChart extends Component {
       let xoffset = xScale.bandwidth() / 2;
       let xsource = xScale.bandwidth() / 2 + xScale(d.name);
       let leftpoints = [
-        { x: xsource, y: this.height },
+        { x: xsource-2, y: this.height },
         { x: xsource, y: this.height / 2 },
         {
           x: xsource - xoffset,
@@ -220,7 +220,7 @@ class CurvesBarChart extends Component {
       ];
 
       let rightpoints = [
-        { x: xsource, y: this.height },
+        { x: xsource+2, y: this.height },
         { x: xsource, y: this.height / 2 },
         {
           x: xsource + xoffset,
@@ -328,7 +328,7 @@ class CurvesBarChart extends Component {
               translateY={-5}
               ticks={0}
             />
-            <Legend width={this.width} height={this.height} />
+            <Legend width={this.width} height={this.height} dataLen={this.props.data.length}/>
           </g>
         </svg>
         <div ref={(node) => (this.tooltip = node)} className="tooltip" />

@@ -97,7 +97,7 @@ class Recommend extends Component {
     });
     const types = this.recommendedTypes.map((t, i) => {
       let type_name = t;
-      return <TypeListItem type_name={type_name} i={i} />;
+      return <TypeListItem type_name={type_name} i={(1+i)*20} />;
     });
     return (
       <div className="recommend">
@@ -115,12 +115,19 @@ class Recommend extends Component {
                 For each attack type, you have at least one team member who is
                 resistant to it to some degree.
               </p>
-              <img
-                className="successIcon"
-                title={"Success! Cherrim (Pokémon)"}
-                alt={"Success"}
-                src={process.env.PUBLIC_URL + "/421Cherrim-Sunny.png"}
-              />
+              <div className="success__img">
+                <img
+                  className="success__background"
+                  alt={"Reward"}
+                  src={process.env.PUBLIC_URL + "/reward_bkg.svg"}
+                />
+                <img
+                  className="successIcon"
+                  title={"Success!"}
+                  alt={"Success"}
+                  src={process.env.PUBLIC_URL + "/Dream_Razz_Berry_Sprite.webp"}
+                />
+              </div>
             </div>
           )}
           {types.length > 0 && (

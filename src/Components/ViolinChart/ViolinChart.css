@@ -5,11 +5,11 @@
   font-size: 1rem;
 }
 
-.violin path {
+.violin__path {
   cursor: pointer;
 }
 
-.violin path:hover {
+.violin__path:hover {
   /* filter: brightness(70%); */
   stroke-width: 3;
 }

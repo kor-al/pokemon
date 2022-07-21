@@ -100,11 +100,10 @@ class App extends Component {
 
   onResize() {
     this.setState({
-      screenWidth: window.outerWidth - 32, //Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)-32,
+      screenWidth: Math.max(200,document.documentElement.clientWidth - 32), //Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)-32,
       // screenWidth: window.innerWidth - 32, //2rem padding
-      screenHeight: window.outerHeight, //window.innerHeight,
+      screenHeight: Math.max(200,document.documentElement.clientHeight), //window.innerHeight,
     });
-    console.log(window.outerWidth)
   }
 
   handleDropdownChange(e, stateFieldString) {

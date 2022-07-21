@@ -90,7 +90,7 @@ class SectionTypes extends Component {
           <div className="chord__wrapper">
             <div className="advice">
               <p className="advice chord__text">
-              Most Pokémon are dual-typed so they weaknesses and resistances
+              Most Pokémon are dual-typed so their weaknesses and resistances
               vary on the combination of types
               </p>
               <div className="arrow">

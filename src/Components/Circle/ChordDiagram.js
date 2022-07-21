@@ -1,10 +1,7 @@
-import React, { Component, useRef, useEffect } from "react";
+import React, { Component } from "react";
 import { chord, ribbon } from "d3-chord";
-import { scaleLinear, scaleBand } from "d3-scale";
-import { min, max, bin, groups, descending } from "d3-array";
+import { descending } from "d3-array";
 import { arc } from "d3-shape";
-import { select } from "d3-selection";
-import { axisLeft, axisBottom } from "d3-axis";
 class ChordDiagram extends Component {
   constructor(props) {
     super(props);

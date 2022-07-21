@@ -22,7 +22,7 @@ class SectionTeamStats extends Component {
       <section className="sectionTeamStats pad">
         <div className="section__header">
           <span className="step">4</span>
-          <h2>Improve your team stats</h2>
+          <h2>Improve your team's stats</h2>
         </div>
         <div className="SectionTeamStats__graphics">
           <Heatmap
