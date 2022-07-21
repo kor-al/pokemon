@@ -21,6 +21,23 @@ const Axis = ({ d3Axis, scale, translateX, translateY, ticks }) => {
   );
 };
 
+const Legend = ({width, height, varname}) => {
+  const translateX = 0;
+  const translateY = -15;
+
+  return (
+    <g
+      className={`legend ${varname}`}
+      transform={`translate(${translateX}, ${translateY})`}
+    >
+      <rect x={0} y={0} width={10} height={10} />
+      <text x={20} y={5} textAnchor="start" alignmentBaseline="middle">
+        faster than XX% of all Pokémon
+      </text>
+    </g>
+  );
+};
+
 class BarChart extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +79,12 @@ class BarChart extends Component {
   };
 
   render() {
-    this.margin = { top: 50, right: 150, bottom: 50,  left:this.props.marginLeft };
+    this.margin = {
+      top: 50,
+      right: 150,
+      bottom: 50,
+      left: this.props.marginLeft,
+    };
     this.width = this.props.size[0] - this.margin.left - this.margin.right;
     this.height = this.props.size[1] - this.margin.top - this.margin.bottom;
     const sortedData = this.props.data
@@ -135,8 +157,8 @@ class BarChart extends Component {
     var xText = (
       <text
         key={`label-scale`}
-        x={this.width+20}
-        y={this.height+13}
+        x={this.width + 20}
+        y={this.height + 13}
         textAnchor="start"
         alignmentBaseline="middle"
         fontSize={12}
@@ -176,6 +198,7 @@ class BarChart extends Component {
               ticks={this.width > 100 ? 6 : 1}
             />
             {labels}
+            <Legend width={this.width} height={this.height} varname={this.props.xvariable}/>
           </g>
         </svg>
         <div ref={(node) => (this.tooltip = node)} className="tooltip" />
